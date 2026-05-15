@@ -3,12 +3,12 @@
 <head >
 <meta charset="UTF-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-<title > Resident Evil Archive</title >
-<!-- Fuentes de Google -->
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;700&display=swap" rel="stylesheet" >
+<title > UNSC Tactical Archive</title >
+<!-- Fuentes de Google: Cambiadas a estilos más tecnológicos -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet" >
 
 <style >
-/* --- ESTILOS GENERALES --- */
+/* --- ESTILOS GENERALES (HALO 4 HUD STYLE) --- */
 html {
     font-size: 15px;
     position: relative;
@@ -16,80 +16,65 @@ html {
     scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 17px;
-    }
-}
-
-/* --- ANIMACIONES --- */
-@keyframes shadowReveal {
+/* --- ANIMACIONES TECNOLÓGICAS --- */
+@keyframes dataInitialize {
     0% {
         opacity: 0;
-        transform: translateY(20px);
-        filter: blur(6px);
+        transform: scaleY(0.005) scaleX(0);
     }
 
     50% {
-        opacity: 0.6;
-        filter: blur(2px);
+        opacity: 0.5;
+        transform: scaleY(0.005) scaleX(1);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
+        transform: scaleY(1) scaleX(1);
     }
 }
 
-@keyframes creepingBackground {
+@keyframes scanlineMove {
     0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
+        background-position: 0% 0%;
     }
 
     100% {
-        background-position: 0% 50%;
+        background-position: 0% 100%;
     }
 }
 
-@keyframes eerieFloat {
+@keyframes cyberPulse {
     0%, 100% {
-        transform: translateY(0);
+        box-shadow: 0 0 5px rgba(0, 242, 255, 0.2);
+        text-shadow: 0 0 5px rgba(0, 242, 255, 0.5);
     }
 
     50% {
-        transform: translateY(-8px);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+        text-shadow: 0 0 15px rgba(0, 242, 255, 1);
     }
 }
 
-@keyframes redPulse {
-    0%, 100% {
-        box-shadow: 0 0 5px rgba(120, 0, 0, 0.2);
-        text-shadow: 0 0 2px rgba(255, 0, 0, 0.2);
-    }
-
-    50% {
-        box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-        text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-    }
-}
-
-/* Nueva: Animación de movimiento para imágenes (Zoom lento) */
-@keyframes imageMovement {
+@keyframes holographicFlicker {
     0% {
-        transform: scale(1) translate(0, 0);
+        opacity: 0.8;
     }
 
-    50% {
-        transform: scale(1.1) translate(-1%, -1%);
+    5% {
+        opacity: 0.9;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    15% {
+        opacity: 1;
     }
 
     100% {
-        transform: scale(1) translate(0, 0);
+        opacity: 0.9;
     }
 }
 
@@ -97,172 +82,243 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Cinzel', serif;
-    background: linear-gradient(135deg, #050505, #240000, #0a0a0a, #150000);
-    background-size: 300% 300%;
-    color: #e6e6e6;
-    animation: shadowReveal 1.5s ease-in-out, creepingBackground 15s ease-in-out infinite;
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #000b14;
+    /* Fondo con rejilla digital */
+    background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px), radial-gradient(circle at center, #001a2e 0%, #00050a 100%);
+    background-size: 30px 30px, 30px 30px, 100% 100%;
+    color: #b3e5ff;
     overflow-x: hidden;
+    animation: holographicFlicker 5s infinite;
 }
 
-/* --- CONTENEDORES DE IMAGEN CON MOVIMIENTO --- */
-.img-container-horror {
+/* --- CONTENEDOR DE IMAGEN (HUD VISOR) --- */
+.img-container-tactical {
     position: relative;
-    overflow: hidden; /* Corta el exceso del zoom */
-    border: 1px solid #500000;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    border: 2px solid #00f2ff;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%); /* Esquinas cortadas */
 }
 
-    .img-container-horror img {
+    .img-container-tactical img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        display: block;
-        filter: brightness(0.7) contrast(1.2) sepia(0.2);
-        animation: imageMovement 20s linear infinite; /* Movimiento constante */
+        filter: cyan(1) brightness(0.8) contrast(1.2);
+        transition: 0.5s;
     }
 
-    /* Capa de suciedad/sangre sobre la imagen */
-    .img-container-horror::after {
+    /* Overlay de scanline */
+    .img-container-tactical::after {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%);
+        background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 242, 255, 0.1) 3px);
         pointer-events: none;
     }
 
-/* --- SECCIÓN DE ENTRADA (INICIO) --- */
-.hero-section {
-    height: 60vh;
-    width: 100%;
+/* --- CONTENEDOR PRINCIPAL --- */
+.tactical-list-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(0, 20, 40, 0.8);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    backdrop-filter: blur(10px);
+    animation: dataInitialize 1s ease-out;
     position: relative;
 }
 
-.hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Título Estilo Halo */
+.tactical-title {
+    font-family: 'Orbitron', sans-serif;
     text-align: center;
-    z-index: 2;
+    color: #00f2ff;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
 }
 
-    .hero-content h1 {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 5rem;
-        margin: 0;
-        color: #fff;
-        text-shadow: 0 0 15px #ff0000;
-        letter-spacing: 10px;
+/* Navegación de Filtros */
+.filter-nav {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+    padding-bottom: 15px;
+}
+
+    .filter-nav a {
+        color: #00f2ff;
+        text-decoration: none;
+        padding: 5px 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+        font-size: 0.9rem;
     }
 
-/* --- DISEÑO DEL CATÁLOGO --- */
-.catalog-wrapper {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+        .filter-nav a:hover {
+            background: rgba(0, 242, 255, 0.1);
+            text-shadow: 0 0 10px #00f2ff;
+        }
+
+/* Lista de Items */
+.tactical-item {
+    list-style: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    background: rgba(0, 0, 0, 0.6);
-    border-top: 2px solid #6b0000;
-    backdrop-filter: blur(5px);
-    animation: shadowReveal 2s ease-out;
-}
-
-/* Estilo para la info del catálogo (basado en tu snippet) */
-.info-panel {
-    flex: 1.5;
-    padding: 10px;
-}
-
-    .info-panel h1 {
-        color: #ff3333;
-        margin-top: 0;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 3.5rem;
-        letter-spacing: 2px;
-    }
-
-    .info-panel p {
-        font-size: 1.2em;
-        margin: 10px 0;
-        border-bottom: 1px solid #300;
-        padding-bottom: 5px;
-    }
-
-    .info-panel strong {
-        color: #ff4d4d;
-    }
-
-.description-container {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #1a0505; /* Un poco más oscuro */
-    border-left: 4px solid #b30000;
-    border-radius: 4px;
-    box-shadow: inset 0 0 15px #000;
-}
-
-    .description-container p {
-        border: none;
-        line-height: 1.6;
-        font-style: italic;
-    }
-
-/* Botón estilo RE */
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 30px;
-    background: #6b0000;
-    color: white;
-    text-decoration: none;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
-    border: 1px solid #ff0000;
-    animation: redPulse 2.5s infinite;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    background: rgba(0, 242, 255, 0.05);
+    border-left: 4px solid #00f2ff;
     transition: 0.3s;
+    cursor: pointer;
 }
 
-    .btn:hover {
-        background: #ff0000;
-        transform: scale(1.1);
+    .tactical-item:hover {
+        background: rgba(0, 242, 255, 0.15);
+        transform: translateX(10px);
+        box-shadow: -5px 0 15px rgba(0, 242, 255, 0.3);
     }
+
+    .tactical-item a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 1px;
+        font-size: 1.2rem;
+    }
+
+.item-meta {
+    color: #00f2ff;
+    opacity: 0.7;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-left: 15px;
+}
+
+/* Icono de estatus */
+.status-icon {
+    color: #00f2ff;
+    font-size: 1.2rem;
+    animation: cyberPulse 2s infinite;
+}
+
+/* Botón Estilo UNSC */
+.btn-add {
+    display: block;
+    width: fit-content;
+    margin: 40px auto 0;
+    padding: 15px 40px;
+    background: transparent;
+    color: #00f2ff;
+    border: 2px solid #00f2ff;
+    font-family: 'Orbitron', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 3px;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .btn-add:hover {
+        background: #00f2ff;
+        color: #000;
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
+    }
+
+/* Decoración de esquinas HUD */
+.hud-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #00f2ff;
+}
+
+.top-left {
+    top: -5px;
+    left: -5px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.top-right {
+    top: -5px;
+    right: -5px;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.bottom-left {
+    bottom: -5px;
+    left: -5px;
+    border-right: 0;
+    border-top: 0;
+}
+
+.bottom-right {
+    bottom: -5px;
+    right: -5px;
+    border-left: 0;
+    border-top: 0;
+}
 
 </style >
 </head >
-<div class="horror-list-container" >
-<h1 class="horror-title" > Mi Catálogo</h1 >
+<body >
+
+<div class="tactical-list-container" >
+<!-- Decoraciones de esquina -->
+<div class="hud-corner top-left" > </div >
+<div class="hud-corner top-right" > </div >
+<div class="hud-corner bottom-left" > </div >
+<div class="hud-corner bottom-right" > </div >
+
+<h1 class="tactical-title" > Mission Archive</h1 >
 
 <nav class="filter-nav" >
-<a href="#" > Todos</a > |
-<a href="#" > Hack and Slash</a > |
-<a href="#" > Metroidvania</a > |
-<a href="#" > Survival Horror</a >
+<a href="#" > Network</a > |
+<a href="#" > Combat</a > |
+<a href="#" > Exploration</a > |
+<a href="#" > Intelligence</a >
 </nav >
 
 <ul style="padding: 0;" >
-<!-- Ejemplo de un item (repite esto en tu foreach) -->
-<li class="horror-item" >
+<!-- Item 1 -->
+<li class="tactical-item" >
 <div >
-<a href="/TuRuta/Details/1" > Devil May Cry</a >
-<span style="color: #888; margin-left: 10px;" > -- Hack and Slash (2001)</span >
+<a href="#" > Devil May Cry</a >
+<span class="item-meta" > // CLASS: Hack & Slash // YEAR: 2001</span >
 </div >
-<span style="color: #444;" > ☣</span >
+<span class="status-icon" > ⧈</span >
 </li >
-
-<li class="horror-item" >
+<!-- Item 2 -->
+<li class="tactical-item" >
 <div >
 <a href="#" > Resident Evil 4</a >
-<span style="color: #888; margin-left: 10px;" > -- Survival Horror (2005)</span >
+<span class="item-meta" > // CLASS: Survival // YEAR: 2005</span >
 </div >
-<span style="color: #444;" > ☣</span >
+<span class="status-icon" > ⧈</span >
+</li >
+<!-- Item 3 -->
+<li class="tactical-item" >
+<div >
+<a href="#" > Halo 4</a >
+<span class="item-meta" > // CLASS: FPS // YEAR: 2012</span >
+</div >
+<span class="status-icon" > ⧈</span >
 </li >
 </ul >
 
-<a href="#" class="btn-add" > + AGREGAR VIDEOJUEGO</a >
+<a href="#" class="btn-add" > INITIALIZE NEW ENTRY</a >
 </div >
+
+</body >
+</html >

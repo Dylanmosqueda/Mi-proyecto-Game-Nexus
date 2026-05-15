@@ -1,8 +1,137 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    <div class="home-terminal">
+        <!-- Círculos de Radar -->
+        <div class="radar-container">
+            <div class="radar-circle"></div>
+            <div class="radar-circle" style="animation-delay: 1s;"></div>
+            <div class="radar-circle" style="animation-delay: 2s;"></div>
+            <div class="radar-sweep"></div>
+
+            <!-- Punto de mira central -->
+            <div class="crosshair-v"></div>
+            <div class="crosshair-h"></div>
+        </div>
+
+        <div class="terminal-text">
+            <h1 class="unsc-title-main" style="font-size: 4rem;">BIENVENIDO SEÑOR DYLAN</h1>
+            <p class="typing-effect">[ INICIALIZANDO SISTEMA... ]</p>
+            <p class="typing-effect" style="animation-delay: 2s;">[ ACCEDIENDO A LOS ARCHIVOS DE VIDEOJUEGOS... ]</p>
+
+            <div class="mt-5">
+                <a href="/GameNexus/Index" class="btn-unsc" style="font-size: 1.5rem; padding: 20px 50px;">
+                    ENTRANDO AL GAME NEXUS HUB
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .home-terminal {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* RADAR TÁCTICO */
+        .radar-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(0, 242, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .radar-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #00f2ff;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            animation: radarExpand 3s ease-out infinite;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: 0;
+            left: 0;
+            background: conic-gradient(from 0deg, rgba(0, 242, 255, 0.4), transparent 90deg);
+            transform-origin: 100% 100%;
+            animation: rotateCW 4s linear infinite;
+            border-right: 1px solid #00f2ff;
+        }
+
+        .crosshair-v {
+            position: absolute;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: rgba(0, 242, 255, 0.3);
+        }
+
+        .crosshair-h {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 242, 255, 0.3);
+        }
+
+        /* EFECTO DE TEXTO ESCRIBIENDO */
+        .typing-effect {
+            font-family: 'Michroma', sans-serif;
+            color: #00f2ff;
+            overflow: hidden;
+            border-right: 2px solid #00f2ff;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            width: 0;
+            animation: typing 2s steps(30, end) forwards, blink 0.75s step-end infinite;
+        }
+
+        @@keyframes radarExpand {
+            from {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            to {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        @@keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @@keyframes blink {
+            from, to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #00f2ff
+            }
+        }
+    </style>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+

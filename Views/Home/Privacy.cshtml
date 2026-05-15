@@ -1,6 +1,149 @@
-﻿@{
+﻿
+    @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!-- Fuentes estilo Halo/UNSC -->
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+    /* --- ESTILO DE LA TERMINAL DE SEGURIDAD --- */
+    .privacy-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background: rgba(0, 20, 40, 0.7);
+        border: 1px solid #00f2ff;
+        padding: 40px;
+        position: relative;
+        backdrop-filter: blur(10px);
+        /* Esquina cortada estilo terminal */
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
+        box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+    }
+
+    .security-header {
+        border-bottom: 2px solid #00f2ff;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+    }
+
+    .security-title {
+        font-family: 'Michroma', sans-serif;
+        color: #00f2ff;
+        font-size: 1.8rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+    }
+
+    .directive-id {
+        font-family: 'Michroma', sans-serif;
+        font-size: 0.7rem;
+        color: #89e2ff;
+        opacity: 0.8;
+    }
+
+    /* BLOQUES DE TEXTO */
+    .protocol-section {
+        margin-bottom: 25px;
+        padding: 20px;
+        background: rgba(0, 242, 255, 0.05);
+        border-left: 4px solid #00f2ff;
+    }
+
+    .protocol-tag {
+        font-family: 'Michroma', sans-serif;
+        font-size: 0.6rem;
+        color: #00f2ff;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    .protocol-text {
+        font-family: 'Exo 2', sans-serif;
+        color: #d1f3ff;
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    /* DECORACIÓN "CLASSIFIED" */
+    .classified-stamp {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        border: 3px solid rgba(255, 0, 0, 0.4);
+        color: rgba(255, 0, 0, 0.4);
+        font-family: 'Michroma', sans-serif;
+        padding: 5px 15px;
+        transform: rotate(15deg);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        pointer-events: none;
+    }
+
+    /* EFECTO DE ESCANEO */
+    .scan-bar {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 2px;
+        background: rgba(0, 242, 255, 0.5);
+        box-shadow: 0 0 10px #00f2ff;
+        animation: scanLoop 8s linear infinite;
+    }
+
+    @@keyframes scanLoop {
+        0% { top: 0%; }
+        100% { top: 100%; }
+    }
+</style>
+
+<div class="privacy-container">
+    <div class="scan-bar"></div>
+    <div class="classified-stamp">Clasificado</div>
+
+    <div class="security-header">
+        <span class="directive-id"></span>
+        <h1 class="security-title">Protocolo de Privacidad</h1>
+    </div>
+
+    <!-- Sección 1 -->
+    <div class="protocol-section">
+        <span class="protocol-tag">RECUPERACIÓN DE DATOS // SECCIÓN 01</span>
+        <p class="protocol-text">
+            Este sitio web, como parte de la red de datos de la GAMES NEXUS HUB, recopila información mínima necesaria para la gestión de la base de datos de videojuegos. Ningún dato personal es transmitido fuera de los servidores seguros de la ONI.
+        </p>
+    </div>
+
+    <!-- Sección 2 -->
+    <div class="protocol-section">
+        <span class="protocol-tag">ENCRIPTACIÓN NEURAL // SECCIÓN 02</span>
+        <p class="protocol-text">
+            Utilizamos protocolos de encriptación de grado militar para asegurar que su catálogo de videojuegos y registros de progreso no sean interceptados por facciones del Covenant o fuerzas externas.
+        </p>
+    </div>
+
+    <!-- Sección 3 -->
+    <div class="protocol-section">
+        <span class="protocol-tag">DIRECTIVA DE COOKIES // SECCIÓN 03</span>
+        <p class="protocol-text">
+            Las 'cookies' se utilizan únicamente para mantener el enlace dekl sitio web estable entre su terminal y nuestro HUB central. Al continuar navegando, acepta los términos de servicio del sistema operativo Game Nexus.
+        </p>
+    </div>
+
+    <!-- Sección 4 -->
+    <div class="protocol-section">
+        <span class="protocol-tag">CONTACTO DE SEGURIDAD // SECCIÓN 04</span>
+        <p class="protocol-text">
+            Si detecta una vulnerabilidad en el sistema, contacte inmediatamente con la IA de servicio Cortana_4.0 o diríjase al puente de mando de la GAMES NEXUS HUB.
+        </p>
+    </div>
+
+    <div class="mt-4" style="text-align: right;">
+        <a asp-action="Index" style="color: #00f2ff; text-decoration: none; font-family: 'Michroma'; font-size: 0.7rem;">
+            [ VOLVER A LA PANTALLA DE INICIO ]
+        </a>
+    </div>
+</div>
+}
+

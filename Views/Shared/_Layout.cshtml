@@ -4,24 +4,181 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GameNexus</title>
-    <script type="importmap"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Game_Nexus.styles.css" asp-append-version="true" />
+
+    <style>
+            /* --- ESTILO BASE --- */
+            body {
+                background-color: #000810 !important;
+                color: #b3e5ff;
+                font-family: 'Exo 2', sans-serif;
+                margin: 0;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* --- 1. LLUVIA DE DATOS (DATA STREAMS) --- */
+            .data-stream-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+                background-size: 50px 50px;
+                z-index: -3;
+            }
+
+                .data-stream-bg::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: repeating-linear-gradient( 0deg, transparent, transparent 50%, rgba(0, 242, 255, 0.03) 50%, rgba(0, 242, 255, 0.03) 100% );
+                    background-size: 100% 4px;
+                    animation: moveLines 10s linear infinite;
+                }
+
+            /* --- 2. MARCOS DE VISOR (HUD BRACKETS) --- */
+            .hud-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1000;
+                border: 20px solid transparent;
+            }
+
+            .hud-corner {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border: 2px solid rgba(0, 242, 255, 0.5);
+                animation: hudPulse 2s ease-in-out infinite alternate;
+            }
+
+            .top-left {
+                top: 20px;
+                left: 20px;
+                border-right: 0;
+                border-bottom: 0;
+                border-top-width: 4px;
+                border-left-width: 4px;
+            }
+
+            .top-right {
+                top: 20px;
+                right: 20px;
+                border-left: 0;
+                border-bottom: 0;
+                border-top-width: 4px;
+                border-right-width: 4px;
+            }
+
+            .bottom-left {
+                bottom: 20px;
+                left: 20px;
+                border-right: 0;
+                border-top: 0;
+                border-bottom-width: 4px;
+                border-left-width: 4px;
+            }
+
+            .bottom-right {
+                bottom: 20px;
+                right: 20px;
+                border-left: 0;
+                border-top: 0;
+                border-bottom-width: 4px;
+                border-right-width: 4px;
+            }
+
+            /* --- 3. VIÑETA DE CASCO --- */
+            .visor-vignette {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, transparent 60%, rgba(0, 11, 20, 0.7) 100%);
+                z-index: 999;
+                pointer-events: none;
+            }
+
+            /* --- ANIMACIONES (@@ para Razor) --- */
+            @@keyframes moveLines {
+                from {
+                    background-position: 0 0;
+                }
+
+                to {
+                    background-position: 0 1000px;
+                }
+            }
+
+            @@keyframes hudPulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.4;
+                    filter: blur(1px);
+                }
+
+                100% {
+                    transform: scale(1.05);
+                    opacity: 1;
+                    filter: blur(0px);
+                }
+            }
+
+            /* --- NAVBAR ESTILO TERMINAL --- */
+            .navbar {
+                background: rgba(0, 20, 40, 0.8) !important;
+                border-bottom: 2px solid #00f2ff !important;
+                box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            }
+
+            .nav-link {
+                font-family: 'Michroma', sans-serif;
+                color: #00f2ff !important;
+                text-transform: uppercase;
+                font-size: 0.7rem;
+                letter-spacing: 3px;
+            }
+
+                .nav-link:hover {
+                    color: #fff !important;
+                    text-shadow: 0 0 10px #00f2ff;
+                }
+    </style>
 </head>
 <body>
+    <!-- Capas de Animación de Fondo -->
+    <div class="data-stream-bg"></div>
+    <div class="visor-vignette"></div>
+
+    <!-- HUD Marcos del Casco -->
+    <div class="hud-overlay">
+        <div class="hud-corner top-left"></div>
+        <div class="hud-corner top-right"></div>
+        <div class="hud-corner bottom-left"></div>
+        <div class="hud-corner bottom-right"></div>
+    </div>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand text-white" asp-controller="Home" asp-action="Index" style="font-family: 'Michroma'; font-size: 0.9rem;">
+                    <span style="color: #00f2ff;">[</span> INICIO <span style="color: #00f2ff;">]</span>
+                </a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GameNexus" asp-action="Index">GameNexus</a>
+                            <a class="nav-link" asp-controller="GameNexus" asp-action="Index">GAME NEXUS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -31,20 +188,22 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="position: relative; z-index: 10;">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="py-3 text-center" style="position: relative; z-index: 10;">
         <div class="container">
-            &copy; 2026 - Game_Nexus - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span style="font-family: 'Michroma'; font-size: 0.6rem; color: #00f2ff;">
+                © 2026 - 05 - 15
+            </span>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

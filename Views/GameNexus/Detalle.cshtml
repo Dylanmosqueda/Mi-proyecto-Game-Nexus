@@ -1,28 +1,197 @@
 ﻿@model Game_Nexus.Models.Item
 
-@{
-  
-}
+<!-- Fuentes estilo Halo/UNSC -->
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
 
+<style>
+    body {
+        background-color: #000b14 !important;
+        color: #b3e5ff;
+        font-family: 'Exo 2', sans-serif;
+        background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+
+    /* CONTENEDOR TIPO DOSSIER HOLOGRÁFICO */
+    .unsc-dossier {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 40px;
+        background: rgba(0, 20, 40, 0.8);
+        border: 1px solid #00f2ff;
+        backdrop-filter: blur(10px);
+        position: relative;
+        /* Esquinas cortadas */
+        clip-path: polygon(0 40px, 40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+        box-shadow: inset 0 0 50px rgba(0, 242, 255, 0.1);
+    }
+
+    /* CABECERA DEL EXPEDIENTE */
+    .dossier-header {
+        border-bottom: 2px solid #00f2ff;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .dossier-title {
+        font-family: 'Michroma', sans-serif;
+        font-size: 2.5rem;
+        color: #fff;
+        text-shadow: 0 0 20px #00f2ff;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    /* IMAGEN TÁCTICA */
+    .img-visor {
+        border: 2px solid #00f2ff;
+        padding: 5px;
+        background: rgba(0, 242, 255, 0.1);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+        max-width: 100%;
+        filter: contrast(1.1) brightness(0.9);
+    }
+
+    /* SECCIONES DE DATOS */
+    .data-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .data-item {
+        background: rgba(0, 242, 255, 0.05);
+        padding: 15px;
+        border-left: 3px solid #00f2ff;
+    }
+
+    .label-unsc {
+        font-family: 'Michroma', sans-serif;
+        font-size: 0.65rem;
+        color: #00f2ff;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 5px;
+        letter-spacing: 2px;
+    }
+
+    .value-unsc {
+        font-size: 1.2rem;
+        color: #fff;
+        font-weight: 400;
+    }
+
+    /* CUADRO DE DESCRIPCIÓN */
+    .debriefing-box {
+        margin-top: 30px;
+        padding: 25px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(0, 242, 255, 0.3);
+        border-radius: 5px;
+        position: relative;
+    }
+
+        .debriefing-box::before {
+            content: "MISSION_DEBRIEFING";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #000b14;
+            padding: 0 10px;
+            font-family: 'Michroma';
+            font-size: 0.7rem;
+            color: #00f2ff;
+        }
+
+    /* BOTONES */
+    .btn-unsc-nav {
+        display: inline-block;
+        padding: 12px 30px;
+        border: 1px solid #00f2ff;
+        color: #00f2ff;
+        text-decoration: none;
+        font-family: 'Michroma';
+        font-size: 0.8rem;
+        transition: 0.3s;
+        background: transparent;
+        margin-top: 40px;
+    }
+
+        .btn-unsc-nav:hover {
+            background: #00f2ff;
+            color: #000;
+            box-shadow: 0 0 20px #00f2ff;
+        }
+
+    /* EFECTO SCANLINE */
+    .scanline {
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        background: rgba(0, 242, 255, 0.1);
+        top: 0;
+        animation: scanMove 6s linear infinite;
+        pointer-events: none;
+    }
+
+    @@keyframes scanMove {
+        0% {
+            top: 0%;
+        }
+
+        100% {
+            top: 100%;
+        }
+    }
 </style>
-                    
-         <div style="flex: 1;">
-            <img src="@Model.ImagenUrl" 
-                 alt="@Model.Titulo" 
-                 style="width: 100%; max-width: 400px; border: 4px solid #fff; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.1);" />
+
+<div class="unsc-dossier">
+    <div class="scanline"></div>
+    <div class="row">
+        <!-- COLUMNA IMAGEN -->
+        <div class="col-md-5 text-center">
+            <img src="@Model.ImagenUrl" class="img-visor" alt="@Model.Titulo" />
         </div>
 
-        <div style="flex: 1.5;">
-            <h1 style="color: #ff3333; margin-top: 0;">@Model.Titulo</h1>
-            <p style="font-size: 1.2em;"><strong>Género:</strong> @Model.Genero</p>
-            <p style="font-size: 1.2em;"><strong>Consola:</strong> @Model.Consola</p>
-            <p style="font-size: 1.2em;"><strong>Año:</strong> @Model.Ano</p>
-            
-            <div style="margin-top: 20px; padding: 15px; background-color: #2a0a0a; border-radius: 8px;">
-                <p><strong>Descripción:</strong></p>
-                <p style="line-height: 1.6;">@Model.Descripcion</p>
+        <!-- COLUMNA DATOS -->
+        <div class="col-md-7">
+                <div class="data-item">
+                    <span class="label-unsc">Año de desarrollo</span>
+                    <span class="value-unsc">@Model.Ano</span>
+                </div>
+                <div class="data-item">
+                    <span class="label-unsc">Horas de juego</span>
+                    <span class="value-unsc">@Model.HorasDedicadas Horas</span>
+                </div>
+                <div class="data-item">
+                    <span class="label-unsc">Fecha de Compra</span>
+                    <span class="value-unsc">@Model.FechaAdquisicion.ToString("dd/MM/yyyy")</span>
+                </div>
             </div>
-        </div>
 
+            <div class="debriefing-box">
+                <p style="margin: 0; line-height: 1.6; color: darkcyan;">
+                    @Model.Descripcion
+                </p>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.VinculacionProyecto))
+            {
+                <div class="data-item mt-3">
+                    <span class="label-unsc">Estilo de pelea</span>
+                    <span class="value-unsc" style="font-size: 0.9rem; font-style: italic;">@Model.VinculacionProyecto</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(0, 242, 255, 0.2); margin-top: 20px;">
+        <a asp-action="Index" class="btn-unsc-nav">
+            [ REGRESAR ]
+        </a>
     </div>
 </div>
