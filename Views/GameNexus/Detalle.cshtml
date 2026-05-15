@@ -1,0 +1,28 @@
+﻿@model Game_Nexus.Models.Item
+
+@{
+  
+}
+
+</style>
+                    
+         <div style="flex: 1;">
+            <img src="@Model.ImagenUrl" 
+                 alt="@Model.Titulo" 
+                 style="width: 100%; max-width: 400px; border: 4px solid #fff; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.1);" />
+        </div>
+
+        <div style="flex: 1.5;">
+            <h1 style="color: #ff3333; margin-top: 0;">@Model.Titulo</h1>
+            <p style="font-size: 1.2em;"><strong>Género:</strong> @Model.Genero</p>
+            <p style="font-size: 1.2em;"><strong>Consola:</strong> @Model.Consola</p>
+            <p style="font-size: 1.2em;"><strong>Año:</strong> @Model.Ano</p>
+            
+            <div style="margin-top: 20px; padding: 15px; background-color: #2a0a0a; border-radius: 8px;">
+                <p><strong>Descripción:</strong></p>
+                <p style="line-height: 1.6;">@Model.Descripcion</p>
+            </div>
+        </div>
+
+    </div>
+</div>

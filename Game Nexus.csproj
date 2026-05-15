@@ -7,4 +7,10 @@
     <RootNamespace>Game_Nexus</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Removed explicit removal and compilation of Razor views. Razor (.cshtml) files
+         are handled automatically by the SDK and must NOT be included as <Compile> items.
+         Keeping them as content/static files (default) so Razor compilation works. -->
+  </ItemGroup>
+
 </Project>
