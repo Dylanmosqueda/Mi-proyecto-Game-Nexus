@@ -1,149 +1,218 @@
-﻿
-    @{
-    ViewData["Title"] = "Privacy Policy";
+﻿@{
+    ViewData["Title"] = "Protocolo de Miedo";
 }
 
-<!-- Fuentes estilo Halo/UNSC -->
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- Fuentes: Special Elite para el toque de expediente de manicomio y Orbitron/Rajdhani para lo tecnológico -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Rajdhani:wght@500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-    /* --- ESTILO DE LA TERMINAL DE SEGURIDAD --- */
-    .privacy-container {
-        max-width: 900px;
+    body {
+        /* Fondo oscuro con atmósfera de gas del miedo */
+        background-color: #050400 !important;
+        background-image: radial-gradient(circle, rgba(139, 0, 0, 0.2) 0%, rgba(0, 0, 0, 1) 100%), url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+        color: #d4a373;
+    }
+
+    /* --- CONTENEDOR HACKEADO POR SCARECROW --- */
+    .scarecrow-container {
+        max-width: 950px;
         margin: 50px auto;
-        background: rgba(0, 20, 40, 0.7);
-        border: 1px solid #00f2ff;
+        background: rgba(20, 10, 0, 0.9);
+        border: 1px solid #4a0000;
+        border-top: 5px solid #ff4500; /* Naranja tóxico */
         padding: 40px;
         position: relative;
         backdrop-filter: blur(10px);
-        /* Esquina cortada estilo terminal */
-        clip-path: polygon(0 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
-        box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+        box-shadow: 0 0 50px rgba(255, 69, 0, 0.2);
+        overflow: hidden;
+        /* Corte asimétrico y tosco */
+        clip-path: polygon(0 0, 97% 0, 100% 3%, 100% 100%, 3% 100%, 0 97%);
     }
 
-    .security-header {
-        border-bottom: 2px solid #00f2ff;
-        margin-bottom: 30px;
-        padding-bottom: 15px;
+    .scarecrow-header {
+        border-bottom: 2px solid #8b0000;
+        margin-bottom: 35px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
     }
 
-    .security-title {
-        font-family: 'Michroma', sans-serif;
-        color: #00f2ff;
-        font-size: 1.8rem;
+    .scarecrow-title {
+        font-family: 'Orbitron', sans-serif;
+        color: #ff4500;
+        font-size: 2.2rem;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        text-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+        letter-spacing: 6px;
+        margin: 0;
+        text-shadow: 3px 3px 0px #300000;
     }
 
-    .directive-id {
-        font-family: 'Michroma', sans-serif;
-        font-size: 0.7rem;
-        color: #89e2ff;
-        opacity: 0.8;
+    .system-status {
+        font-family: 'Special Elite', cursive;
+        color: #ffcc00;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
     }
 
-    /* BLOQUES DE TEXTO */
-    .protocol-section {
+    /* BLOQUES DE INFECCIÓN */
+    .infection-node {
         margin-bottom: 25px;
-        padding: 20px;
-        background: rgba(0, 242, 255, 0.05);
-        border-left: 4px solid #00f2ff;
+        padding: 25px;
+        background: rgba(139, 0, 0, 0.05);
+        border: 1px solid rgba(255, 69, 0, 0.1);
+        border-left: 5px solid #8b0000;
+        transition: all 0.3s ease;
+        position: relative;
     }
 
-    .protocol-tag {
-        font-family: 'Michroma', sans-serif;
-        font-size: 0.6rem;
-        color: #00f2ff;
-        text-transform: uppercase;
+        .infection-node:hover {
+            background: rgba(255, 69, 0, 0.1);
+            border-left: 5px solid #ffcc00;
+            transform: scale(1.01);
+        }
+
+    .node-id {
+        font-family: 'Special Elite', cursive;
+        font-size: 0.8rem;
+        color: #ffcc00;
         display: block;
-        margin-bottom: 10px;
-        letter-spacing: 1.5px;
+        margin-bottom: 8px;
     }
 
-    .protocol-text {
-        font-family: 'Exo 2', sans-serif;
-        color: #d1f3ff;
-        line-height: 1.6;
-        font-size: 1rem;
-    }
-
-    /* DECORACIÓN "CLASSIFIED" */
-    .classified-stamp {
-        position: absolute;
-        top: 40px;
-        right: 40px;
-        border: 3px solid rgba(255, 0, 0, 0.4);
-        color: rgba(255, 0, 0, 0.4);
-        font-family: 'Michroma', sans-serif;
-        padding: 5px 15px;
-        transform: rotate(15deg);
+    .node-title {
+        font-family: 'Orbitron', sans-serif;
+        color: #ff4500;
         font-size: 1.2rem;
-        text-transform: uppercase;
-        pointer-events: none;
+        margin-bottom: 10px;
+        display: block;
+        letter-spacing: 2px;
     }
 
-    /* EFECTO DE ESCANEO */
-    .scan-bar {
+    .node-text {
+        font-family: 'Rajdhani', sans-serif;
+        color: #d4a373;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    /* MARCA DE AGUA SCARECROW */
+    .scarecrow-watermark {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 2px;
-        background: rgba(0, 242, 255, 0.5);
-        box-shadow: 0 0 10px #00f2ff;
-        animation: scanLoop 8s linear infinite;
+        bottom: 10px;
+        right: 20px;
+        opacity: 0.1;
+        font-family: 'Orbitron', sans-serif;
+        color: #ff4500;
+        font-size: 2rem;
+        pointer-events: none;
+        transform: rotate(-5deg);
     }
 
-    @@keyframes scanLoop {
-        0% { top: 0%; }
-        100% { top: 100%; }
+    /* EFECTO DE GAS TÓXICO */
+    .fear-gas-stream {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 69, 0, 0.03) 2px);
+        pointer-events: none;
+        z-index: 5;
     }
+
+    .glitch-line {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #ff4500;
+        box-shadow: 0 0 15px #ff4500;
+        opacity: 0.3;
+        animation: glitchMove 2s infinite;
+    }
+
+    /* Uso de @@ para escapar el símbolo en Razor */
+    @@keyframes glitchMove {
+        0% {
+            top: -10%;
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            top: 110%;
+            opacity: 0;
+        }
+    }
+
+    .btn-toxin {
+        display: inline-block;
+        padding: 12px 25px;
+        color: #ff4500;
+        border: 2px solid #8b0000;
+        background: #2a0000;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    }
+
+        .btn-toxin:hover {
+            background: #ff4500;
+            color: #000;
+            box-shadow: 0 0 30px #ff4500;
+            transform: rotate(-2deg);
+        }
 </style>
 
-<div class="privacy-container">
-    <div class="scan-bar"></div>
-    <div class="classified-stamp">Clasificado</div>
+<div class="scarecrow-container">
+    <div class="fear-gas-stream"></div>
+    <div class="glitch-line"></div>
 
-    <div class="security-header">
-        <span class="directive-id"></span>
-        <h1 class="security-title">Protocolo de Privacidad</h1>
+    <div class="scarecrow-header">
+        <h1 class="scarecrow-title">Protocolos de Miedo</h1>
+        <span class="system-status">TRANSMISIÓN_INTERRUMPIDA // S.C.R.W.</span>
     </div>
 
     <!-- Sección 1 -->
-    <div class="protocol-section">
-        <span class="protocol-tag">RECUPERACIÓN DE DATOS // SECCIÓN 01</span>
-        <p class="protocol-text">
-            Este sitio web, como parte de la red de datos de la GAMES NEXUS HUB, recopila información mínima necesaria para la gestión de la base de datos de videojuegos. Ningún dato personal es transmitido fuera de los servidores seguros de la ONI.
+    <div class="infection-node">
+        <span class="node-id">TOXIN_ID: 001</span>
+        <span class="node-title">EXTRACCIÓN DE INFORMACIÓN</span>
+        <p class="node-text">
+            Este sitio ha sido infectado para observar su comportamiento. Recopilamos datos mínimos de
+            su catálogo de juegos, no para servirle, sino para entender sus debilidades. La privacidad es una ilusión que el gas del miedo pronto disipará.
         </p>
     </div>
 
     <!-- Sección 2 -->
-    <div class="protocol-section">
-        <span class="protocol-tag">ENCRIPTACIÓN NEURAL // SECCIÓN 02</span>
-        <p class="protocol-text">
-            Utilizamos protocolos de encriptación de grado militar para asegurar que su catálogo de videojuegos y registros de progreso no sean interceptados por facciones del Covenant o fuerzas externas.
+    <div class="infection-node">
+        <span class="node-id">TOXIN_ID: 002</span>
+        <span class="node-title">SEGURIDAD INESTABLE</span>
+        <p class="node-text">
+            Usamos protocolos de encriptación que Batman no puede rastrear. Sus registros están ocultos bajo capas de caos digital. Nadie en Gotham, ni siquiera el GCPD, encontrará lo que ha guardado aquí.
         </p>
     </div>
 
     <!-- Sección 3 -->
-    <div class="protocol-section">
-        <span class="protocol-tag">DIRECTIVA DE COOKIES // SECCIÓN 03</span>
-        <p class="protocol-text">
-            Las 'cookies' se utilizan únicamente para mantener el enlace dekl sitio web estable entre su terminal y nuestro HUB central. Al continuar navegando, acepta los términos de servicio del sistema operativo Game Nexus.
+    <div class="infection-node">
+        <span class="node-id">TOXIN_ID: 003</span>
+        <span class="node-title">RASTREADORES NEURALES</span>
+        <p class="node-text">
+            Las 'cookies' aquí actúan como micro-dosis de mi toxina. Mantienen su terminal conectado a mi red central de Arkham Knight. Si continúa navegando, acepta que el miedo sea su único guía.
         </p>
     </div>
 
-    <!-- Sección 4 -->
-    <div class="protocol-section">
-        <span class="protocol-tag">CONTACTO DE SEGURIDAD // SECCIÓN 04</span>
-        <p class="protocol-text">
-            Si detecta una vulnerabilidad en el sistema, contacte inmediatamente con la IA de servicio Cortana_4.0 o diríjase al puente de mando de la GAMES NEXUS HUB.
-        </p>
-    </div>
+    <div class="scarecrow-watermark">TUS MIEDOS ME ALIMENTAN</div>
 
     <div class="mt-4" style="text-align: right;">
-        <a asp-action="Index" style="color: #00f2ff; text-decoration: none; font-family: 'Michroma'; font-size: 0.7rem;">
-            [ VOLVER A LA PANTALLA DE INICIO ]
+        <a asp-action="Index" class="btn-toxin">
+            &lt; VOLVER A LA PESADILLA
         </a>
     </div>
 </div>
-}
-

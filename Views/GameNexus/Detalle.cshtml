@@ -1,34 +1,37 @@
 ﻿@model Game_Nexus.Models.Item
 
-<!-- Fuentes estilo Halo/UNSC -->
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- Fuentes: Special Elite para informes médicos y Orbitron para la tecnología hackeada -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+    /* --- ATMÓSFERA DE PESADILLA --- */
     body {
-        background-color: #000b14 !important;
-        color: #b3e5ff;
-        font-family: 'Exo 2', sans-serif;
-        background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
-        background-size: 30px 30px;
+        background-color: #050400 !important;
+        color: #d4a373;
+        font-family: 'Rajdhani', sans-serif;
+        background-image: 
+            radial-gradient(circle at center, rgba(139, 0, 0, 0.15) 0%, #000 100%),
+            url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+        overflow-x: hidden;
     }
 
-    /* CONTENEDOR TIPO DOSSIER HOLOGRÁFICO */
-    .unsc-dossier {
+    /* --- CONTENEDOR: EXPEDIENTE DE VÍCTIMA --- */
+    .fear-dossier {
         max-width: 1100px;
         margin: 50px auto;
         padding: 40px;
-        background: rgba(0, 20, 40, 0.8);
-        border: 1px solid #00f2ff;
-        backdrop-filter: blur(10px);
+        background: rgba(20, 10, 5, 0.95);
+        border: 1px solid #4a0000;
         position: relative;
-        /* Esquinas cortadas */
-        clip-path: polygon(0 40px, 40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
-        box-shadow: inset 0 0 50px rgba(0, 242, 255, 0.1);
+        /* Corte asimétrico y tosco */
+        clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 95%);
+        box-shadow: 0 0 60px rgba(139, 0, 0, 0.3);
+        animation: hijackIn 0.8s ease-out forwards;
     }
 
-    /* CABECERA DEL EXPEDIENTE */
+    /* CABECERA HACKEADA */
     .dossier-header {
-        border-bottom: 2px solid #00f2ff;
+        border-bottom: 2px solid #ff4500;
         padding-bottom: 20px;
         margin-bottom: 40px;
         display: flex;
@@ -37,161 +40,196 @@
     }
 
     .dossier-title {
-        font-family: 'Michroma', sans-serif;
+        font-family: 'Orbitron', sans-serif;
         font-size: 2.5rem;
-        color: #fff;
-        text-shadow: 0 0 20px #00f2ff;
+        color: #ff4500;
+        text-shadow: 3px 3px 0px #3a0000;
         margin: 0;
         text-transform: uppercase;
+        letter-spacing: 5px;
     }
 
-    /* IMAGEN TÁCTICA */
-    .img-visor {
-        border: 2px solid #00f2ff;
-        padding: 5px;
-        background: rgba(0, 242, 255, 0.1);
-        box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+    /* IMAGEN TÓXICA */
+    .img-toxin {
+        border: 2px solid #8b0000;
+        padding: 10px;
+        background: rgba(139, 0, 0, 0.1);
+        box-shadow: 0 0 30px rgba(255, 69, 0, 0.2);
         max-width: 100%;
-        filter: contrast(1.1) brightness(0.9);
+        /* Efecto de foto vieja/pesadilla */
+        filter: sepia(1) contrast(1.4) brightness(0.7);
+        transition: 0.5s;
     }
 
-    /* SECCIONES DE DATOS */
-    .data-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+    .img-toxin:hover {
+        filter: sepia(0.5) contrast(1.2) brightness(0.9);
+        transform: scale(1.02) rotate(-1deg);
     }
 
-    .data-item {
-        background: rgba(0, 242, 255, 0.05);
+    /* SECCIONES DE DATOS INFERNALES */
+    .data-item-fear {
+        background: rgba(74, 0, 0, 0.1);
         padding: 15px;
-        border-left: 3px solid #00f2ff;
+        border-left: 4px solid #ff4500;
+        margin-bottom: 15px;
+        transition: 0.3s;
     }
 
-    .label-unsc {
-        font-family: 'Michroma', sans-serif;
-        font-size: 0.65rem;
-        color: #00f2ff;
+    .data-item-fear:hover {
+        background: rgba(255, 69, 0, 0.1);
+        transform: translateX(10px);
+    }
+
+    .label-fear {
+        font-family: 'Special Elite', cursive;
+        font-size: 0.75rem;
+        color: #ffcc00;
         text-transform: uppercase;
         display: block;
         margin-bottom: 5px;
-        letter-spacing: 2px;
     }
 
-    .value-unsc {
+    .value-fear {
+        font-family: 'Orbitron', sans-serif;
         font-size: 1.2rem;
         color: #fff;
-        font-weight: 400;
+        font-weight: 700;
+        letter-spacing: 1px;
     }
 
-    /* CUADRO DE DESCRIPCIÓN */
-    .debriefing-box {
+    /* CUADRO DE EVALUACIÓN (REPORT) */
+    .toxin-report-box {
         margin-top: 30px;
-        padding: 25px;
-        background: rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(0, 242, 255, 0.3);
-        border-radius: 5px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid #4a0000;
         position: relative;
+        border-radius: 2px;
     }
 
-        .debriefing-box::before {
-            content: "MISSION_DEBRIEFING";
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #000b14;
-            padding: 0 10px;
-            font-family: 'Michroma';
-            font-size: 0.7rem;
-            color: #00f2ff;
-        }
+    .toxin-report-box::before {
+        content: "EVALUACIÓN_PSICOLÓGICA_DETALLE";
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: #050400;
+        padding: 0 15px;
+        font-family: 'Special Elite', cursive;
+        font-size: 0.8rem;
+        color: #ff4500;
+        animation: flicker 2s infinite;
+    }
 
     /* BOTONES */
-    .btn-unsc-nav {
+    .btn-toxin-nav {
         display: inline-block;
-        padding: 12px 30px;
-        border: 1px solid #00f2ff;
-        color: #00f2ff;
+        padding: 12px 35px;
+        border: 1px solid #ff4500;
+        color: #ff4500;
         text-decoration: none;
-        font-family: 'Michroma';
-        font-size: 0.8rem;
-        transition: 0.3s;
-        background: transparent;
-        margin-top: 40px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        transition: 0.4s;
+        background: #2a0000;
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
     }
 
-        .btn-unsc-nav:hover {
-            background: #00f2ff;
-            color: #000;
-            box-shadow: 0 0 20px #00f2ff;
-        }
+    .btn-toxin-nav:hover {
+        background: #ff4500;
+        color: #000;
+        box-shadow: 0 0 30px #ff4500;
+        transform: translateY(-3px);
+    }
 
-    /* EFECTO SCANLINE */
-    .scanline {
+    /* EFECTO GAS DEL MIEDO */
+    .gas-cloud-scan {
         position: absolute;
         width: 100%;
-        height: 4px;
-        background: rgba(0, 242, 255, 0.1);
-        top: 0;
-        animation: scanMove 6s linear infinite;
+        height: 100%;
+        top: 0; left: 0;
+        background: linear-gradient(to bottom, transparent, rgba(255, 69, 0, 0.05), transparent);
         pointer-events: none;
+        z-index: 10;
+        animation: gasFlow 4s linear infinite;
     }
 
-    @@keyframes scanMove {
-        0% {
-            top: 0%;
-        }
+    @@keyframes hijackIn {
+        0% { opacity: 0; transform: scale(1.1); filter: invert(1) blur(10px); }
+        100% { opacity: 1; transform: scale(1); filter: invert(0) blur(0); }
+    }
 
-        100% {
-            top: 100%;
-        }
+    @@keyframes gasFlow {
+        0% { top: -100%; }
+        100% { top: 100%; }
+    }
+
+    @@keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
     }
 </style>
 
-<div class="unsc-dossier">
-    <div class="scanline"></div>
+<div class="fear-dossier">
+    <div class="gas-cloud-scan"></div>
+
     <div class="row">
-        <!-- COLUMNA IMAGEN -->
-        <div class="col-md-5 text-center">
-            <img src="@Model.ImagenUrl" class="img-visor" alt="@Model.Titulo" />
+        <!-- COLUMNA IMAGEN (SUJETO) -->
+        <div class="col-md-5 text-center mb-4">
+            <img src="@Model.ImagenUrl" class="img-toxin" alt="@Model.Titulo" />
+            <div style="margin-top: 15px; font-family: 'Special Elite'; color: #8b0000; font-size: 0.7rem;">
+                IDENTIFICACIÓN VISUAL // COMPROMETIDA
+            </div>
         </div>
 
-        <!-- COLUMNA DATOS -->
+        <!-- COLUMNA DATOS (HISTORIAL) -->
         <div class="col-md-7">
-                <div class="data-item">
-                    <span class="label-unsc">Año de desarrollo</span>
-                    <span class="value-unsc">@Model.Ano</span>
+            <div class="dossier-header">
+                <h1 class="dossier-title">@Model.Titulo</h1>
+                <span style="font-family: 'Special Elite'; color: #ffcc00; font-size: 0.8rem;">REF: @Model.Id</span>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="data-item-fear">
+                        <span class="label-fear">AÑO DE INFECCIÓN</span>
+                        <span class="value-fear">@Model.Ano</span>
+                    </div>
                 </div>
-                <div class="data-item">
-                    <span class="label-unsc">Horas de juego</span>
-                    <span class="value-unsc">@Model.HorasDedicadas Horas</span>
+                <div class="col-sm-6">
+                    <div class="data-item-fear">
+                        <span class="label-fear">TIEMPO DE EXPOSICIÓN</span>
+                        <span class="value-fear">@Model.HorasDedicadas H.</span>
+                    </div>
                 </div>
-                <div class="data-item">
-                    <span class="label-unsc">Fecha de Compra</span>
-                    <span class="value-unsc">@Model.FechaAdquisicion.ToString("dd/MM/yyyy")</span>
+                <div class="col-sm-12">
+                    <div class="data-item-fear">
+                        <span class="label-fear">FECHA DE PRIMER CONTACTO</span>
+                        <span class="value-fear">@Model.FechaAdquisicion.ToString("dd / MM / yyyy")</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="debriefing-box">
-                <p style="margin: 0; line-height: 1.6; color: darkcyan;">
+            <div class="toxin-report-box">
+                <p style="margin: 0; line-height: 1.8; color: #d4a373; font-family: 'Special Elite', cursive; font-size: 1rem;">
                     @Model.Descripcion
                 </p>
             </div>
 
             @if (!string.IsNullOrEmpty(Model.VinculacionProyecto))
             {
-                <div class="data-item mt-3">
-                    <span class="label-unsc">Estilo de pelea</span>
-                    <span class="value-unsc" style="font-size: 0.9rem; font-style: italic;">@Model.VinculacionProyecto</span>
+                <div class="data-item-fear mt-4">
+                    <span class="label-fear">ESTILO DE COMBATE REGISTRADO</span>
+                    <span class="value-fear" style="font-size: 1rem; color: #ff4500;">@Model.VinculacionProyecto</span>
                 </div>
             }
         </div>
     </div>
 
     <!-- BOTONES DE ACCIÓN -->
-    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(0, 242, 255, 0.2); margin-top: 20px;">
-        <a asp-action="Index" class="btn-unsc-nav">
-            [ REGRESAR ]
+    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(139, 0, 0, 0.3); margin-top: 30px; padding-top: 20px;">
+        <a asp-action="Index" class="btn-toxin-nav">
+            [ VOLVER A LOS ARCHIVOS ]
         </a>
+      
     </div>
 </div>

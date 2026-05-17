@@ -1,286 +1,273 @@
 ﻿@model List<Game_Nexus.Models.Item>
 
-<!-- Nuevas Fuentes de Google estilo Halo/UNSC (Michroma y Exo 2) -->
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+<!-- Fuentes: Estilo industrial y desgastado -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-    /* --- CONFIGURACIÓN GLOBAL --- */
+    /* --- ATMÓSFERA TÓXICA DE SCARECROW --- */
     body {
-        background-color: #000b14 !important;
-        color: #b3e5ff;
-        /* Fuente principal de lectura cambiada a Exo 2 */
-        font-family: 'Exo 2', sans-serif;
+        background-color: #050400 !important;
+        color: #d4a373;
+        font-family: 'Rajdhani', sans-serif;
         margin: 0;
         padding: 0;
-        background-image: linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
+        overflow-x: hidden;
+        /* Efecto de grano de película y gas */
+        background-image: radial-gradient(circle at center, rgba(163, 64, 0, 0.15) 0%, transparent 70%), url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
     }
 
-    /* --- ANIMACIÓN DE CABECERA --- */
-    .ai-interface-header {
-        position: relative;
-        height: 350px;
-        background: radial-gradient(circle at center, #001a2e 0%, #00050a 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-bottom: 2px solid #00f2ff;
-        box-shadow: 0 5px 25px rgba(0, 242, 255, 0.2);
-    }
-
-    .ai-visuals {
-        position: absolute;
-        width: 350px;
-        height: 350px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0.6;
-    }
-
-    .ring {
-        position: absolute;
-        border-radius: 50%;
-        border: 2px solid rgba(0, 242, 255, 0.3);
-    }
-
-    .outer-ring {
-        width: 300px;
-        height: 300px;
-        border-style: dashed;
-        animation: rotateCW 20s linear infinite;
-    }
-
-    .middle-ring {
-        width: 230px;
-        height: 230px;
-        border: 1px solid rgba(0, 242, 255, 0.5);
-        border-top-color: transparent;
-        border-bottom-color: transparent;
-        animation: rotateCCW 12s linear infinite;
-    }
-
-    .inner-ring {
-        width: 170px;
-        height: 170px;
-        border: 3px double #00f2ff;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        animation: rotateCW 6s linear infinite;
-    }
-
-    .core-pulse {
-        width: 90px;
-        height: 90px;
-        background: radial-gradient(circle, rgba(0, 242, 255, 0.9) 0%, transparent 70%);
-        border-radius: 50%;
-        box-shadow: 0 0 40px #00f2ff;
-        animation: corePulse 2s ease-in-out infinite alternate;
-    }
-
-    .header-content {
-        z-index: 10;
-        text-align: center;
-    }
-
-    .unsc-title-main {
-        /* Cambio a Michroma */
-        font-family: 'Michroma', sans-serif;
-        color: #00f2ff;
-        font-size: 3rem;
-        letter-spacing: 12px;
-        text-shadow: 0 0 20px rgba(0, 242, 255, 0.8);
-        margin: 0;
-    }
-
-    /* --- TARJETAS TÁCTICAS --- */
-    .unsc-card {
-        background: rgba(0, 20, 40, 0.7);
-        border: 1px solid #00f2ff;
-        margin-bottom: 30px;
-        transition: 0.4s;
-        clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(5px);
-    }
-
-        .unsc-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
-            background: rgba(0, 40, 80, 0.8);
+    /* Animación de Parpadeo de Gas del Miedo */
+    @@keyframes fearPulse {
+        0%, 100% {
+            opacity: 0.8;
+            filter: saturate(1) contrast(1.2);
         }
 
-    .card-header-unsc {
-        border-bottom: 1px solid rgba(0, 242, 255, 0.3);
-        padding: 15px;
-        background: rgba(0, 242, 255, 0.1);
+        50% {
+            opacity: 1;
+            filter: saturate(2) contrast(1.5) drop-shadow(0 0 10px #ff4500);
+        }
     }
 
-    .label-tag {
-        /* Michroma para etiquetas pequeñas */
-        font-family: 'Michroma', sans-serif;
-        font-size: 0.55rem;
-        color: #00f2ff;
+    @@keyframes glitchEffect {
+        0% {
+            transform: translate(0);
+        }
+
+        20% {
+            transform: translate(-3px, 2px);
+            clip-path: inset(10% 0 30% 0);
+        }
+
+        40% {
+            transform: translate(3px, -2px);
+            clip-path: inset(30% 0 10% 0);
+        }
+
+        100% {
+            transform: translate(0);
+        }
+    }
+
+    /* --- CABECERA: TRANSMISIÓN HACKEADA --- */
+    .scarecrow-header {
+        position: relative;
+        height: 350px;
+        background: linear-gradient(to bottom, #1a0f00, #050400);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 2px solid #8b0000;
+        box-shadow: 0 0 50px rgba(139, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+        .scarecrow-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 69, 0, 0.05) 3px);
+            pointer-events: none;
+        }
+
+    .scarecrow-title {
+        font-family: 'Orbitron', sans-serif;
+        color: #ff4500;
+        font-size: 4rem;
+        font-weight: 900;
+        letter-spacing: 15px;
+        text-shadow: 5px 5px 0px #3a0000;
+        margin: 0;
+        animation: glitchEffect 2s infinite alternate-reverse;
+    }
+
+    .fear-subtitle {
+        font-family: 'Special Elite', cursive;
+        color: #ffcc00;
+        letter-spacing: 5px;
+        font-size: 1.2rem;
+        margin-top: 10px;
         text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 1.5px;
     }
 
-    .data-value {
-        color: #fff;
-        font-size: 0.95rem;
-        font-weight: 400;
-    }
-
-    .scanline {
-        position: absolute;
-        width: 100%;
-        height: 5px;
-        background: rgba(0, 242, 255, 0.2);
-        box-shadow: 0 0 10px #00f2ff;
-        animation: scanAnim 4s linear infinite;
-        pointer-events: none;
-    }
-
-    /* Botones */
-    .btn-unsc {
-        display: inline-block;
-        border: 1px solid #00f2ff;
-        color: #00f2ff;
-        padding: 10px 20px;
-        text-decoration: none;
-        /* Michroma para botones */
-        font-family: 'Michroma', sans-serif;
-        font-size: 0.7rem;
-        text-align: center;
+    /* --- TARJETAS: EXPEDIENTES TÓXICOS --- */
+    .fear-card {
+        background: rgba(20, 15, 10, 0.95);
+        border: 1px solid #4a2c00;
+        margin-bottom: 40px;
+        position: relative;
         transition: 0.3s;
-        background: rgba(0, 242, 255, 0.05);
+        /* Estilo más tosco y asimétrico */
+        clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 100%);
+    }
+
+        .fear-card:hover {
+            transform: scale(1.02) rotate(1deg);
+            border-color: #ff4500;
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.3);
+        }
+
+    .card-header-fear {
+        background: #2a1b0a;
+        padding: 10px 20px;
+        border-bottom: 2px solid #ff4500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .fear-tag {
+        font-family: 'Special Elite', cursive;
+        font-size: 0.7rem;
+        color: #ff4500;
+    }
+
+    .game-image-container {
+        filter: sepia(100%) saturate(150%) brightness(0.6) contrast(1.2);
+        transition: 0.5s;
+        border: 2px solid #1a1a1a;
+        margin: 10px;
+    }
+
+    .fear-card:hover .game-image-container {
+        filter: sepia(50%) saturate(200%) brightness(0.8);
+    }
+
+    .data-label {
+        font-family: 'Special Elite', cursive;
+        font-size: 0.65rem;
+        color: #ffcc00;
+        text-transform: uppercase;
+    }
+
+    .data-text {
+        color: #e0ccb1;
+        font-weight: bold;
         letter-spacing: 1px;
     }
 
-        .btn-unsc:hover {
-            background: #00f2ff;
+    /* Botones Estilo "Inyectora" */
+    .btn-toxin {
+        display: block;
+        background: #4a0000;
+        color: #ff4500;
+        border: 1px solid #ff4500;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.8rem;
+        transition: 0.3s;
+        margin-top: 15px;
+    }
+
+        .btn-toxin:hover {
+            background: #ff4500;
             color: #000;
-            box-shadow: 0 0 15px #00f2ff;
+            box-shadow: 0 0 20px #ff4500;
         }
 
-    /* --- ANIMACIONES --- */
-    @@keyframes rotateCW {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
+    .btn-add-fear {
+        background: #ff4500;
+        color: #000;
+        padding: 20px 50px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        text-decoration: none;
+        border: none;
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        transition: 0.4s;
     }
 
-    @@keyframes rotateCCW {
-        from {
-            transform: rotate(360deg);
+        .btn-add-fear:hover {
+            background: #ffcc00;
+            letter-spacing: 5px;
+            box-shadow: 0 0 40px #ffcc00;
         }
 
-        to {
-            transform: rotate(0deg);
-        }
+    /* Filtros estilo terminal hackeada */
+    .fear-filter {
+        color: #ffcc00;
+        text-decoration: none;
+        font-family: 'Special Elite', cursive;
+        margin: 0 10px;
+        padding: 5px 10px;
+        border: 1px solid transparent;
     }
 
-    @@keyframes corePulse {
-        0% {
-            transform: scale(0.8);
-            opacity: 0.5;
+        .fear-filter:hover {
+            border: 1px solid #ff4500;
+            color: #ff4500;
+            background: rgba(255, 69, 0, 0.1);
         }
-
-        100% {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-    }
-
-    @@keyframes scanAnim {
-        0% {
-            top: -10%;
-        }
-
-        100% {
-            top: 110%;
-        }
-    }
 
 </style>
 
-<!-- HEADER ANIMADO -->
-<div class="ai-interface-header">
-    <div class="ai-visuals">
-        <div class="ring outer-ring"></div>
-        <div class="ring middle-ring"></div>
-        <div class="ring inner-ring"></div>
-        <div class="core-pulse"></div>
-    </div>
-    <div class="header-content">
-        <h1 class="unsc-title-main">GAME NEXUS HUB</h1>
-        <p style="color: #89e2ff; letter-spacing: 5px; font-weight: 300; margin-top: 10px; font-size: 0.8rem;">
-            [ ESTADO DEL SISTEMA: EN LINEA // AI: CORTANA_4.0 ]
-        </p>
-    </div>
+<!-- HEADER SCARECROW -->
+<div class="scarecrow-header">
+    <h1 class="scarecrow-title">GAME NEXUS HUB</h1>
+    <p class="fear-subtitle">Transmisión Iniciada: Protocolo Archivos del Miedo </p>
+    <div style="width: 100%; height: 2px; background: #ff4500; position: absolute; bottom: 10px; animation: fearPulse 1s infinite;"></div>
 </div>
 
 <div class="container mt-5">
-    <!-- SECCIÓN DE FILTROS -->
+    <!-- FILTROS -->
     <div class="text-center mb-5">
-        <h3 style="font-family: 'Michroma', sans-serif; color: #00f2ff; letter-spacing: 3px; font-size: 1.2rem;">CATÁLOGO DE VIDEOJUEGOS</h3>
+        <h3 style="font-family: 'Special Elite'; color: #8b0000;">SELECCIONAR ARCHIVO INFECTADO:</h3>
         <div class="mt-4">
-            <a asp-action="Index" class="btn-unsc mx-1">TODOS LOS ARCHIVOS</a>
+            <a asp-action="Index" class="fear-filter">TODOS LOS ARCHIVOS</a>
             @foreach (var gen in ViewBag.Generos as List<string>)
             {
-                <a asp-action="Index" asp-route-genero="@gen" class="btn-unsc mx-1" style="font-size: 0.6rem; border-color: rgba(0,242,255,0.3);">@gen</a>
+                <a asp-action="Index" asp-route-genero="@gen" class="fear-filter">@gen.ToUpper()</a>
             }
         </div>
     </div>
 
-    <!-- LISTA DE VIDEOJUEGOS -->
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-4">
-                <div class="unsc-card">
-                    <div class="scanline"></div>
-
-                    <div class="card-header-unsc">
-                        <h4 class="m-0 text-white" style="font-family: 'Michroma', sans-serif; font-size: 1rem; letter-spacing: 1px;">@item.Titulo</h4>
+                <div class="fear-card">
+                    <div class="card-header-fear">
+                        <span class="fear-tag">ARCHIVO DE PRUEBA // @item.Id</span>
+                        <div style="width: 8px; height: 8px; background: #ff4500; border-radius: 50%; animation: fearPulse 0.5s infinite;"></div>
                     </div>
 
                     <div class="p-4">
-                        <img src="@item.ImagenUrl" style="width: 100%; height: 180px; object-fit: cover; border: 1px solid rgba(0,242,255,0.3); filter: brightness(0.9) contrast(1.1);" />
+                        <h4 class="text-center" style="font-family: 'Orbitron'; color: #ffcc00; text-transform: uppercase;">@item.Titulo</h4>
 
-                        <div class="mt-3">
+                        <div class="game-image-container">
+                            <img src="@item.ImagenUrl" style="width: 100%; height: 200px; object-fit: cover;" />
+                        </div>
+
+                        <div class="mt-4">
                             <div class="row">
                                 <div class="col-6 mb-2">
-                                    <span class="label-tag">Desarrollado por:</span><br />
-                                    <span class="data-value">@item.Desarrollador</span>
+                                    <span class="data-label">ORIGEN:</span><br />
+                                    <span class="data-text">@item.Desarrollador</span>
                                 </div>
                                 <div class="col-6 mb-2">
-                                    <span class="label-tag">Estado</span><br />
-                                    <span class="data-value" style="color: #00f2ff;">@item.EstadoProgreso</span>
+                                    <span class="data-label">ESTADO DEL ARCHIVO:</span><br />
+                                    <span class="data-text" style="color: #ff4500;">@item.EstadoProgreso</span>
                                 </div>
-                                <div class="col-6 mb-2">
-                                    <span class="label-tag">Plataforma</span><br />
-                                    <span class="data-value">@item.Consola</span>
+                                <div class="col-6">
+                                    <span class="data-label">PLATAFORMA:</span><br />
+                                    <span class="data-text">@item.Consola</span>
                                 </div>
-                                <div class="col-6 mb-2">
-                                    <span class="label-tag">Calificación</span><br />
-                                    <span class="data-value" style="color: #ffcc00; font-family: 'Michroma'; font-size: 0.7rem;">@item.Calificacion / 10</span>
+                                <div class="col-6">
+                                    <span class="data-label">NIVEL DE MIEDO:</span><br />
+                                    <span class="data-text" style="color: #ffcc00;">@item.Calificacion / 10</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mt-4">
-                            <a asp-action="Detalle" asp-route-id="@item.Id" class="btn-unsc w-100">
-                                ACCESO A LA CARPETA
-                            </a>
-                        </div>
+                        <a asp-action="Detalle" asp-route-id="@item.Id" class="btn-toxin">
+                             DETALLES DEL ARCHIVO
+                        </a>
                     </div>
                 </div>
             </div>
@@ -289,8 +276,8 @@
 
     <!-- BOTÓN AGREGAR -->
     <div class="text-center mt-5 mb-5 pb-5">
-        <a asp-action="Agregar" class="btn-unsc" style="padding: 15px 40px; font-size: 1rem; background: rgba(0,242,255,0.1); border-width: 2px;">
-            + NUEVO VIDEOJUEGO
+        <a asp-action="Agregar" class="btn-add-fear">
+            + AÑADIR NUEVO ARCHIVO
         </a>
     </div>
 </div>
