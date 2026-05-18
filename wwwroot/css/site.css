@@ -4,308 +4,317 @@
 <meta charset="UTF-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 <title > Protocolo de Miedo - Transmisión Scarecrow</title >
-<!-- Fuentes: Special Elite (Expedientes) y Orbitron (Tech Hackeada) -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" >
 
 <style >
-/* --- ANIMACIONES DE PESADILLA --- */
-/* 1. Secuestro de Señal (Hijack) */
-@keyframes hijackBoot {
+/* --- ANIMACIONES TERRORÍFICAS Y LLAMATIVAS --- */
+/* 1. Secuestro Violento con Glitch de Color */
+@@keyframes violentHijack {
     0% {
         opacity: 0;
-        transform: scale(1.2) skewX(20deg);
-        filter: invert(1) blur(10px);
+        transform: scale(1.5) skewX(40deg);
+        filter: invert(1) blur(20px) contrast(5);
+    }
+
+    5% {
+        opacity: 1;
+        transform: scale(1) skewX(-40deg);
+        filter: invert(0) blur(0);
     }
 
     10% {
-        opacity: 1;
-        transform: scale(1) skewX(-20deg);
-        filter: invert(0) blur(2px);
+        transform: translateX(-30px) rotate(5deg);
+        filter: hue-rotate(180deg);
     }
 
     15% {
-        transform: translateX(-10px);
-        filter: hue-rotate(90deg);
-    }
-
-    20% {
-        transform: translateX(10px);
+        transform: translateX(30px) rotate(-5deg);
     }
 
     100% {
         opacity: 1;
-        transform: scale(1) skewX(0);
+        transform: scale(1) rotate(0);
     }
 }
 
-/* 2. Dispersión de Gas (Scanline Tóxico) */
-@keyframes gasScan {
-    0% {
-        top: -100%;
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.5;
-        background: rgba(255, 69, 0, 0.2);
-    }
-
-    100% {
-        top: 100%;
-        opacity: 0;
-    }
-}
-
-/* 3. Parpadeo de Terror */
-@keyframes fearFlicker {
+/* 2. Pulso de Gas Neón */
+@@keyframes gasLungs {
     0%, 100% {
-        opacity: 1;
+        box-shadow: 0 0 40px rgba(255, 69, 0, 0.4), inset 0 0 20px rgba(255, 69, 0, 0.2);
+        transform: scale(1);
     }
 
     50% {
-        opacity: 0.8;
-        filter: sepia(1) saturate(2);
-    }
-
-    52% {
-        opacity: 0.2;
-    }
-
-    54% {
-        opacity: 1;
+        box-shadow: 0 0 80px rgba(255, 204, 0, 0.6), inset 0 0 40px rgba(255, 204, 0, 0.3);
+        transform: scale(1.01);
     }
 }
 
-/* --- ESTILOS GENERALES --- */
+/* 3. Sangrado de Texto Neón */
+@@keyframes textBleed {
+    0%, 100% {
+        text-shadow: 0 0 10px #ff4500, 0 0 20px #8b0000;
+        color: #fff;
+    }
+
+    50% {
+        text-shadow: 0 0 30px #ffcc00, 0 0 50px #ff4500, 5px 5px 0 #000;
+        color: #ffcc00;
+    }
+}
+
+/* --- ESTILOS DE PESADILLA --- */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Rajdhani', sans-serif;
-    background-color: #050400;
-    /* Grano de película y atmósfera naranja */
-    background-image: radial-gradient(circle at center, rgba(139, 0, 0, 0.2) 0%, #000 100%), url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-    color: #d4a373;
+    background-color: #000; /* Negro puro para máximo contraste */
+    color: #ffcc00; /* Amarillo tóxico de base */
     overflow-x: hidden;
 }
 
-    /* Overlay de interferencia de video */
-    body::before {
+    /* Viñeta Claustrofóbica Intensificada */
+    body::after {
         content: "";
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 69, 0, 0.03) 2px);
+        background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.95) 100%);
         pointer-events: none;
-        z-index: 100;
+        z-index: 1000;
     }
 
-.scarecrow-container {
-    max-width: 900px;
-    margin: 60px auto;
-    padding: 40px;
-    background: rgba(15, 5, 0, 0.9);
-    border: 1px solid #4a0000;
-    border-top: 4px solid #ff4500;
-    position: relative;
-    animation: hijackBoot 0.7s ease-in-out forwards;
-    box-shadow: 0 0 50px rgba(139, 0, 0, 0.5);
-    /* Forma asimétrica */
-    clip-path: polygon(0 2%, 100% 0, 98% 100%, 2% 98%);
+.noise-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://media.giphy.com/media/oEI9uWUqnW3Fe/giphy.gif');
+    opacity: 0.06; /* Más visible */
+    z-index: -1;
+    mix-blend-mode: overlay;
 }
 
-    .scarecrow-container::after {
-        content: "RE-ROUTING SIGNAL...";
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-family: 'Special Elite';
-        font-size: 0.6rem;
-        color: #ff4500;
-        animation: fearFlicker 2s infinite;
-    }
+.scarecrow-container {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 50px;
+    background: rgba(15, 5, 0, 0.98);
+    border: 2px solid #ff4500; /* Borde neón */
+    border-top: 15px solid #ff4500;
+    position: relative;
+    animation: violentHijack 0.8s ease-in-out forwards, gasLungs 4s infinite ease-in-out;
+    clip-path: polygon(0 5%, 100% 0, 97% 97%, 3% 100%);
+    backdrop-filter: blur(15px);
+}
 
 .scarecrow-title {
     font-family: 'Orbitron', sans-serif;
-    color: #ff4500;
-    font-size: 2.5rem;
+    color: #fff;
+    font-size: 3.5rem;
     font-weight: 900;
-    letter-spacing: 8px;
-    text-shadow: 3px 3px 0px #300000;
+    letter-spacing: 12px;
+    text-align: center;
     margin: 0;
+    animation: textBleed 2s infinite;
     text-transform: uppercase;
+    filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.8));
 }
 
-.status-line {
-    height: 2px;
-    background: #8b0000;
-    width: 100%;
-    margin: 15px 0 35px;
-    position: relative;
-    overflow: hidden;
+.status-warning {
+    font-family: 'Special Elite', cursive;
+    color: #ffcc00;
+    display: block;
+    text-align: center;
+    margin: 10px 0 40px;
+    letter-spacing: 6px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffcc00;
+    animation: nerveJitter 0.1s infinite;
 }
 
-    .status-line::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        width: 30%;
-        height: 100%;
-        background: #ff4500;
-        box-shadow: 0 0 10px #ff4500;
-        animation: gasScan 2s infinite linear;
-    }
-
-/* --- ITEMS DE LA LISTA (VÍCTIMAS) --- */
+/* --- VÍCTIMAS (ITEMS LLAMATIVOS) --- */
 .victim-item {
     list-style: none;
-    background: rgba(139, 0, 0, 0.05);
-    border: 1px solid rgba(255, 69, 0, 0.1);
-    margin-bottom: 15px;
-    padding: 25px;
+    background: rgba(40, 0, 0, 0.5);
+    border: 1px solid #ff4500;
+    margin-bottom: 25px;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     overflow: hidden;
-    transition: 0.3s;
-    cursor: pointer;
-    border-left: 5px solid #4a0000;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: crosshair;
 }
 
-    /* Efecto Gas del Miedo al Hover */
-    .victim-item::after {
-        content: "";
-        position: absolute;
-        top: -100%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, transparent, rgba(255, 69, 0, 0.15), transparent);
-        pointer-events: none;
-    }
-
     .victim-item:hover {
-        background: rgba(255, 69, 0, 0.1);
-        border-left: 5px solid #ff4500;
-        transform: translateX(10px) rotate(-1deg);
+        background: #ffcc00; /* Cambio a amarillo cegador */
+        border-color: #fff;
+        transform: scale(1.06) rotate(1deg);
+        box-shadow: 0 0 60px #ffcc00;
+        z-index: 50;
     }
 
-        .victim-item:hover::after {
-            animation: gasScan 1s infinite linear;
+        .victim-item:hover .victim-name,
+        .victim-item:hover .victim-metadata,
+        .victim-item:hover .bio-marker {
+            color: #000 !important;
+            text-shadow: none !important;
+            font-weight: 900;
         }
 
 .victim-name {
     font-family: 'Orbitron', sans-serif;
-    color: #ffcc00;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
+    color: #ff4500;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
     text-decoration: none;
     text-transform: uppercase;
+    text-shadow: 0 0 10px #ff4500;
+    display: block;
 }
 
 .victim-metadata {
     display: block;
-    color: #d4a373;
+    color: #ffcc00; /* Color más llamativo */
     font-family: 'Special Elite', cursive;
-    font-size: 0.8rem;
-    margin-top: 8px;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    margin-top: 10px;
+    text-shadow: 0 0 5px #ffcc00;
 }
 
-/* Botón Toxina */
+/* Botón de Inyección Llamativo */
 .btn-toxin {
     display: block;
-    width: fit-content;
-    margin: 40px auto;
-    padding: 18px 50px;
-    background: #4a0000;
-    color: #ff4500;
-    border: 1px solid #ff4500;
+    width: 100%;
+    margin-top: 50px;
+    padding: 25px;
+    background: #ff4500;
+    color: #000;
+    border: 4px solid #fff;
     font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
     text-decoration: none;
-    letter-spacing: 5px;
-    font-weight: bold;
-    transition: 0.4s;
-    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
+    text-align: center;
+    letter-spacing: 12px;
+    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+    transition: 0.3s;
+    box-shadow: 0 0 30px #ff4500;
+    animation: nerveJitter 0.3s infinite;
 }
 
     .btn-toxin:hover {
-        background: #ff4500;
-        color: #000;
-        box-shadow: 0 0 40px #ff4500;
-        transform: scale(1.1) rotate(2deg);
+        background: #fff;
+        color: #ff0000;
+        transform: scale(1.1);
+        box-shadow: 0 0 100px #fff;
     }
 
-/* Marcador Biohazard */
+/* Marcador Biohazard Sangriento Neón */
 .bio-marker {
-    width: 30px;
-    height: 30px;
-    border: 2px solid #8b0000;
+    width: 45px;
+    height: 45px;
+    border: 3px solid #ff4500;
     border-radius: 50%;
-    position: relative;
-    animation: fearFlicker 1s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: #ff4500;
+    text-shadow: 0 0 10px #ff4500;
+    animation: nerveJitter 0.1s infinite;
 }
 
-    .bio-marker::before {
-        content: "!";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #8b0000;
-        font-weight: bold;
+/* --- ANIMACIÓN JITTER --- */
+@@keyframes nerveJitter {
+    0% {
+        transform: translate(0);
     }
 
-.victim-item:hover .bio-marker {
-    border-color: #ff4500;
-    background: #ff4500;
+    25% {
+        transform: translate(2px, -2px);
+    }
+
+    50% {
+        transform: translate(-2px, 2px);
+    }
+
+    75% {
+        transform: translate(2px, 2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
-
-    .victim-item:hover .bio-marker::before {
-        color: #000;
-    }
 
 </style >
 </head >
 <body >
 
+<div class="noise-bg" > </div >
+
 <div class="scarecrow-container" >
 <header >
-<h1 class="scarecrow-title" > SUJETOS_DE_PRUEBA</h1 >
-<div class="status-line" > </div >
+<h1 class="scarecrow-title" > MUESTRARIO_DE_AGONÍA</h1 >
+<span class="status-warning" > INYECTANDO TOXINA... NO HAY SALIDA</span >
 </header >
 
 <ul style="padding: 0; margin: 0;" >
-<!-- Item 1 -->
-<li class="victim-item" style="animation: hijackBoot 0.4s 0.2s backwards;" >
+<li class="victim-item" style="animation: violentHijack 0.4s 0.2s backwards;" >
 <div >
-<a href="#" class="victim-name" > DEVIL MAY CRY</a >
-<span class="victim-metadata" > ID: #401-HNS // NIVEL DE MIEDO: ANALIZANDO...</span >
+<a href="#" class="victim-name" > VICTIM_001_DANTE</a >
+<span class="victim-metadata" > ESTADO: PARANOIA TOTAL // PULSO: 180 BPM</span >
 </div >
-<div class="bio-marker" > </div >
+<div class="bio-marker" > !</div >
 </li >
-<!-- Item 2 -->
-<li class="victim-item" style="animation: hijackBoot 0.4s 0.4s backwards;" >
+
+<li class="victim-item" style="animation: violentHijack 0.4s 0.4s backwards;" >
 <div >
-<a href="#" class="victim-name" > RESIDENT EVIL 4</a >
-<span class="victim-metadata" > ID: #908-SRV // NIVEL DE MIEDO: CRÍTICO</span >
+<a href="#" class="victim-name" > VICTIM_002_LEON</a >
+<span class="victim-metadata" > ESTADO: ALUCINACIONES CONSTANTES // PUPILAS: DILATADAS</span >
 </div >
-<div class="bio-marker" > </div >
+<div class="bio-marker" > !</div >
 </li >
-<!-- Item 3 -->
-<li class="victim-item" style="animation: hijackBoot 0.4s 0.6s backwards;" >
+
+<li class="victim-item" style="animation: violentHijack 0.4s 0.6s backwards;" >
 <div >
-<a href="#" class="victim-name" > HALO 4</a >
-<span class="victim-metadata" > ID: #117-FPS // NIVEL DE MIEDO: INMUNE</span >
+<a href="#" class="victim-name" > VICTIM_003_CHIEF</a >
+<span class="victim-metadata" > ESTADO: CATATÓNICO // FASE: FINAL</span >
 </div >
-<div class="bio-marker" > </div >
+<div class="bio-marker" > !</div >
 </li >
 </ul >
 
-<a href="#" class="btn-toxin" > INYECTAR TOXINA</a >
+<a href="#" class="btn-toxin" > ACEPTAR TU DESTINO</a >
 </div >
+
+<script >
+// Script de "Jump Scare" Visual Potenciado
+setInterval(() => {
+        if(Math.random() > 0.92) {
+            document.body.style.filter = "invert(1) contrast(8) hue-rotate(180deg) brightness(2)";
+            setTimeout(() => {
+                document.body.style.filter = "none";
+            }, 70);
+        }
+        
+        // Glitch de escala violento
+        if(Math.random() > 0.97) {
+            document.querySelector('.scarecrow-container').style.transform = `translateX(${Math.random()*30 - 15}px) scale(1.08) skewX(${Math.random()*10 - 5}deg)`;
+            setTimeout(() => {
+                document.querySelector('.scarecrow-container').style.transform = `translateX(0) scale(1) skewX(0)`;
+            }, 80);
+        }
+    }, 800);
+</script >
 
 </body >
 </html >

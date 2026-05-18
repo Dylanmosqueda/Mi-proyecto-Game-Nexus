@@ -3,216 +3,117 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Scarecrow Hijack</title>
-
-    <!-- Fuentes: Special Elite (Expedientes Arkham) y Orbitron/Rajdhani -->
+    <title>@ViewData["Title"] - GameNexus: Scarecrow Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <style>
-            /* --- ATMÓSFERA TÓXICA (SCARECROW) --- */
+            /* --- ESTÉTICA DE PESADILLA NEÓN --- */
             body {
-                background-color: #050400 !important;
-                color: #d4a373;
+                background-color: #000 !important;
+                color: #ffcc00;
                 font-family: 'Rajdhani', sans-serif;
                 margin: 0;
                 overflow-x: hidden;
-                position: relative;
-                /* Efecto de ruido/grano de imagen hackeada */
-                background-image: radial-gradient(circle at center, rgba(139, 0, 0, 0.1) 0%, transparent 80%), url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+                /* Rejilla de energía naranja */
+                background-image: linear-gradient(rgba(255, 69, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.15) 1px, transparent 1px);
+                background-size: 50px 50px;
             }
 
-            /* --- 1. OVERLAY DE GAS Y GLITCH --- */
-            .fear-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255, 69, 0, 0.02) 2px);
-                z-index: -3;
-                pointer-events: none;
-            }
+                /* Viñeta de Gas del Miedo */
+                body::after {
+                    content: "";
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    box-shadow: inset 0 0 150px #000, inset 0 0 100px rgba(255, 69, 0, 0.2);
+                    pointer-events: none;
+                    z-index: 9999;
+                    animation: gasPulse 4s infinite alternate;
+                }
 
-            /* Ola de gas del miedo (reemplaza la línea de escaneo) */
-            .gas-wave {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 200px;
-                background: linear-gradient(to bottom, transparent, rgba(255, 69, 0, 0.05), transparent);
-                z-index: -2;
-                pointer-events: none;
-                animation: gasFlow 6s ease-in-out infinite;
-                filter: blur(15px);
-            }
-
-            /* --- 2. MARCOS OXIDADOS (HUD) --- */
-            .hud-bracket {
-                position: fixed;
-                width: 50px;
-                height: 50px;
-                border: 2px solid #8b0000;
-                z-index: 1000;
-                pointer-events: none;
-                opacity: 0.7;
-                animation: jitter 0.2s infinite;
-            }
-
-            .top-left {
-                top: 20px;
-                left: 20px;
-                border-right: 0;
-                border-bottom: 0;
-            }
-
-            .top-right {
-                top: 20px;
-                right: 20px;
-                border-left: 0;
-                border-bottom: 0;
-            }
-
-            .bottom-left {
-                bottom: 20px;
-                left: 20px;
-                border-right: 0;
-                border-top: 0;
-            }
-
-            .bottom-right {
-                bottom: 20px;
-                right: 20px;
-                border-left: 0;
-                border-top: 0;
-            }
-
-            /* --- 3. ANIMACIONES DE PESADILLA --- */
-            @@keyframes hijackIn {
+            /* --- ANIMACIONES --- */
+            @@keyframes gasPulse {
                 0% {
-                    opacity: 0;
-                    filter: contrast(3) invert(1) blur(10px);
-                }
-
-                10% {
-                    opacity: 0.8;
-                    filter: contrast(1) invert(0) blur(2px);
-                }
-
-                15% {
-                    transform: translateX(-10px);
-                }
-
-                20% {
-                    transform: translateX(10px);
                     opacity: 0.5;
                 }
 
                 100% {
                     opacity: 1;
-                    filter: blur(0);
+                    box-shadow: inset 0 0 200px #000, inset 0 0 150px rgba(255, 69, 0, 0.4);
                 }
             }
 
-            @@keyframes gasFlow {
-                0% {
-                    transform: translateY(-200px) skewY(5deg);
-                }
-
-                100% {
-                    transform: translateY(100vh) skewY(-5deg);
-                }
-            }
-
-            @@keyframes jitter {
-                0% {
-                    transform: translate(0);
+            @@keyframes navGlitch {
+                0%, 100% {
+                    text-shadow: 0 0 5px #ff4500;
                 }
 
                 50% {
-                    transform: translate(1px, -1px);
-                }
-
-                100% {
-                    transform: translate(-1px, 1px);
+                    text-shadow: -3px 0 #ff0000, 3px 0 #ffcc00;
+                    transform: skewX(-5deg);
                 }
             }
 
-            /* --- NAVBAR: TRANSMISIÓN PIRATA --- */
+            /* --- NAVBAR HACKEADA --- */
             .navbar {
-                background: rgba(15, 5, 0, 0.95) !important;
-                border-bottom: 2px solid #8b0000 !important;
-                backdrop-filter: grayscale(1);
+                background: rgba(10, 0, 0, 0.95) !important;
+                border-bottom: 3px solid #ff4500 !important;
+                box-shadow: 0 0 30px #ff4500;
                 padding: 15px 0;
-                box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
             }
 
             .navbar-brand {
                 font-family: 'Orbitron', sans-serif;
                 font-weight: 900;
+                color: #fff !important;
                 letter-spacing: 5px;
-                color: #ff4500 !important;
-                text-transform: uppercase;
-                text-shadow: 2px 2px 0px #000;
+                text-shadow: 0 0 15px #ff4500;
             }
 
             .nav-link {
                 font-family: 'Special Elite', cursive;
-                color: #d4a373 !important;
+                color: #ffcc00 !important;
                 text-transform: uppercase;
-                font-size: 0.85rem;
-                letter-spacing: 2px;
                 margin: 0 15px;
-                transition: 0.3s;
+                transition: 0.2s;
+                animation: navGlitch 3s infinite;
             }
 
                 .nav-link:hover {
-                    color: #ff4500 !important;
-                    text-shadow: 0 0 10px #ff4500;
-                    transform: scale(1.1) rotate(-1deg);
+                    color: #fff !important;
+                    transform: scale(1.2);
+                    filter: drop-shadow(0 0 10px #ff4500);
                 }
 
-            /* --- CONTENEDOR PRINCIPAL --- */
             .main-render {
-                animation: hijackIn 0.7s ease-in-out;
                 position: relative;
                 z-index: 10;
             }
 
-            /* --- FOOTER DE ASILO --- */
             footer {
                 border-top: 1px solid #4a0000;
-                background: #0a0500;
-                font-family: 'Special Elite', cursive;
+                background: #000;
                 color: #8b0000;
+                font-family: 'Special Elite', cursive;
+                padding: 20px 0;
             }
     </style>
 </head>
 <body>
-    <!-- Capas de Interfaz Scarecrow -->
-    <div class="fear-overlay"></div>
-    <div class="gas-wave"></div>
-
-    <!-- HUD Brackets Distorsionados -->
-    <div class="hud-bracket top-left"></div>
-    <div class="hud-bracket top-right"></div>
-    <div class="hud-bracket bottom-left"></div>
-    <div class="hud-bracket bottom-right"></div>
-
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
             <div class="container-fluid px-5">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                    [INI<span style="color: #ffcc00;">CIO]</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" style="filter: sepia(1) saturate(5) hue-rotate(-50deg);">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">INICIO</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">[PROTOCOLO_DE_PRIVACIDAD]</a>
+                            <a class="nav-link" asp-controller="GameNexus" asp-action="Index">[ ARCHIVOS_INFECTADOS ]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">[ PROTOCOLO_MIEDO ]</a>
                         </li>
                     </ul>
                 </div>
@@ -226,17 +127,22 @@
         </main>
     </div>
 
-    <footer class="py-4 text-center">
+    <footer class="text-center">
         <div class="container">
-            <span style="letter-spacing: 3px;">
-                ESTADO: <span style="color: #ff4500;">INFECTADO</span> //
-                PROYECTO: <span style="color: #ff4500;">EN CAOS</span> //
-                © @DateTime.Now.Year - EL MIEDO CONQUISTA TODO
-            </span>
+            <span>© @DateTime.Now.Year - EL MIEDO ES TU ÚNICA VERDAD</span>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Efecto de parpadeo de sistema aleatorio
+        setInterval(() => {
+        if(Math.random() > 0.95) {
+        document.body.style.filter = "invert(1) contrast(3)";
+        setTimeout(() => document.body.style.filter = "none", 50);
+        }
+        }, 2000);
+    </script>
 </body>
 </html>

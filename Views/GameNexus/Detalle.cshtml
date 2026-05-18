@@ -4,34 +4,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-    /* --- ATMÓSFERA DE PESADILLA --- */
+    /* --- ATMÓSFERA DE PESADILLA PURA --- */
     body {
-        background-color: #050400 !important;
-        color: #d4a373;
+        background-color: #020200 !important;
+        color: #bc8f8f;
         font-family: 'Rajdhani', sans-serif;
-        background-image: 
-            radial-gradient(circle at center, rgba(139, 0, 0, 0.15) 0%, #000 100%),
-            url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+        margin: 0;
         overflow-x: hidden;
+        /* Grano de película sucio y atmósfera de gas denso */
+        background-image: radial-gradient(circle at center, rgba(74, 0, 0, 0.2) 0%, #000 100%), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
     }
 
-    /* --- CONTENEDOR: EXPEDIENTE DE VÍCTIMA --- */
+        /* Viñeta claustrofóbica para cerrar el campo de visión */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 200px #000, inset 0 0 100px rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+    /* --- ANIMACIONES TERRORÍFICAS --- */
+
+    /* Glitch Violento con inversión de color */
+    @@keyframes violentHijack {
+        0% {
+            opacity: 0;
+            transform: scale(1.1) skewX(10deg);
+            filter: invert(1) contrast(5) blur(10px);
+        }
+
+        5% {
+            opacity: 1;
+            transform: scale(1) skewX(-10deg);
+            filter: invert(0) blur(0);
+        }
+
+        10% {
+            transform: translateX(-10px) rotate(1deg);
+            filter: hue-rotate(90deg);
+        }
+
+        15% {
+            transform: translateX(10px) rotate(-1deg);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Vibración de Nervios (Jitter) */
+    @@keyframes jitter {
+        0% {
+            transform: translate(0);
+        }
+
+        25% {
+            transform: translate(1px, -1px);
+            filter: blur(0.5px);
+        }
+
+        50% {
+            transform: translate(-1px, 1px);
+        }
+
+        75% {
+            transform: translate(1px, 1px);
+            filter: blur(0.5px);
+        }
+
+        100% {
+            transform: translate(0);
+        }
+    }
+
+    /* Pulso de Toxina (Aberración Cromática) */
+    @@keyframes chromatic {
+        0%, 100% {
+            text-shadow: 2px 2px #300000;
+        }
+
+        50% {
+            text-shadow: -3px 0 #ff0000, 3px 0 #00ff00;
+            transform: scale(1.01);
+        }
+    }
+
+    /* --- CONTENEDOR: EXPEDIENTE DE SUPLICIO --- */
     .fear-dossier {
         max-width: 1100px;
         margin: 50px auto;
-        padding: 40px;
-        background: rgba(20, 10, 5, 0.95);
-        border: 1px solid #4a0000;
+        padding: 50px;
+        background: rgba(10, 5, 0, 0.98);
+        border: 2px solid #300000;
+        border-top: 10px solid #ff4500;
         position: relative;
-        /* Corte asimétrico y tosco */
-        clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 95%);
-        box-shadow: 0 0 60px rgba(139, 0, 0, 0.3);
-        animation: hijackIn 0.8s ease-out forwards;
+        /* Forma rota y asimétrica */
+        clip-path: polygon(0 5%, 100% 0, 95% 95%, 5% 100%);
+        box-shadow: 0 0 100px rgba(139, 0, 0, 0.4);
+        animation: violentHijack 0.8s ease-in-out forwards;
     }
 
     /* CABECERA HACKEADA */
     .dossier-header {
-        border-bottom: 2px solid #ff4500;
+        border-bottom: 3px double #ff4500;
         padding-bottom: 20px;
         margin-bottom: 40px;
         display: flex;
@@ -41,195 +123,213 @@
 
     .dossier-title {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2.5rem;
+        font-size: 3rem;
         color: #ff4500;
-        text-shadow: 3px 3px 0px #3a0000;
         margin: 0;
         text-transform: uppercase;
-        letter-spacing: 5px;
+        letter-spacing: 10px;
+        animation: chromatic 3s infinite;
     }
 
-    /* IMAGEN TÓXICA */
+    /* IMAGEN TÓXICA (MODO PESADILLA) */
+    .img-toxin-container {
+        position: relative;
+        overflow: hidden;
+        border: 3px solid #4a0000;
+        animation: jitter 0.2s infinite;
+    }
+
     .img-toxin {
-        border: 2px solid #8b0000;
-        padding: 10px;
-        background: rgba(139, 0, 0, 0.1);
-        box-shadow: 0 0 30px rgba(255, 69, 0, 0.2);
-        max-width: 100%;
-        /* Efecto de foto vieja/pesadilla */
-        filter: sepia(1) contrast(1.4) brightness(0.7);
-        transition: 0.5s;
+        width: 100%;
+        /* Efecto de cámara de tortura/seguridad */
+        filter: sepia(1) contrast(2) brightness(0.5) grayscale(0.5);
+        transition: 0.2s;
     }
 
-    .img-toxin:hover {
-        filter: sepia(0.5) contrast(1.2) brightness(0.9);
-        transform: scale(1.02) rotate(-1deg);
+    .img-toxin-container:hover .img-toxin {
+        filter: sepia(0.5) contrast(1.5) brightness(0.8) hue-rotate(180deg);
+        transform: scale(1.1);
     }
 
-    /* SECCIONES DE DATOS INFERNALES */
+    /* SECCIONES DE DATOS */
     .data-item-fear {
-        background: rgba(74, 0, 0, 0.1);
-        padding: 15px;
-        border-left: 4px solid #ff4500;
-        margin-bottom: 15px;
-        transition: 0.3s;
+        background: rgba(40, 0, 0, 0.3);
+        padding: 20px;
+        border-left: 5px solid #ff4500;
+        margin-bottom: 20px;
+        transition: 0.1s;
     }
 
-    .data-item-fear:hover {
-        background: rgba(255, 69, 0, 0.1);
-        transform: translateX(10px);
-    }
+        .data-item-fear:hover {
+            background: #ff4500;
+            color: #000;
+            transform: translateX(15px) skewX(-5deg);
+        }
+
+            .data-item-fear:hover .label-fear, .data-item-fear:hover .value-fear {
+                color: #000 !important;
+            }
 
     .label-fear {
         font-family: 'Special Elite', cursive;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         color: #ffcc00;
         text-transform: uppercase;
         display: block;
-        margin-bottom: 5px;
     }
 
     .value-fear {
         font-family: 'Orbitron', sans-serif;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         color: #fff;
-        font-weight: 700;
-        letter-spacing: 1px;
+        font-weight: 900;
     }
 
     /* CUADRO DE EVALUACIÓN (REPORT) */
     .toxin-report-box {
         margin-top: 30px;
-        padding: 30px;
-        background: rgba(0, 0, 0, 0.7);
-        border: 1px solid #4a0000;
+        padding: 40px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #ff4500;
         position: relative;
-        border-radius: 2px;
+        box-shadow: inset 0 0 30px rgba(255, 69, 0, 0.2);
     }
 
-    .toxin-report-box::before {
-        content: "EVALUACIÓN_PSICOLÓGICA_DETALLE";
-        position: absolute;
-        top: -12px;
-        left: 20px;
-        background: #050400;
-        padding: 0 15px;
+        .toxin-report-box::before {
+            content:"EXPEDIENTE_DE_VÍCTIMA"; 
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #ff4500;
+            color: #000;
+            padding: 2px 20px;
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            font-weight: 900;
+        }
+
+    .report-text {
+        margin: 0;
+        line-height: 2;
+        color: #d4a373;
         font-family: 'Special Elite', cursive;
-        font-size: 0.8rem;
-        color: #ff4500;
-        animation: flicker 2s infinite;
+        font-size: 1.1rem;
+        filter: blur(0.4px); /* Simula mareo visual */
     }
 
     /* BOTONES */
     .btn-toxin-nav {
         display: inline-block;
-        padding: 12px 35px;
-        border: 1px solid #ff4500;
+        padding: 15px 45px;
+        background: #4a0000;
         color: #ff4500;
-        text-decoration: none;
+        border: 2px solid #ff4500;
+        text-decoration: none !important;
         font-family: 'Orbitron', sans-serif;
-        font-size: 0.9rem;
-        transition: 0.4s;
-        background: #2a0000;
-        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        font-weight: 900;
+        font-size: 1rem;
+        letter-spacing: 5px;
+        transition: 0.2s;
+        clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
+        animation: jitter 5s infinite;
     }
 
-    .btn-toxin-nav:hover {
-        background: #ff4500;
-        color: #000;
-        box-shadow: 0 0 30px #ff4500;
-        transform: translateY(-3px);
-    }
+        .btn-toxin-nav:hover {
+            background: #ff4500;
+            color: #000;
+            box-shadow: 0 0 50px #ff4500;
+            transform: scale(1.1);
+        }
 
-    /* EFECTO GAS DEL MIEDO */
-    .gas-cloud-scan {
+    /* ESTÁTICA DE TV */
+    .static-overlay {
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        top: 0; left: 0;
-        background: linear-gradient(to bottom, transparent, rgba(255, 69, 0, 0.05), transparent);
+        background: url('https://media.giphy.com/media/oEI9uWUqnW3Fe/giphy.gif');
+        opacity: 0.05;
         pointer-events: none;
-        z-index: 10;
-        animation: gasFlow 4s linear infinite;
-    }
-
-    @@keyframes hijackIn {
-        0% { opacity: 0; transform: scale(1.1); filter: invert(1) blur(10px); }
-        100% { opacity: 1; transform: scale(1); filter: invert(0) blur(0); }
-    }
-
-    @@keyframes gasFlow {
-        0% { top: -100%; }
-        100% { top: 100%; }
-    }
-
-    @@keyframes flicker {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+        z-index: 50;
+        mix-blend-mode: overlay;
     }
 </style>
 
 <div class="fear-dossier">
-    <div class="gas-cloud-scan"></div>
+    <div class="static-overlay"></div>
 
     <div class="row">
-        <!-- COLUMNA IMAGEN (SUJETO) -->
-        <div class="col-md-5 text-center mb-4">
-            <img src="@Model.ImagenUrl" class="img-toxin" alt="@Model.Titulo" />
-            <div style="margin-top: 15px; font-family: 'Special Elite'; color: #8b0000; font-size: 0.7rem;">
-                IDENTIFICACIÓN VISUAL // COMPROMETIDA
+        <!-- COLUMNA IMAGEN (VÍCTIMA) -->
+        <div class="col-md-5 text-center mb-5">
+            <div class="img-toxin-container">
+                <img src="@Model.ImagenUrl" class="img-toxin" alt="@Model.Titulo" />
+            </div>
+            <div style="margin-top: 20px; font-family: 'Special Elite'; color: #ff0000; font-size: 0.9rem; animation: jitter 0.1s infinite;">
+                SUJETO BAJO OBSERVACIÓN // NO HAY RETORNO
             </div>
         </div>
 
-        <!-- COLUMNA DATOS (HISTORIAL) -->
+        <!-- COLUMNA DATOS (HISTORIAL DE TRAUMA) -->
         <div class="col-md-7">
             <div class="dossier-header">
                 <h1 class="dossier-title">@Model.Titulo</h1>
-                <span style="font-family: 'Special Elite'; color: #ffcc00; font-size: 0.8rem;">REF: @Model.Id</span>
+                <span style="font-family: 'Special Elite'; color: #ffcc00; font-size: 1rem;">SUJETO_#@Model.Id</span>
             </div>
 
             <div class="row">
                 <div class="col-sm-6">
                     <div class="data-item-fear">
-                        <span class="label-fear">AÑO DE INFECCIÓN</span>
+                        <span class="label-fear">COMIENZO DE LA PESADILLA</span>
                         <span class="value-fear">@Model.Ano</span>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="data-item-fear">
-                        <span class="label-fear">TIEMPO DE EXPOSICIÓN</span>
+                        <span class="label-fear">TIEMPO DE JUEGO</span>
                         <span class="value-fear">@Model.HorasDedicadas H.</span>
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <div class="data-item-fear">
-                        <span class="label-fear">FECHA DE PRIMER CONTACTO</span>
+                        <span class="label-fear">EXPEDIENTE CREADO</span>
                         <span class="value-fear">@Model.FechaAdquisicion.ToString("dd / MM / yyyy")</span>
                     </div>
                 </div>
             </div>
 
             <div class="toxin-report-box">
-                <p style="margin: 0; line-height: 1.8; color: #d4a373; font-family: 'Special Elite', cursive; font-size: 1rem;">
+                <p class="report-text">
                     @Model.Descripcion
                 </p>
             </div>
 
             @if (!string.IsNullOrEmpty(Model.VinculacionProyecto))
             {
-                <div class="data-item-fear mt-4">
-                    <span class="label-fear">ESTILO DE COMBATE REGISTRADO</span>
-                    <span class="value-fear" style="font-size: 1rem; color: #ff4500;">@Model.VinculacionProyecto</span>
+                <div class="data-item-fear mt-4" style="border-left-color: #ff0000;">
+                    <span class="label-fear"> VINCULACIÓN</span>
+                    <span class="value-fear" style="font-size: 1.1rem; color: #ff4500;">@Model.VinculacionProyecto</span>
                 </div>
             }
         </div>
     </div>
 
     <!-- BOTONES DE ACCIÓN -->
-    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(139, 0, 0, 0.3); margin-top: 30px; padding-top: 20px;">
+    <div style="display: flex; justify-content: center; border-top: 2px solid #4a0000; margin-top: 40px; padding-top: 30px;">
         <a asp-action="Index" class="btn-toxin-nav">
-            [ VOLVER A LOS ARCHIVOS ]
+            ABANDONAR EXPEDIENTE
         </a>
-      
     </div>
 </div>
+
+<script>
+    // Script de alucinación visual (Flashes de inversión)
+    setInterval(() => {
+        if(Math.random() > 0.94) {
+            document.body.style.filter = "invert(1) contrast(5) hue-rotate(90deg)";
+            setTimeout(() => {
+                document.body.style.filter = "none";
+            }, 60);
+        }
+    }, 1200);
+</script>
