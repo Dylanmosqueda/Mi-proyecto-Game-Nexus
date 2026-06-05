@@ -72,15 +72,19 @@ Nos enfocaremos en cuatro vistas principales, representadas a través de diagram
 
  1. Vista Lógica (Estructura de Capas)
 Muestra la organización del código dividida en responsabilidades lógicas independientes.
+<img width="4479" height="3970" alt="React State Management-2026-06-05-033903" src="https://github.com/user-attachments/assets/477d6bec-c0c5-4bcf-922e-97f1ac7e6147" />
 
 2. Vista Física (Estructura de Componentes y Directorios)
 Representa la organización de carpetas y módulos dentro del código fuente del proyecto.
+<img width="5973" height="3790" alt="Untitled diagram-2026-06-05-034229" src="https://github.com/user-attachments/assets/6cbc0139-5904-4e7a-89cb-1617f970379e" />
 
 3. Vista de Despliegue (Infraestructura de Red)
 Ilustra la infraestructura física en la nube donde residen, se ejecutan y se comunican los artefactos de software.
+<img width="2939" height="3171" alt="Untitled diagram-2026-06-05-034619" src="https://github.com/user-attachments/assets/4c17c902-5bda-4921-bd57-f57c50dd7bbe" />
 
 4. Vista de Procesos (Flujo de Consulta de Videojuegos)
 Describe la secuencia temporal de un proceso crítico: cuando el usuario busca e interactúa con la ficha de un videojuego.
+<img width="8192" height="3933" alt="Untitled diagram-2026-06-05-034940" src="https://github.com/user-attachments/assets/52bc1afa-9823-4010-91d3-50c428bd8ee1" />
 
 
 
