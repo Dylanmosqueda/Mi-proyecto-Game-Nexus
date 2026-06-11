@@ -55,6 +55,7 @@ Deuda o riesgo: Si no se respetan estrictamente los límites de las capas, se pu
 Este diagrama ilustra cómo las capas se comunican de forma unidireccional para gestionar la biblioteca y los assets.
 <img width="2295" height="2998" alt="Untitled diagram-2026-06-11-144632" src="https://github.com/user-attachments/assets/38542f01-59d2-49d4-8b36-da74c942e266" />
 
+Declaracion de IA: Utilice IA Studio para crear el codigo para mermaid  y tambien lo utilice para saber que estilo  de arquitectura seria mas util en mi proyecto
 
 
 
