@@ -1,4 +1,4 @@
-# ADR-01: [Título corto de la decisión]
+# ADR-01: [Selección del Estilo Arquitectónico basado en N-Capas (Java/MVC)]
 
 | Campo  | Valor |
 |--------|-------|
@@ -52,7 +52,10 @@ Limitación técnica: Existe una mayor verbosidad inicial; se deben crear más c
 Deuda o riesgo: Si no se respetan estrictamente los límites de las capas, se puede caer en un "Monolito Degenerado", donde las capas dependen demasiado entre sí.
 
 ## Diagrama
+Este diagrama ilustra cómo las capas se comunican de forma unidireccional para gestionar la biblioteca y los assets.
+<img width="2295" height="2998" alt="Untitled diagram-2026-06-11-144632" src="https://github.com/user-attachments/assets/38542f01-59d2-49d4-8b36-da74c942e266" />
 
-Un boceto de cómo se estructura tu sistema (draw.io, Mermaid o a mano escaneado)
 
-![Diagrama del sistema]( ./ruta/diagrama-nivel-1.png )
+
+
+
