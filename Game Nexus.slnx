@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../Game Nexus.API/Game Nexus.API.csproj" Id="4e95b2df-aeb0-4cff-a180-3c1bf1ecd6ac" />
   <Project Path="Game Nexus.csproj" />
 </Solution>

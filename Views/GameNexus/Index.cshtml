@@ -247,7 +247,7 @@
 
 <div class="container mt-5">
     <div class="text-center mb-5">
-        <h3 style="font-family: 'Special Elite'; color: #ff4500; text-shadow: 0 0 10px #8b0000;">FILTRAR EXPEDINTES:</h3>
+        <h3 style="font-family: 'Special Elite'; color: #ff4500; text-shadow: 0 0 10px #8b0000;">FILTRAR EXPEDIENTES:</h3>
         <div class="mt-4">
             <a asp-action="Index" class="fear-filter">[ TODOS_LOS_EXPEDIENTES ]</a>
             @foreach (var gen in ViewBag.Generos as List<string>)
@@ -263,7 +263,7 @@
             <div class="col-md-4">
                 <div class="fear-card">
                     <div class="card-header-fear">
-                        <span class="fear-tag">VÍCTIMA_@item.Id</span>
+                        <span class="fear-tag">SUJETO_@item.Id</span>
                         <div style="width: 12px; height: 12px; background: #ff0000; border-radius: 50%; box-shadow: 0 0 10px #ff0000; animation: scanline 0.5s infinite;"></div>
                     </div>
 
@@ -282,14 +282,14 @@
                                 </div>
                                 <div class="col-6 mb-3">
                                     <span class="data-label">ESTADO:</span><br />
-                                    <span class="data-text" style="color: #ff4500;">@item.EstadoProgreso</span>
+                                    <span class="data-text" style="color: #ff4500;">@item.Estado</span>
                                 </div>
                                 <div class="col-6">
                                     <span class="data-label">TERMINAL:</span><br />
                                     <span class="data-text">@item.Consola</span>
                                 </div>
                                 <div class="col-6">
-                                    <span class="data-label">TRAUMA:</span><br />
+                                    <span class="data-label">PUNTUACION:</span><br />
                                     <span class="data-text" style="color: #ffcc00;">@item.Calificacion / 10</span>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
 
     <div class="text-center mt-5 mb-5 pb-5">
         <a asp-action="Agregar" class="btn-add-fear">
-            + AÑADIR NUEVO EXPEDIENTE
+            + NUEVO EXPEDIENTE
         </a>
     </div>
 </div>
