@@ -50,6 +50,5 @@ La API accederá a sus datos en producción mediante el ORM **Entity Framework C
 
 ## Diagrama
 
-Un boceto de cómo se estructura tu sistema (draw.io, Mermaid o a mano escaneado)
+<img width="5163" height="1673" alt="Untitled diagram-2026-06-18-222448" src="https://github.com/user-attachments/assets/586ac695-e412-459e-9dbc-f4d1f73833e9" />
 
-![Diagrama del sistema]( ./ruta/diagrama-nivel-1.png )
