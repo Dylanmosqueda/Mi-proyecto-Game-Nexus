@@ -8,12 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Removed explicit removal and compilation of Razor views. Razor (.cshtml) files
-         are handled automatically by the SDK and must NOT be included as <Compile> items.
-         Keeping them as content/static files (default) so Razor compilation works. -->
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="GitHub.Copilot.SDK" Version="1.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
