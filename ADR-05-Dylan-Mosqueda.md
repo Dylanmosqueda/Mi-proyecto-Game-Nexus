@@ -1,4 +1,4 @@
-# ADR-01: [Título corto de la decisión]
+# ADR-05: Integración de Patrones GoF (Singleton y Strategy) para la Gestión del Catálogo
 
 | Campo  | Valor |
 |--------|-------|
