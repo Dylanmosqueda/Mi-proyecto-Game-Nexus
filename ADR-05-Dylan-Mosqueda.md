@@ -54,5 +54,9 @@ Se decidió integrar dos patrones de diseño de la Pandilla de los Cuatro (GoF):
 *   **Deuda o riesgo**: El uso del Singleton en memoria (`GameNexusDb`) asume el riesgo de pérdida de datos ante un reinicio del servidor IIS o de la aplicación. Además, restringe la escalabilidad horizontal en producción (múltiples servidores tendrían estados diferentes), una deuda técnica conocida que deberá ser saldada en el futuro mediante la migración a una base de datos externa administrada (AWS RDS / MongoDB Atlas).
 
 ## Diagrama
+<img width="1240" height="1675" alt="Untitled diagram-2026-06-25-004252" src="https://github.com/user-attachments/assets/95f2f515-3ed5-4cbe-b263-3720bc098fae" />
+<img width="1590" height="2850" alt="Gamer API Integration-2026-06-25-004315" src="https://github.com/user-attachments/assets/8797f76f-1a22-4173-b4bd-7b67a658a6f4" />
+<img width="8192" height="3360" alt="ItemsController Strategy-2026-06-25-004343" src="https://github.com/user-attachments/assets/1cb8397f-e40f-4b59-b000-04f0579b25ee" />
+
 
 
