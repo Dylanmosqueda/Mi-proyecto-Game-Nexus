@@ -77,4 +77,58 @@ flowchart TB
     class ExtAPI,EmailService external;
 ```
 
+Nivel 3 — Componentes
+## ¿Para quién es?
+Audiencia: Desarrolladores de software y líderes técnicos encargados de codificar o dar mantenimiento a esta sección del sistema.
+## ¿Qué pregunta responde?
+Pregunta: ¿Cómo está estructurado internamente el contenedor principal (API Backend) y cuáles son las responsabilidades de sus componentes?
 
+
+```mermaid
+flowchart TB
+    WebApp[" Aplicación Frontend"]
+    Database[(" Base de Datos")]
+    ExtAPI[" API Externa de Juegos"]
+
+    subgraph BackendAPIContainer [Límite de la API Backend]
+        %% Controladores (Controllers)
+        AuthController[" Auth Controller<br/>Maneja el registro y login de usuarios"]
+        GameController[" Game Controller<br/>Maneja consultas e información de videojuegos"]
+        ReviewController[" Review Controller<br/>Maneja operaciones CRUD de las reseñas"]
+        
+        %% Servicios (Services)
+        AuthService[" Auth Service<br/>Valida credenciales y genera tokens (JWT)"]
+        GameService[" Game Service<br/>Procesa la información y consume la API externa"]
+        ReviewService[" Review Service<br/>Aplica reglas de negocio de las reseñas"]
+        
+        %% Repositorios / Acceso a datos
+        UserRepository[" User Repository / DAO<br/>Mapea el acceso a datos de usuarios"]
+        ReviewRepository[" Review Repository / DAO<br/>Mapea el acceso a datos de reseñas"]
+    end
+
+    %% Flujo de peticiones desde el exterior
+    WebApp -->|HTTP POST /auth/*| AuthController
+    WebApp -->|HTTP GET /games/*| GameController
+    WebApp -->|HTTP GET-POST-DELETE /reviews/*| ReviewController
+
+    %% Comunicación interna
+    AuthController -->|Llama a| AuthService
+    GameController -->|Llama a| GameService
+    ReviewController -->|Llama a| ReviewService
+
+    AuthService -->|Usa| UserRepository
+    GameService -->|Consulta directo o por caché| ExtAPI
+    ReviewService -->|Usa| ReviewRepository
+
+    UserRepository -->|Accede a la tabla de usuarios en| Database
+    ReviewRepository -->|Accede a la tabla de reseñas en| Database
+
+    %% Estilos de C4
+    classDef external fill:#999999,stroke:#666666,color:#FFFFFF;
+    classDef component fill:#85BBF0,stroke:#5D82A8,color:#222222;
+    classDef repository fill:#438DD5,stroke:#2E6295,color:#FFFFFF;
+
+    class WebApp,Database,ExtAPI external;
+    class AuthController,GameController,ReviewController,AuthService,GameService,ReviewService component;
+    class UserRepository,ReviewRepository repository;
+```
