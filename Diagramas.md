@@ -35,3 +35,46 @@ flowchart TB
     class GameNexus system;
     class ExtAPI,EmailService external;
 ```
+
+Nivel 2 
+## ¿Para quién es?
+Audiencia: Desarrolladores, arquitectos de software y personal de operaciones (DevOps).
+## ¿Qué pregunta responde?
+Pregunta: ¿Cuáles son las aplicaciones o contenedores de datos que componen el sistema, qué tecnologías usan y cómo se comunican entre sí?
+
+
+```mermaid
+flowchart TB
+    Gamer[" Gamer / Usuario"]
+    Admin[" Administrador"]
+
+    subgraph GameNexusSystem [Contenedores de Game Nexus]
+        WebApp[" Aplicación Frontend<br/>[React / Vue o HTML/JS]<br/>Interfaz de usuario responsiva e interactiva"]
+        BackendAPI[" API Backend<br/>[Node.js / Python / Java]<br/>Provee lógica de negocio, autenticación y endpoints REST"]
+        Database[(" Base de Datos<br/>[PostgreSQL / MySQL / MongoDB]<br/>Guarda usuarios, reseñas y favoritos")]
+    end
+
+    ExtAPI[" API Externa de Juegos"]
+    EmailService[" Servicio de Correo"]
+
+    %% Relaciones de comunicación
+    Gamer -->|Usa| WebApp
+    Admin -->|Administra usando| WebApp
+    WebApp -->|Realiza peticiones HTTP / JSON a| BackendAPI
+    BackendAPI -->|Lee y escribe usando queries/ORM en| Database
+    BackendAPI -->|Solicita envío de emails por SMTP/HTTP a| EmailService
+    BackendAPI -->|Consulta catálogo de videojuegos a| ExtAPI
+
+    %% Estilos de C4
+    classDef actor fill:#08427B,stroke:#052E56,color:#FFFFFF;
+    classDef container fill:#438DD5,stroke:#2E6295,color:#FFFFFF;
+    classDef db fill:#1168BD,stroke:#0B4E8F,color:#FFFFFF;
+    classDef external fill:#999999,stroke:#666666,color:#FFFFFF;
+
+    class Gamer,Admin actor;
+    class WebApp,BackendAPI container;
+    class Database db;
+    class ExtAPI,EmailService external;
+```
+
+
