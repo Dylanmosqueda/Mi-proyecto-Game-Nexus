@@ -1,4 +1,4 @@
-# ADR-04: Incorporación de la API REST
+# ADR-05: deudas-tecnicas
 
 
 | Campo  | Valor |
@@ -11,8 +11,7 @@
 
 ## Contexto
 
-Actualmente, la API REST del proyecto Game Nexus se ejecuta localmente utilizando un almacenamiento simulado en memoria para facilitar el desarrollo rápido de las entidades `Item` y `Review`. 
-No obstante, al planificar el despliegue de la solución a un entorno de producción en AWS (Amazon Web Services), se requiere definir un mecanismo de almacenamiento persistente que garantice la disponibilidad, consistencia y seguridad de la información.
+Durante las fases iniciales de desarrollo de **Game Nexus**, priorizamos la entrega rápida de características funcionales en la API (`Game Nexus.API`) y la integración del cliente. Para cumplir con los plazos estimados, tomamos decisiones de diseño y configuración simplificadas. Con el fin de evitar que estas decisiones comprometan la mantenibilidad y seguridad del proyecto a largo plazo, procedemos a documentar estas deudas técnicas para planificar su resolución.
 
 ---
 
@@ -47,6 +46,20 @@ La API accederá a sus datos en producción mediante el ORM **Entity Framework C
 
 **Limitación técnica**: **Latencia de Red.** Al estar la base de datos en un servicio externo, cada consulta tiene un pequeño retraso adicional de red comparado con leer de la memoria local, lo que requiere optimizar las consultas.
 **Deuda o riesgo**: **Costo de Infraestructura.** AWS RDS tiene un costo superior al almacenamiento local. Se asume el riesgo de salir de la capa gratuita si no se monitorea correctamente el tamaño de la instancia de base de datos.
+
+### Deuda Técnica 1: Gestión de Configuración e Infraestructura
+*   **Qué es:** 
+    Uso de credenciales de infraestructura (cadena de conexión a SQL Server, claves JWT para autenticación de usuarios y credenciales de APIs de terceros como IGDB o Steam) quemadas directamente en el archivo `appsettings.development.json` o expuestas en el código de inicialización en `Program.cs`. No existe una separación clara de secretos por entorno.
+*   **Por qué existe:** 
+    Fue una decisión consciente para acelerar el arranque del entorno de desarrollo local y simplificar la colaboración inicial entre los miembros del equipo, evitando la sobrecarga de configurar bóvedas de claves externas en etapas tempranas.
+*   **Costo de no pagarla:** 
+    Si el proyecto escala o se prepara para producción, corremos un riesgo elevado de fuga de credenciales sensibles si un desarrollador sube por error estos archivos al repositorio público de Git. Además, dificulta el despliegue automatizado (CI/CD), ya que los entornos de pruebas y producción requerirían modificar manualmente archivos físicos de configuración en el servidor.
+*   **Propuesta de solución:** 
+    Aplicar la técnica de **Externalización de Configuración**. Utilizaremos el Administrador de Secretos de usuario de .NET (`dotnet user-secrets`) para el desarrollo local, excluyendo por completo los secretos del control de versiones. Para entornos de producción, se migrará la infraestructura hacia variables de entorno del sistema o un servicio de bóveda gestionado (como Azure Key Vault o AWS Secrets Manager), mapeando estas propiedades de forma segura mediante el patrón de opciones fuertemente tipadas (`IOptions<TOptions>`) en .NET.
+
+
+
+
 
 ## Diagrama
 
