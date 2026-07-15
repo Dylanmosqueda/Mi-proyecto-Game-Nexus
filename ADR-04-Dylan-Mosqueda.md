@@ -59,6 +59,15 @@ La API accederá a sus datos en producción mediante el ORM **Entity Framework C
 
 
 
+### Deuda Técnica 2: Arquitectura de Software (Controladores Acoplados / "Fat Controllers")
+*   **Qué es:** 
+    Inyección directa de la clase `DbContext` de Entity Framework Core dentro de los controladores de la API (`GameController.cs` y `ReviewController.cs`), procesando la lógica de negocio, validaciones de dominio (como el cálculo de promedios de calificación o validaciones de usuarios) y el formateo de respuestas directamente en los endpoints.
+*   **Por qué existe:** 
+    Descuido no detectado a tiempo debido a la inercia del desarrollo inicial. Al buscar que la API devolviera datos rápidamente para que el cliente frontend pudiera consumirlos, se omitió la creación de una capa de servicios o de lógica de negocio independiente.
+*   **Costo de no pagarla:** 
+    A medida que agreguemos más reglas de negocio, los controladores se volverán gigantescos y difíciles de mantener (violando el Principio de Responsabilidad Única). Adicionalmente, escribir pruebas unitarias automatizadas se volverá sumamente complejo, ya que nos obligará a simular (`mockear`) el comportamiento completo de la base de datos y de la infraestructura HTTP en lugar de probar la pura lógica de negocio.
+*   **Propuesta de solución:** 
+    Aplicar la refactorización mediante la **Separación en Capas** o el **Patrón Mediator** (usando la biblioteca MediatR). Extraeremos la lógica de persistencia de datos y de negocio de los controladores hacia manejadores de peticiones independientes (Handlers) o Servicios de Aplicación. Los controladores solo actuarán como una capa delgada de entrada y salida, delegando el procesamiento real a estas clases desacopladas.
 
 
 ## Diagrama
