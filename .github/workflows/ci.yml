@@ -1,0 +1,29 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches: [ "main", "pipeline-ci" ]
+  pull_request:
+    branches: [ "main", "pipeline-ci" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del codigo
+      uses: actions/checkout@v4
+
+    - name: Configurar .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 11.0.x # Ajusta a la versión de .NET que utilices (ej. 8.0.x o 9.0.x)
+
+    - name: Restaurar dependencias
+      run: dotnet restore
+
+    - name: Compilar solucion
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Ejecutar pruebas unitarias
+      run: dotnet test --no-build --verbosity normal --configuration Release
