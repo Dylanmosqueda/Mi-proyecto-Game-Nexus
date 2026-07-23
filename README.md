@@ -1,2 +1,4 @@
 Mi proyecto Game Nexus Hub
 Inteligencias Utilizadas: IA Studio, la utilice para poder crear los codigos de los diagramas para Mermaid y para investigar un poco mas acerca de las vistas arquitectónicas, hoy la utilice para corregir errores que me da va la api rest asi que tuve que utilizarla para checar cuales eran esos errores y poder corregirlos, tambien la utilice para ayudarme a entender como utilizar la api rest sin utilizar el power shell
+Para el desarrollo de esta actividad, se utilizó asistencia de Inteligencia Artificial (asistente de lenguaje basado en GPT) con los siguientes propósitos:
+- Diseñar la estructura inicial y sugerir casos de prueba representativos para una API en .NET utilizando el framework xUnit bajo el estándar Arrange-Act-Assert (AAA).
