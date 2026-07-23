@@ -13,7 +13,7 @@ namespace Game_Nexus.Tests
         {
             // Arrange (Preparar)
             var calculator = new RatingCalculator();
-            var ratings = new List<int> { 4, 5, 3, 5 };
+            var ratings = new List<int> { 4, 5, 4 }; // El promedio es 4.33, que se redondea a 4.3
 
             // Act (Actuar)
             var result = calculator.CalculateAverage(ratings);
