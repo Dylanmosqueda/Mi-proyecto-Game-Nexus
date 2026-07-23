@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>Game_Nexus</RootNamespace>
+		<!-- Excluimos por completo las carpetas de API y Pruebas de la compilación de este proyecto -->
+		<DefaultItemExcludes>$(DefaultItemExcludes);Game Nexus.API\**;Game Nexus.Tests\**;Game Nexus.API/**;Game Nexus.Tests/**</DefaultItemExcludes>
 	</PropertyGroup>
 
 	<ItemGroup>
