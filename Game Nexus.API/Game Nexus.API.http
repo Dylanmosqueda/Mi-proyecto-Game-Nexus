@@ -1,0 +1,6 @@
+@Game_Nexus.API_HostAddress = http://localhost:5110
+
+GET {{Game_Nexus.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
