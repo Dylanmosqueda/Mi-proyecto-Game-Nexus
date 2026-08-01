@@ -2,9 +2,9 @@ name: .NET Core CI
 
 on:
   push:
-    branches: [ "main", "pipeline-ci" ]
+    branches: [ "master", "pipeline-ci" ]
   pull_request:
-    branches: [ "main", "pipeline-ci" ]
+    branches: [ "master", "pipeline-ci" ]
 
 jobs:
   build-and-test:
@@ -17,7 +17,7 @@ jobs:
     - name: Configurar .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 11.0.x # Ajusta a la versión de .NET que utilices (ej. 8.0.x o 9.0.x)
+        dotnet-version: '11.0.x' # O cámbialo a '9.0.x' si usas .NET 9
 
     - name: Restaurar dependencias
       run: dotnet restore

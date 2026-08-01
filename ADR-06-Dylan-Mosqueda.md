@@ -4,7 +4,7 @@
 |--------|-------|
 | Autor  | Dylan Emmanuel Mosqueda Lugo |
 | Fecha  | 24/06/2026 |
-| Estado | `Reemplazado por ADR 4-Dylan` |
+| Estado | `Actualizado` |
 
 ---
 
@@ -55,9 +55,13 @@ Se decidió integrar dos patrones de diseño de la Pandilla de los Cuatro (GoF):
 
 
 ## Diagrama
-<img width="1240" height="1675" alt="Untitled diagram-2026-06-25-004252" src="https://github.com/user-attachments/assets/95f2f515-3ed5-4cbe-b263-3720bc098fae" />
-<img width="1590" height="2850" alt="Gamer API Integration-2026-06-25-004315" src="https://github.com/user-attachments/assets/8797f76f-1a22-4173-b4bd-7b67a658a6f4" />
-<img width="8192" height="3360" alt="ItemsController Strategy-2026-06-25-004343" src="https://github.com/user-attachments/assets/1cb8397f-e40f-4b59-b000-04f0579b25ee" />
+<img width="4610" height="4985" alt="Game Nexus API-2026-08-01-005017" src="https://github.com/user-attachments/assets/c00ccf93-0d45-46cd-a90f-4bc8ba073849" />
+
+<img width="7797" height="4275" alt="Untitled diagram-2026-08-01-005034" src="https://github.com/user-attachments/assets/dfa606ca-c79d-4051-a4ba-b9472a137f52" />
+
+<img width="6467" height="4370" alt="Untitled diagram-2026-08-01-005049" src="https://github.com/user-attachments/assets/a46fa68d-c187-49cd-99dd-937a975ae931" />
+
+
 
 ---
 
@@ -73,3 +77,27 @@ Para garantizar la estabilidad del sistema durante futuros cambios y refactoriza
    * *Por qué se eligió:* Este componente maneja la autenticación. Es crítico asegurar que las claves de cifrado cumplan con los estándares de seguridad requeridos por los algoritmos de hashing antes de levantar el servidor de producción.
 
 Estas pruebas siguen estrictamente la estructura **Arrange-Act-Assert (AAA)** para facilitar la lectura y el mantenimiento de las especificaciones de software.
+<<<<<<< HEAD:ADR-06-Dylan-Mosqueda (1).md
+=======
+<<<<<<< HEAD:ADR-06-Dylan-Mosqueda.md
+
+
+## Evaluación ATAM:
+
+Riesgo: Existe un riesgo de rendimiento y disponibilidad al procesar operaciones intensivas mediante la comunicación síncrona cliente-servidor desde Game Nexus hacia la API REST (Game Nexus.API),
+ya que si el volumen de peticiones simultáneas se incrementa o la base de datos responde con alta latencia,
+al no contar con mecanismos de caché o resiliencia la experiencia del usuario se degradará y el sistema podría no estar disponible.
+
+Trade-off: La decisión de aislar las pruebas de software en el proyecto independiente Game Nexus.Tests presenta un compromiso entre mantenibilidad y tiempo de despliegue, 
+puesto que por un lado mejora sustancialmente la mantenibilidad y la prevención de regresiones al validar la lógica antes de cada entrega, 
+pero por el otro incrementa el tiempo de compilación y ejecución en los pipelines de CI/CD, 
+exigiendo además un esfuerzo continuo en la actualización de mocks a medida que la API evoluciona.
+
+Punto de sensibilidad: La centralización de la lógica de autenticación y autorización en el proyecto Game Nexus.API actúa como punto de sensibilidad para la seguridad y la disponibilidad,
+debido a que cualquier modificación en la configuración del backend (como políticas de tokens JWT o CORS) impacta de forma crítica en toda la aplicación,
+donde una falla puede exponer el sistema a accesos no autorizados o bloquear por completo la entrada a usuarios legítimos.
+
+
+=======
+>>>>>>> Actualizacion del Estilo:ADR-06-Dylan-Mosqueda (1).md
+>>>>>>> temp-estilos:ADR-06-Dylan-Mosqueda.md
