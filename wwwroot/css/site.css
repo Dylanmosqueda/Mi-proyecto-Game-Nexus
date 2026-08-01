@@ -3,77 +3,82 @@
 <head >
 <meta charset="UTF-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-<title > Protocolo de Miedo - Transmisión Scarecrow</title >
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" >
+<title > UNSC Pillar of Autumn - Transmisión Táctica Spartan</title >
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" >
 
 <style >
-/* --- ANIMACIONES TERRORÍFICAS Y LLAMATIVAS --- */
-/* 1. Secuestro Violento con Glitch de Color */
-@@keyframes violentHijack {
+/* --- ANIMACIONES TÁCTICAS MILITARES Y HUD SPARTAN --- */
+/* 1. Despliegue de Interfaz MJOLNIR */
+@@keyframes mjolnirBoot {
     0% {
         opacity: 0;
-        transform: scale(1.5) skewX(40deg);
-        filter: invert(1) blur(20px) contrast(5);
-    }
-
-    5% {
-        opacity: 1;
-        transform: scale(1) skewX(-40deg);
-        filter: invert(0) blur(0);
+        transform: scale(0.95) translateY(20px);
+        filter: brightness(3) blur(10px);
     }
 
     10% {
-        transform: translateX(-30px) rotate(5deg);
-        filter: hue-rotate(180deg);
+        opacity: 0.8;
+        filter: hue-rotate(90deg) blur(0);
     }
 
-    15% {
-        transform: translateX(30px) rotate(-5deg);
+    20% {
+        transform: scale(1.02);
     }
 
     100% {
         opacity: 1;
-        transform: scale(1) rotate(0);
+        transform: scale(1) translateY(0);
     }
 }
 
-/* 2. Pulso de Gas Neón */
-@@keyframes gasLungs {
+/* 2. Pulso de Energía del Escudo MJOLNIR */
+@@keyframes shieldPulse {
     0%, 100% {
-        box-shadow: 0 0 40px rgba(255, 69, 0, 0.4), inset 0 0 20px rgba(255, 69, 0, 0.2);
-        transform: scale(1);
+        box-shadow: 0 0 35px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.2);
+        border-color: #00f0ff;
     }
 
     50% {
-        box-shadow: 0 0 80px rgba(255, 204, 0, 0.6), inset 0 0 40px rgba(255, 204, 0, 0.3);
-        transform: scale(1.01);
+        box-shadow: 0 0 60px rgba(255, 180, 0, 0.6), inset 0 0 25px rgba(255, 180, 0, 0.3);
+        border-color: #ffb400;
     }
 }
 
-/* 3. Sangrado de Texto Neón */
-@@keyframes textBleed {
+/* 3. Brillo Holográfico de Cortana */
+@@keyframes cortanaGlow {
     0%, 100% {
-        text-shadow: 0 0 10px #ff4500, 0 0 20px #8b0000;
-        color: #fff;
+        text-shadow: 0 0 12px #00f0ff, 0 0 25px rgba(0, 240, 255, 0.6);
+        color: #ffffff;
     }
 
     50% {
-        text-shadow: 0 0 30px #ffcc00, 0 0 50px #ff4500, 5px 5px 0 #000;
-        color: #ffcc00;
+        text-shadow: 0 0 20px #00f0ff, 0 0 40px #00a8ff, 0 0 60px #00f0ff;
+        color: #e2f1f8;
     }
 }
 
-/* --- ESTILOS DE PESADILLA --- */
+/* 4. Barrido del Radar de Movimiento */
+@@keyframes radarSweep {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- ESTILOS DE INTERFAZ UNSC --- */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Rajdhani', sans-serif;
-    background-color: #000; /* Negro puro para máximo contraste */
-    color: #ffcc00; /* Amarillo tóxico de base */
+    background-color: #070a0e; /* Negro metálico de la UNSC */
+    color: #e2f1f8;
     overflow-x: hidden;
 }
 
-    /* Viñeta Claustrofóbica Intensificada */
+    /* Viñeta de Casco Spartan Mark V */
     body::after {
         content: "";
         position: fixed;
@@ -81,178 +86,177 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.95) 100%);
+        background: radial-gradient(circle, transparent 50%, rgba(5, 8, 12, 0.9) 100%);
         pointer-events: none;
         z-index: 1000;
     }
 
+/* Líneas de escaneo del Visor */
 .noise-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://media.giphy.com/media/oEI9uWUqnW3Fe/giphy.gif');
-    opacity: 0.06; /* Más visible */
-    z-index: -1;
-    mix-blend-mode: overlay;
+    background: linear-gradient(rgba(0, 240, 255, 0.03) 50%, rgba(0, 0, 0, 0.4) 50%);
+    background-size: 100% 4px;
+    opacity: 0.8;
+    z-index: 999;
+    pointer-events: none;
 }
 
 .scarecrow-container {
     max-width: 950px;
-    margin: 60px auto;
-    padding: 50px;
-    background: rgba(15, 5, 0, 0.98);
-    border: 2px solid #ff4500; /* Borde neón */
-    border-top: 15px solid #ff4500;
+    margin: 50px auto;
+    padding: 45px;
+    background: rgba(13, 18, 25, 0.95);
+    border: 2px solid #00f0ff;
+    border-top: 8px solid #ffb400; /* Color Escudo Spartan */
     position: relative;
-    animation: violentHijack 0.8s ease-in-out forwards, gasLungs 4s infinite ease-in-out;
-    clip-path: polygon(0 5%, 100% 0, 97% 97%, 3% 100%);
-    backdrop-filter: blur(15px);
+    animation: mjolnirBoot 0.8s ease-out forwards, shieldPulse 5s infinite ease-in-out;
+    clip-path: polygon(0 3%, 3% 0, 97% 0, 100% 3%, 100% 97%, 97% 100%, 3% 100%, 0 97%);
+    backdrop-filter: blur(10px);
 }
 
 .scarecrow-title {
     font-family: 'Orbitron', sans-serif;
     color: #fff;
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 900;
-    letter-spacing: 12px;
+    letter-spacing: 8px;
     text-align: center;
     margin: 0;
-    animation: textBleed 2s infinite;
+    animation: cortanaGlow 3s infinite;
     text-transform: uppercase;
-    filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.8));
 }
 
 .status-warning {
-    font-family: 'Special Elite', cursive;
-    color: #ffcc00;
+    font-family: 'Share Tech Mono', monospace;
+    color: #ffb400;
     display: block;
     text-align: center;
-    margin: 10px 0 40px;
-    letter-spacing: 6px;
+    margin: 12px 0 35px;
+    letter-spacing: 4px;
     font-weight: bold;
-    text-shadow: 0 0 10px #ffcc00;
-    animation: nerveJitter 0.1s infinite;
+    text-shadow: 0 0 8px rgba(255, 180, 0, 0.6);
 }
 
-/* --- VÍCTIMAS (ITEMS LLAMATIVOS) --- */
+/* --- LISTA DE UNIDADES Y REGISTROS TÁCTICOS --- */
 .victim-item {
     list-style: none;
-    background: rgba(40, 0, 0, 0.5);
-    border: 1px solid #ff4500;
-    margin-bottom: 25px;
-    padding: 30px;
+    background: rgba(20, 30, 42, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    border-left: 6px solid #3e4d30; /* Verde MJOLNIR */
+    margin-bottom: 20px;
+    padding: 22px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     overflow: hidden;
-    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: crosshair;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
 
     .victim-item:hover {
-        background: #ffcc00; /* Cambio a amarillo cegador */
-        border-color: #fff;
-        transform: scale(1.06) rotate(1deg);
-        box-shadow: 0 0 60px #ffcc00;
+        background: rgba(62, 77, 48, 0.9); /* Verde Oliva Spartan */
+        border-color: #00f0ff;
+        border-left-color: #ffb400;
+        transform: scale(1.02) translateX(5px);
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
         z-index: 50;
     }
 
         .victim-item:hover .victim-name,
         .victim-item:hover .victim-metadata,
         .victim-item:hover .bio-marker {
-            color: #000 !important;
-            text-shadow: none !important;
-            font-weight: 900;
+            color: #ffffff !important;
+            text-shadow: 0 0 10px #00f0ff !important;
         }
 
 .victim-name {
     font-family: 'Orbitron', sans-serif;
-    color: #ff4500;
-    font-size: 1.8rem;
-    letter-spacing: 4px;
+    color: #00f0ff;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
     text-decoration: none;
     text-transform: uppercase;
-    text-shadow: 0 0 10px #ff4500;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
     display: block;
 }
 
 .victim-metadata {
     display: block;
-    color: #ffcc00; /* Color más llamativo */
-    font-family: 'Special Elite', cursive;
-    font-size: 1rem;
-    margin-top: 10px;
-    text-shadow: 0 0 5px #ffcc00;
+    color: #a4c2d1;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    margin-top: 6px;
 }
 
-/* Botón de Inyección Llamativo */
+/* Botón de Despliegue UNSC */
 .btn-toxin {
     display: block;
     width: 100%;
-    margin-top: 50px;
-    padding: 25px;
-    background: #ff4500;
-    color: #000;
-    border: 4px solid #fff;
+    margin-top: 40px;
+    padding: 20px;
+    background: #3e4d30; /* Verde MJOLNIR */
+    color: #00f0ff;
+    border: 2px solid #00f0ff;
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 900;
     text-decoration: none;
     text-align: center;
-    letter-spacing: 12px;
-    clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-    transition: 0.3s;
-    box-shadow: 0 0 30px #ff4500;
-    animation: nerveJitter 0.3s infinite;
+    letter-spacing: 8px;
+    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+    transition: 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    box-sizing: border-box;
 }
 
     .btn-toxin:hover {
-        background: #fff;
-        color: #ff0000;
-        transform: scale(1.1);
-        box-shadow: 0 0 100px #fff;
+        background: #00f0ff;
+        color: #0b0e14;
+        transform: scale(1.03);
+        box-shadow: 0 0 50px #00f0ff;
     }
 
-/* Marcador Biohazard Sangriento Neón */
+/* Indicador de Escudo / Estado */
 .bio-marker {
-    width: 45px;
-    height: 45px;
-    border: 3px solid #ff4500;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    border: 2px solid #00f0ff;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 1.6rem;
-    color: #ff4500;
-    text-shadow: 0 0 10px #ff4500;
-    animation: nerveJitter 0.1s infinite;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: #ffb400;
+    text-shadow: 0 0 8px #ffb400;
 }
 
-/* --- ANIMACIÓN JITTER --- */
-@@keyframes nerveJitter {
-    0% {
-        transform: translate(0);
-    }
+/* Radar de Movimiento Halo */
+.radar-widget {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #00f0ff;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(0,0,0,0.8) 80%);
+    box-shadow: 0 0 10px rgba(0,240,255,0.3);
+}
 
-    25% {
-        transform: translate(2px, -2px);
-    }
-
-    50% {
-        transform: translate(-2px, 2px);
-    }
-
-    75% {
-        transform: translate(2px, 2px);
-    }
-
-    100% {
-        transform: translate(0);
-    }
+.radar-sweep {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.4) 0deg, transparent 60deg);
+    animation: radarSweep 2.5s linear infinite;
 }
 
 </style >
@@ -262,58 +266,65 @@ body {
 <div class="noise-bg" > </div >
 
 <div class="scarecrow-container" >
+<div class="radar-widget" title="Sensor de Movimiento" >
+<div class="radar-sweep" > </div >
+</div >
+
 <header >
-<h1 class="scarecrow-title" > MUESTRARIO_DE_AGONÍA</h1 >
-<span class="status-warning" > INYECTANDO TOXINA... NO HAY SALIDA</span >
+<h1 class="scarecrow-title" > REGISTRO_TÁCTICO_UNSC</h1 >
+<span class="status-warning" > CORTANA A.I. SYSTEM // INSTALACIÓN 04 ACTIVA</span >
 </header >
 
 <ul style="padding: 0; margin: 0;" >
-<li class="victim-item" style="animation: violentHijack 0.4s 0.2s backwards;" >
+<li class="victim-item" style="animation: mjolnirBoot 0.4s 0.2s backwards;" >
 <div >
-<a href="#" class="victim-name" > VICTIM_001_DANTE</a >
-<span class="victim-metadata" > ESTADO: PARANOIA TOTAL // PULSO: 180 BPM</span >
+<a href="#" class="victim-name" > SPARTAN_117_JOHN</a >
+<span class="victim-metadata" > ESTADO: OPERATIVO // ESCUDOS: 100% // ARMA: MA5B RIFLE DE ASALTO</span >
 </div >
-<div class="bio-marker" > !</div >
+<div class="bio-marker" > 117</div >
 </li >
 
-<li class="victim-item" style="animation: violentHijack 0.4s 0.4s backwards;" >
+<li class="victim-item" style="animation: mjolnirBoot 0.4s 0.4s backwards;" >
 <div >
-<a href="#" class="victim-name" > VICTIM_002_LEON</a >
-<span class="victim-metadata" > ESTADO: ALUCINACIONES CONSTANTES // PUPILAS: DILATADAS</span >
+<a href="#" class="victim-name" > CAPITÁN_KEYES</a >
+<span class="victim-metadata" > ESTADO: EN PUENTE DE MANDO // NAVE: PILLAR OF AUTUMN</span >
 </div >
-<div class="bio-marker" > !</div >
+<div class="bio-marker" > UNSC</div >
 </li >
 
-<li class="victim-item" style="animation: violentHijack 0.4s 0.6s backwards;" >
+<li class="victim-item" style="animation: mjolnirBoot 0.4s 0.6s backwards;" >
 <div >
-<a href="#" class="victim-name" > VICTIM_003_CHIEF</a >
-<span class="victim-metadata" > ESTADO: CATATÓNICO // FASE: FINAL</span >
+<a href="#" class="victim-name" > AMENAZA_COVENANT</a >
+<span class="victim-metadata" > DETECCION: MÚLTIPLES NAVES DE GUERRA EN ÓRBITA</span >
 </div >
-<div class="bio-marker" > !</div >
+<div class="bio-marker" style="color: #ff3333; border-color: #ff3333;" > !</div >
 </li >
 </ul >
 
-<a href="#" class="btn-toxin" > ACEPTAR TU DESTINO</a >
+<a href="#" class="btn-toxin" onclick="activarEscudos(event)" > INICIAR PROTOCOLO COLE</a >
 </div >
 
 <script >
-// Script de "Jump Scare" Visual Potenciado
+// Efecto de Recarga de Escudo Spartan (Halo CE)
+function activarEscudos(e) {
+    e .preventDefault();
+    document .body.style.filter = "brightness(2) hue-rotate(180deg)";
+
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        alert("CORTANA: 'Protocolo Cole iniciado. Purgando datos de navegación.'");
+    }, 150);
+}
+
+// Escaneo aleatorio del Visor MJOLNIR (Telemetry Ping)
 setInterval(() => {
-        if(Math.random() > 0.92) {
-            document.body.style.filter = "invert(1) contrast(8) hue-rotate(180deg) brightness(2)";
-            setTimeout(() => {
-                document.body.style.filter = "none";
-            }, 70);
-        }
-        
-        // Glitch de escala violento
-        if(Math.random() > 0.97) {
-            document.querySelector('.scarecrow-container').style.transform = `translateX(${Math.random()*30 - 15}px) scale(1.08) skewX(${Math.random()*10 - 5}deg)`;
-            setTimeout(() => {
-                document.querySelector('.scarecrow-container').style.transform = `translateX(0) scale(1) skewX(0)`;
-            }, 80);
-        }
-    }, 800);
+    if(Math.random() > 0.90) {
+        document.querySelector('.scarecrow-container').style.boxShadow = "0 0 80px rgba(0, 240, 255, 0.8)";
+        setTimeout(() => {
+            document.querySelector('.scarecrow-container').style.boxShadow = "";
+        }, 120);
+    }
+}, 1200);
 </script >
 
 </body >

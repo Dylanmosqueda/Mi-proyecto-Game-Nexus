@@ -3,24 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GameNexus: Scarecrow Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>@ViewData["Title"] - GameNexus: Combat Evolved</title>
+    <!-- Fuentes Tácticas UNSC -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <style>
-            /* --- ESTÉTICA DE PESADILLA NEÓN --- */
+            /* --- ESTÉTICA MILITAR UNSC / VISOR SPARTAN --- */
             body {
-                background-color: #000 !important;
-                color: #ffcc00;
+                background-color: #070a0e !important;
+                color: #e2f1f8;
                 font-family: 'Rajdhani', sans-serif;
                 margin: 0;
                 overflow-x: hidden;
-                /* Rejilla de energía naranja */
-                background-image: linear-gradient(rgba(255, 69, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.15) 1px, transparent 1px);
-                background-size: 50px 50px;
+                /* Rejilla de sensor HUD cian */
+                background-image: radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, #05080c 100%), linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+                background-size: 100% 100%, 30px 30px, 30px 30px;
             }
 
-                /* Viñeta de Gas del Miedo */
+                /* Viñeta del Casco Spartan Mark V */
                 body::after {
                     content: "";
                     position: fixed;
@@ -28,64 +29,67 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    box-shadow: inset 0 0 150px #000, inset 0 0 100px rgba(255, 69, 0, 0.2);
+                    box-shadow: inset 0 0 150px #000, inset 0 0 80px rgba(0, 240, 255, 0.15);
                     pointer-events: none;
                     z-index: 9999;
-                    animation: gasPulse 4s infinite alternate;
+                    animation: shieldPulse 5s infinite alternate;
                 }
 
-            /* --- ANIMACIONES --- */
-            @@keyframes gasPulse {
+            /* --- ANIMACIONES TÁCTICAS --- */
+            @@keyframes shieldPulse {
                 0% {
-                    opacity: 0.5;
+                    opacity: 0.6;
+                    box-shadow: inset 0 0 150px #000, inset 0 0 80px rgba(0, 240, 255, 0.2);
                 }
 
                 100% {
                     opacity: 1;
-                    box-shadow: inset 0 0 200px #000, inset 0 0 150px rgba(255, 69, 0, 0.4);
+                    box-shadow: inset 0 0 200px #000, inset 0 0 120px rgba(255, 180, 0, 0.3);
                 }
             }
 
             @@keyframes navGlitch {
                 0%, 100% {
-                    text-shadow: 0 0 5px #ff4500;
+                    text-shadow: 0 0 8px #00f0ff;
                 }
 
                 50% {
-                    text-shadow: -3px 0 #ff0000, 3px 0 #ffcc00;
-                    transform: skewX(-5deg);
+                    text-shadow: -2px 0 #00f0ff, 2px 0 #ffb400;
+                    transform: skewX(-3deg);
                 }
             }
 
-            /* --- NAVBAR HACKEADA --- */
+            /* --- NAVBAR COMANDO UNSC --- */
             .navbar {
-                background: rgba(10, 0, 0, 0.95) !important;
-                border-bottom: 3px solid #ff4500 !important;
-                box-shadow: 0 0 30px #ff4500;
+                background: rgba(11, 15, 23, 0.95) !important;
+                border-bottom: 3px solid #00f0ff !important;
+                box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
                 padding: 15px 0;
+                backdrop-filter: blur(8px);
             }
 
             .navbar-brand {
                 font-family: 'Orbitron', sans-serif;
                 font-weight: 900;
-                color: #fff !important;
-                letter-spacing: 5px;
-                text-shadow: 0 0 15px #ff4500;
+                color: #ffffff !important;
+                letter-spacing: 4px;
+                text-shadow: 0 0 15px #00f0ff;
             }
 
             .nav-link {
-                font-family: 'Special Elite', cursive;
-                color: #ffcc00 !important;
+                font-family: 'Share Tech Mono', monospace;
+                color: #ffb400 !important;
                 text-transform: uppercase;
                 margin: 0 15px;
-                transition: 0.2s;
-                animation: navGlitch 3s infinite;
+                transition: all 0.2s ease;
+                animation: navGlitch 4s infinite;
+                letter-spacing: 2px;
             }
 
                 .nav-link:hover {
-                    color: #fff !important;
-                    transform: scale(1.2);
-                    filter: drop-shadow(0 0 10px #ff4500);
+                    color: #ffffff !important;
+                    transform: scale(1.1);
+                    filter: drop-shadow(0 0 10px #00f0ff);
                 }
 
             .main-render {
@@ -94,26 +98,42 @@
             }
 
             footer {
-                border-top: 1px solid #4a0000;
-                background: #000;
-                color: #8b0000;
-                font-family: 'Special Elite', cursive;
+                border-top: 1px dashed rgba(0, 240, 255, 0.4);
+                background: #05080c;
+                color: #a4c2d1;
+                font-family: 'Share Tech Mono', monospace;
                 padding: 20px 0;
+                letter-spacing: 2px;
+            }
+
+            /* Líneas de escaneo HUD global */
+            .hud-scanlines {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(rgba(0, 240, 255, 0.02) 50%, rgba(0, 0, 0, 0.2) 50%);
+                background-size: 100% 4px;
+                pointer-events: none;
+                z-index: 9998;
             }
     </style>
 </head>
 <body>
+    <div class="hud-scanlines"></div>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
             <div class="container-fluid px-5">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">INICIO</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">INICIO UNSC</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="GameNexus" asp-action="Index">[ ARCHIVOS_INFECTADOS ]</a>
+                            <a class="nav-link" asp-controller="GameNexus" asp-action="Index">[ MANDO_TÁCTICO ]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">[ PROTOCOLO_MIEDO ]</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">[ PROTOCOLO_COLE ]</a>
                         </li>
                     </ul>
                 </div>
@@ -129,20 +149,20 @@
 
     <footer class="text-center">
         <div class="container">
-            <span>© @DateTime.Now.Year - EL MIEDO ES TU ÚNICA VERDAD</span>
+            <span>© @DateTime.Now.Year - UNSC PILLAR OF AUTUMN // SISTEMA MJOLNIR MARK V ONLINE</span>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Efecto de parpadeo de sistema aleatorio
-        setInterval(() => {
-        if(Math.random() > 0.95) {
-        document.body.style.filter = "invert(1) contrast(3)";
-        setTimeout(() => document.body.style.filter = "none", 50);
-        }
-        }, 2000);
+            // Parpadeo telemétrico del Visor Spartan MJOLNIR
+            setInterval(() => {
+                if (Math.random() > 0.96) {
+                    document.body.style.filter = "brightness(1.2) contrast(1.1)";
+                    setTimeout(() => document.body.style.filter = "none", 60);
+                }
+            }, 2000);
     </script>
 </body>
 </html>

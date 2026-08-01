@@ -73,6 +73,3 @@ Para garantizar la estabilidad del sistema durante futuros cambios y refactoriza
    * *Por qué se eligió:* Este componente maneja la autenticación. Es crítico asegurar que las claves de cifrado cumplan con los estándares de seguridad requeridos por los algoritmos de hashing antes de levantar el servidor de producción.
 
 Estas pruebas siguen estrictamente la estructura **Arrange-Act-Assert (AAA)** para facilitar la lectura y el mantenimiento de las especificaciones de software.
-
-
-
