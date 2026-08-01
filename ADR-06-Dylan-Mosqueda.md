@@ -77,6 +77,7 @@ Para garantizar la estabilidad del sistema durante futuros cambios y refactoriza
    * *Por qué se eligió:* Este componente maneja la autenticación. Es crítico asegurar que las claves de cifrado cumplan con los estándares de seguridad requeridos por los algoritmos de hashing antes de levantar el servidor de producción.
 
 Estas pruebas siguen estrictamente la estructura **Arrange-Act-Assert (AAA)** para facilitar la lectura y el mantenimiento de las especificaciones de software.
+<<<<<<< HEAD:ADR-06-Dylan-Mosqueda.md
 
 
 ## Evaluación ATAM:
@@ -95,3 +96,5 @@ debido a que cualquier modificación en la configuración del backend (como pol�
 donde una falla puede exponer el sistema a accesos no autorizados o bloquear por completo la entrada a usuarios legítimos.
 
 
+=======
+>>>>>>> Actualizacion del Estilo:ADR-06-Dylan-Mosqueda (1).md

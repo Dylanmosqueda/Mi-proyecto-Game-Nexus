@@ -1,124 +1,152 @@
 ﻿@{
-    <div class="scarecrow-welcome">
-        <div class="toxin-emitter">
-            <div class="biohazard-neon">☢</div>
-            <div class="pulse-ring"></div>
+    <div class="unsc-welcome">
+        <!-- Emblema de Escudo Spartan y Sensor de Energía -->
+        <div class="shield-emitter">
+            <div class="unsc-emblem">🛡️</div>
+            <div class="shield-ring"></div>
         </div>
 
-        <h1 class="master-title">BIENVENIDO SEÑOR DYLAN</h1>
-        <p class="fear-subtitle">EL GAS HA SIDO LIBERADO. GOTHAM ES MÍA.</p>
+        <h1 class="spartan-title">BIENVENIDO, SPARTAN DYLAN</h1>
+        <p class="cortana-subtitle">SISTEMA MJOLNIR MARK V ONLINE. CORTANA EN LÍNEA.</p>
 
         <div class="mt-5">
-            <a href="/GameNexus/Index" class="btn-toxin-glow">
-                ENTRAR A LOS EXPEDINTES INFECTADOS
+            <a href="/GameNexus/Index" class="btn-spartan-glow">
+                ACCEDER A LA BASE DE DATOS UNSC
             </a>
         </div>
     </div>
 
     <style>
-        .scarecrow-welcome {
+        .unsc-welcome {
             height: 75vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        .toxin-emitter {
             position: relative;
-            margin-bottom: 50px;
         }
 
-        .biohazard-neon {
-            font-size: 12rem;
-            color: #ff4500; /* Naranja-Rojo tóxico */
-            text-shadow: 0 0 30px #ff4500, 0 0 60px #ff0000;
-            animation: rotateBio 10s infinite linear;
+        .shield-emitter {
+            position: relative;
+            margin-bottom: 40px;
         }
 
-        .pulse-ring {
+        .unsc-emblem {
+            font-size: 9rem;
+            color: #00f0ff; /* Azul Neón Cortana / Visor */
+            text-shadow: 0 0 30px #00f0ff, 0 0 60px rgba(0, 240, 255, 0.6);
+            animation: pulseEmblem 3s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-ring {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100px;
             height: 100px;
-            border: 5px solid #ffcc00;
+            border: 4px solid #ffb400; /* Dorado Escudo de Energía Halo 1 */
             border-radius: 50%;
-            animation: ringExpand 2s infinite ease-out;
+            animation: shieldExpand 2.5s infinite ease-out;
         }
 
-        .master-title {
-            font-family: 'Orbitron';
+        .spartan-title {
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 3.5rem;
-            color: #ffcc00; /* Amarillo Tóxico (Más llamativo y terrorífico) */
+            font-size: 3.2rem;
+            color: #ffffff;
             text-align: center;
-            text-shadow: 3px 3px 0 #8b0000, -3px -3px 0 #ff4500; /* Sombras rojo sangre y naranja */
-            animation: textShake 0.1s infinite alternate;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px #00f0ff, 3px 3px 0 #3e4d30; /* Brillo cian y sombra verde Spartan */
+            animation: cortanaFlicker 4s infinite;
         }
 
-        .fear-subtitle {
-            font-family: 'Special Elite', cursive;
-            color: #ff4500; /* Naranja Fuego */
-            font-size: 1.5rem;
+        .cortana-subtitle {
+            font-family: 'Share Tech Mono', 'Consolas', monospace;
+            color: #ffb400; /* Amarillo/Dorado Alerta UNSC */
+            font-size: 1.3rem;
             text-align: center;
-            letter-spacing: 5px;
-            text-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+            letter-spacing: 4px;
+            text-shadow: 0 0 12px rgba(255, 180, 0, 0.6);
             font-weight: bold;
+            margin-top: 10px;
         }
 
-        .btn-toxin-glow {
-            padding: 25px 80px;
-            background: #ff4500;
-            color: #000; /* Texto negro para contraste agresivo */
-            font-family: 'Orbitron';
+        .btn-spartan-glow {
+            padding: 22px 70px;
+            background: #3e4d30; /* Verde Oliva Armadura MJOLNIR */
+            color: #00f0ff; /* Texto Neón Cortana */
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             text-decoration: none;
             font-size: 1.2rem;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
-            box-shadow: 0 0 40px #ff4500;
-            transition: 0.3s;
+            letter-spacing: 3px;
+            border: 2px solid #00f0ff;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
         }
 
-            .btn-toxin-glow:hover {
-                background: #fff;
-                color: #ff4500; /* Cambio de color al pasar el mouse */
-                box-shadow: 0 0 80px #fff;
-                transform: scale(1.1) rotate(-2deg);
+            .btn-spartan-glow:hover {
+                background: #00f0ff;
+                color: #0b0e14; /* Cambio a negro militar al pasar el mouse */
+                box-shadow: 0 0 60px #00f0ff, inset 0 0 15px #ffffff;
+                transform: scale(1.08) translateY(-3deg);
+                border-color: #ffffff;
             }
 
-        @@keyframes rotateBio {
-            from {
-                transform: rotate(0);
+        @@keyframes pulseEmblem {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px #00f0ff);
             }
 
-            to {
-                transform: rotate(360deg);
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 40px #ffb400);
             }
         }
 
-        @@keyframes ringExpand {
+        @@keyframes shieldExpand {
             0% {
-                width: 0;
-                height: 0;
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+                border-color: #ffb400;
+            }
+
+            100% {
+                width: 350px;
+                height: 350px;
+                opacity: 0;
+                border-color: #00f0ff;
+            }
+        }
+
+        @@keyframes cortanaFlicker {
+            0%, 100% {
                 opacity: 1;
             }
 
-            100% {
-                width: 400px;
-                height: 400px;
-                opacity: 0;
-            }
-        }
-
-        @@keyframes textShake {
-            0% {
-                transform: translate(1px, 1px);
+            92% {
+                opacity: 1;
             }
 
-            100% {
-                transform: translate(-1px, -1px);
+            93% {
+                opacity: 0.4;
+                transform: skewX(2deg);
+            }
+
+            94% {
+                opacity: 1;
+            }
+
+            98% {
+                opacity: 0.8;
             }
         }
     </style>

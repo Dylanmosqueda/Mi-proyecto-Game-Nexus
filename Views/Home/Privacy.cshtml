@@ -1,59 +1,94 @@
 ﻿<div class="privacy-manifesto">
-    <h1 class="manifesto-title">MANIFIESTO DEL MIEDO</h1>
+    <h1 class="manifesto-title">PROTOCOLO_COLE_UNSC</h1>
 
     <div class="node">
-        <h2>01. VIGILANCIA</h2>
-        <p>Tus datos no nos interesan, solo tu capacidad para sucumbir. Observamos tus juegos para medir tu resistencia a la toxina.</p>
+        <h2>01. TELEMETRÍA Y MONITOREO SPARTAN</h2>
+        <p>Los sistemas del casco MJOLNIR Mark V registran exclusivamente la eficiencia operativa y constante del sujeto. Ninguna coordenada táctica o dato confidencial será expuesto al Covenant.</p>
     </div>
 
     <div class="node">
-        <h2>02. ENCRIPTACIÓN TÓXICA</h2>
-        <p>Tus registros están sellados bajo capas de caos digital. Batman no puede entrar aquí, y tú no puedes salir.</p>
+        <h2>02. PROTOCOLO COLE (DIRECTIVA 092)</h2>
+        <p>En caso de amenaza de abordaje o brecha de seguridad en la terminal, la I.A. Cortana ejecutará la purga inmediata de mapas de navegación, coordenadas terrestres y matrices de memoria.</p>
     </div>
 
     <div class="node">
-        <h2>03. RASTREADORES NEURALES</h2>
-        <p>Nuestras 'cookies' infectan tu terminal para asegurar que la pesadilla nunca termine.</p>
+        <h2>03. ENLACE NEURAL DE CORTANA</h2>
+        <p>Los datos locales y registros en caché se utilizan de manera exclusiva para mantener la calibración continua de los escudos de energía y sincronizar los sensores de movimiento del HUD.</p>
     </div>
 </div>
 
 <style>
     .privacy-manifesto {
-        max-width: 800px;
+        max-width: 850px;
         margin: 50px auto;
+        position: relative;
     }
 
     .manifesto-title {
-        font-family: 'Orbitron';
+        font-family: 'Orbitron', sans-serif;
         font-size: 3rem;
-        color: #ff4500;
+        font-weight: 900;
+        color: #ffffff;
         text-align: center;
-        text-shadow: 0 0 20px #ff4500;
+        letter-spacing: 6px;
+        text-shadow: 0 0 20px #00f0ff, 0 0 40px rgba(0, 240, 255, 0.5);
         margin-bottom: 50px;
+        text-transform: uppercase;
+        animation: cortanaGlow 3.5s infinite ease-in-out;
     }
 
     .node {
-        background: rgba(20, 0, 0, 0.8);
-        border-left: 10px solid #ff4500;
+        background: rgba(13, 18, 25, 0.9);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        border-left: 8px solid #00f0ff; /* Azul Neón Cortana */
         padding: 30px;
         margin-bottom: 30px;
-        transition: 0.3s;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+        backdrop-filter: blur(5px);
     }
 
         .node:hover {
-            background: #ff4500;
-            color: #000;
-            transform: translateX(20px);
-            box-shadow: 0 0 50px #ff4500;
+            background: #3e4d30; /* Verde MJOLNIR */
+            border-color: #00f0ff;
+            border-left-color: #ffb400; /* Dorado Escudo */
+            color: #ffffff;
+            transform: translateX(15px);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
         }
 
         .node h2 {
-            font-family: 'Orbitron';
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
+            color: #00f0ff;
+            margin-top: 0;
+            letter-spacing: 3px;
+            font-size: 1.4rem;
+            transition: color 0.3s ease;
+        }
+
+        .node:hover h2 {
+            color: #ffffff;
+            text-shadow: 0 0 10px #00f0ff;
         }
 
         .node p {
-            font-family: 'Special Elite';
-            font-size: 1.2rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e2f1f8;
+            margin-bottom: 0;
         }
+
+    @@keyframes cortanaGlow {
+        0%, 100% {
+            text-shadow: 0 0 15px #00f0ff, 0 0 30px rgba(0, 240, 255, 0.5);
+            color: #ffffff;
+        }
+
+        50% {
+            text-shadow: 0 0 25px #00f0ff, 0 0 50px #00a8ff;
+            color: #e2f1f8;
+        }
+    }
 </style>

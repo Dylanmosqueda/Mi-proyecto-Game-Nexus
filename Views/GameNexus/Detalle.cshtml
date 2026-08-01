@@ -1,21 +1,22 @@
 ﻿@model Game_Nexus.Models.Item
 
-<!-- Fuentes: Special Elite para informes médicos y Orbitron para la tecnología hackeada -->
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<!-- Fuentes Tácticas UNSC -->
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-    /* --- ATMÓSFERA DE PESADILLA PURA --- */
+    /* --- ATMÓSFERA HUD SPARTAN MARK V --- */
     body {
-        background-color: #020200 !important;
-        color: #bc8f8f;
+        background-color: #070a0e !important;
+        color: #e2f1f8;
         font-family: 'Rajdhani', sans-serif;
         margin: 0;
         overflow-x: hidden;
-        /* Grano de película sucio y atmósfera de gas denso */
-        background-image: radial-gradient(circle at center, rgba(74, 0, 0, 0.2) 0%, #000 100%), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        /* Fondo con rejilla militar y brillo neón cian */
+        background-image: radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, #05080c 100%), linear-gradient(rgba(0, 240, 255, 0.03) 50%, rgba(0, 0, 0, 0.4) 50%);
+        background-size: 100% 100%, 100% 4px;
     }
 
-        /* Viñeta claustrofóbica para cerrar el campo de visión */
+        /* Viñeta de Visor Táctico Spartan */
         body::after {
             content: "";
             position: fixed;
@@ -23,97 +24,76 @@
             left: 0;
             width: 100%;
             height: 100%;
-            box-shadow: inset 0 0 200px #000, inset 0 0 100px rgba(0,0,0,1);
+            box-shadow: inset 0 0 150px #000, inset 0 0 80px rgba(0, 240, 255, 0.15);
             pointer-events: none;
             z-index: 9999;
         }
 
-    /* --- ANIMACIONES TERRORÍFICAS --- */
+    /* --- ANIMACIONES DE SISTEMA HUD --- */
 
-    /* Glitch Violento con inversión de color */
-    @@keyframes violentHijack {
+    /* Inicialización de Casco Spartan */
+    @@keyframes spartanBoot {
         0% {
             opacity: 0;
-            transform: scale(1.1) skewX(10deg);
-            filter: invert(1) contrast(5) blur(10px);
-        }
-
-        5% {
-            opacity: 1;
-            transform: scale(1) skewX(-10deg);
-            filter: invert(0) blur(0);
-        }
-
-        10% {
-            transform: translateX(-10px) rotate(1deg);
-            filter: hue-rotate(90deg);
+            transform: scale(0.96) translateY(15px);
+            filter: brightness(2) blur(8px);
         }
 
         15% {
-            transform: translateX(10px) rotate(-1deg);
+            opacity: 1;
+            filter: hue-rotate(90deg) blur(0);
         }
 
         100% {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
     }
 
-    /* Vibración de Nervios (Jitter) */
-    @@keyframes jitter {
-        0% {
-            transform: translate(0);
-        }
-
-        25% {
-            transform: translate(1px, -1px);
-            filter: blur(0.5px);
-        }
-
-        50% {
-            transform: translate(-1px, 1px);
-        }
-
-        75% {
-            transform: translate(1px, 1px);
-            filter: blur(0.5px);
-        }
-
-        100% {
-            transform: translate(0);
-        }
-    }
-
-    /* Pulso de Toxina (Aberración Cromática) */
-    @@keyframes chromatic {
+    /* Pulso Telemétrico del Visor */
+    @@keyframes hudPulse {
         0%, 100% {
-            text-shadow: 2px 2px #300000;
+            border-color: #00f0ff;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.3);
         }
 
         50% {
-            text-shadow: -3px 0 #ff0000, 3px 0 #00ff00;
-            transform: scale(1.01);
+            border-color: #ffb400;
+            box-shadow: 0 0 50px rgba(255, 180, 0, 0.4);
         }
     }
 
-    /* --- CONTENEDOR: EXPEDIENTE DE SUPLICIO --- */
-    .fear-dossier {
+    /* Brillo de Holograma de Cortana */
+    @@keyframes cortanaText {
+        0%, 100% {
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.6);
+            color: #ffffff;
+        }
+
+        50% {
+            text-shadow: 0 0 18px #00f0ff, 0 0 35px #00a8ff;
+            color: #e2f1f8;
+        }
+    }
+
+    /* --- CONTENEDOR: DOSSIER TÁCTICO UNSC --- */
+    .unsc-dossier {
         max-width: 1100px;
         margin: 50px auto;
         padding: 50px;
-        background: rgba(10, 5, 0, 0.98);
-        border: 2px solid #300000;
-        border-top: 10px solid #ff4500;
+        background: rgba(13, 18, 25, 0.95);
+        border: 2px solid #00f0ff;
+        border-top: 10px solid #ffb400; /* Color Escudo Spartan */
         position: relative;
-        /* Forma rota y asimétrica */
-        clip-path: polygon(0 5%, 100% 0, 95% 95%, 5% 100%);
-        box-shadow: 0 0 100px rgba(139, 0, 0, 0.4);
-        animation: violentHijack 0.8s ease-in-out forwards;
+        clip-path: polygon(0 3%, 3% 0, 97% 0, 100% 3%, 100% 97%, 97% 100%, 3% 100%, 0 97%);
+        box-shadow: 0 0 80px rgba(0, 240, 255, 0.25);
+        animation: spartanBoot 0.8s ease-out forwards, hudPulse 6s infinite ease-in-out;
+        backdrop-filter: blur(10px);
     }
 
-    /* CABECERA HACKEADA */
+    /* CABECERA MILITAR UNSC */
     .dossier-header {
-        border-bottom: 3px double #ff4500;
+        border-bottom: 2px dashed #00f0ff;
         padding-bottom: 20px;
         margin-bottom: 40px;
         display: flex;
@@ -123,182 +103,184 @@
 
     .dossier-title {
         font-family: 'Orbitron', sans-serif;
-        font-size: 3rem;
-        color: #ff4500;
+        font-size: 2.8rem;
+        color: #00f0ff;
         margin: 0;
         text-transform: uppercase;
-        letter-spacing: 10px;
-        animation: chromatic 3s infinite;
+        letter-spacing: 6px;
+        animation: cortanaText 4s infinite;
     }
 
-    /* IMAGEN TÓXICA (MODO PESADILLA) */
-    .img-toxin-container {
+    /* SCANNER DE EQUIPAMIENTO / IMAGEN */
+    .img-hud-container {
         position: relative;
         overflow: hidden;
-        border: 3px solid #4a0000;
-        animation: jitter 0.2s infinite;
+        border: 2px solid #00f0ff;
+        background: #05080c;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
     }
 
-    .img-toxin {
+    .img-hud {
         width: 100%;
-        /* Efecto de cámara de tortura/seguridad */
-        filter: sepia(1) contrast(2) brightness(0.5) grayscale(0.5);
-        transition: 0.2s;
+        filter: contrast(1.1) brightness(0.9);
+        transition: transform 0.3s ease, filter 0.3s ease;
     }
 
-    .img-toxin-container:hover .img-toxin {
-        filter: sepia(0.5) contrast(1.5) brightness(0.8) hue-rotate(180deg);
-        transform: scale(1.1);
+    .img-hud-container:hover .img-hud {
+        filter: contrast(1.2) brightness(1.1) hue-rotate(15deg);
+        transform: scale(1.05);
     }
 
-    /* SECCIONES DE DATOS */
-    .data-item-fear {
-        background: rgba(40, 0, 0, 0.3);
-        padding: 20px;
-        border-left: 5px solid #ff4500;
+    /* SECCIONES DE DATOS TÁCTICOS */
+    .data-item-unsc {
+        background: rgba(20, 30, 42, 0.7);
+        padding: 18px 22px;
+        border-left: 5px solid #3e4d30; /* Verde MJOLNIR */
+        border-right: 1px solid rgba(0, 240, 255, 0.2);
         margin-bottom: 20px;
-        transition: 0.1s;
+        transition: all 0.2s ease;
     }
 
-        .data-item-fear:hover {
-            background: #ff4500;
-            color: #000;
-            transform: translateX(15px) skewX(-5deg);
+        .data-item-unsc:hover {
+            background: #3e4d30;
+            border-left-color: #ffb400;
+            transform: translateX(10px);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
         }
 
-            .data-item-fear:hover .label-fear, .data-item-fear:hover .value-fear {
-                color: #000 !important;
+            .data-item-unsc:hover .label-unsc, .data-item-unsc:hover .value-unsc {
+                color: #ffffff !important;
+                text-shadow: 0 0 8px #00f0ff;
             }
 
-    .label-fear {
-        font-family: 'Special Elite', cursive;
-        font-size: 0.8rem;
-        color: #ffcc00;
+    .label-unsc {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.85rem;
+        color: #ffb400;
         text-transform: uppercase;
         display: block;
+        letter-spacing: 2px;
     }
 
-    .value-fear {
+    .value-unsc {
         font-family: 'Orbitron', sans-serif;
-        font-size: 1.4rem;
-        color: #fff;
+        font-size: 1.35rem;
+        color: #ffffff;
         font-weight: 900;
     }
 
-    /* CUADRO DE EVALUACIÓN (REPORT) */
-    .toxin-report-box {
+    /* CUADRO DE INFORME DE CORTANA */
+    .cortana-report-box {
         margin-top: 30px;
-        padding: 40px;
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid #ff4500;
+        padding: 35px;
+        background: rgba(5, 10, 16, 0.85);
+        border: 1px solid #00f0ff;
         position: relative;
-        box-shadow: inset 0 0 30px rgba(255, 69, 0, 0.2);
+        box-shadow: inset 0 0 25px rgba(0, 240, 255, 0.15);
     }
 
-        .toxin-report-box::before {
-            content:"EXPEDIENTE_DE_VÍCTIMA"; 
+        .cortana-report-box::before {
+            content: "ANÁLISIS_TÁCTICO_DE_CORTANA";
             position: absolute;
-            top: -15px;
-            left: 30px;
-            background: #ff4500;
-            color: #000;
-            padding: 2px 20px;
-            font-family: 'Orbitron';
-            font-size: 0.7rem;
+            top: -14px;
+            left: 25px;
+            background: #00f0ff;
+            color: #0b0e14;
+            padding: 2px 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
             font-weight: 900;
+            letter-spacing: 2px;
         }
 
     .report-text {
         margin: 0;
-        line-height: 2;
-        color: #d4a373;
-        font-family: 'Special Elite', cursive;
-        font-size: 1.1rem;
-        filter: blur(0.4px); /* Simula mareo visual */
+        line-height: 1.9;
+        color: #e2f1f8;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 1.05rem;
     }
 
-    /* BOTONES */
-    .btn-toxin-nav {
+    /* BOTONES TÁCTICOS */
+    .btn-unsc-nav {
         display: inline-block;
         padding: 15px 45px;
-        background: #4a0000;
-        color: #ff4500;
-        border: 2px solid #ff4500;
+        background: #3e4d30;
+        color: #00f0ff;
+        border: 2px solid #00f0ff;
         text-decoration: none !important;
         font-family: 'Orbitron', sans-serif;
         font-weight: 900;
         font-size: 1rem;
-        letter-spacing: 5px;
-        transition: 0.2s;
-        clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-        animation: jitter 5s infinite;
+        letter-spacing: 4px;
+        transition: all 0.25s ease;
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
     }
 
-        .btn-toxin-nav:hover {
-            background: #ff4500;
-            color: #000;
-            box-shadow: 0 0 50px #ff4500;
-            transform: scale(1.1);
+        .btn-unsc-nav:hover {
+            background: #00f0ff;
+            color: #0b0e14;
+            box-shadow: 0 0 40px #00f0ff;
+            transform: scale(1.06);
         }
 
-    /* ESTÁTICA DE TV */
-    .static-overlay {
+    /* LÍNEAS DE ESCANEO HUD */
+    .hud-scanlines {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: url('https://media.giphy.com/media/oEI9uWUqnW3Fe/giphy.gif');
-        opacity: 0.05;
+        background: linear-gradient(rgba(0, 240, 255, 0.02) 50%, rgba(0, 0, 0, 0.2) 50%);
+        background-size: 100% 4px;
         pointer-events: none;
         z-index: 50;
-        mix-blend-mode: overlay;
     }
 </style>
 
-<div class="fear-dossier">
-    <div class="static-overlay"></div>
+<div class="unsc-dossier">
+    <div class="hud-scanlines"></div>
 
     <div class="row">
-        <!-- COLUMNA IMAGEN (VÍCTIMA) -->
+        <!-- COLUMNA IMAGEN (SCANNER TÁCTICO) -->
         <div class="col-md-5 text-center mb-5">
-            <div class="img-toxin-container">
-                <img src="@Model.ImagenUrl" class="img-toxin" alt="@Model.Titulo" />
+            <div class="img-hud-container">
+                <img src="@Model.ImagenUrl" class="img-hud" alt="@Model.Titulo" />
             </div>
-            <div style="margin-top: 20px; font-family: 'Special Elite'; color: #ff0000; font-size: 0.9rem; animation: jitter 0.1s infinite;">
-                SUJETO BAJO OBSERVACIÓN // NO HAY RETORNO
+            <div style="margin-top: 18px; font-family: 'Share Tech Mono', monospace; color: #ffb400; font-size: 0.85rem; letter-spacing: 2px;">
+                REGISTRO TÁCTICO // INSTALACIÓN 04
             </div>
         </div>
 
-        <!-- COLUMNA DATOS (HISTORIAL DE TRAUMA) -->
+        <!-- COLUMNA DATOS (ESPECIFICACIONES DE EQUIPAMIENTO) -->
         <div class="col-md-7">
             <div class="dossier-header">
                 <h1 class="dossier-title">@Model.Titulo</h1>
-                <span style="font-family: 'Special Elite'; color: #ffcc00; font-size: 1rem;">SUJETO_#@Model.Id</span>
+                <span style="font-family: 'Share Tech Mono', monospace; color: #ffb400; font-size: 1.1rem;">UNSC_ID:#@Model.Id</span>
             </div>
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="data-item-fear">
-                        <span class="label-fear">AÑO DE SALIDA</span>
-                        <span class="value-fear">@Model.Ano</span>
+                    <div class="data-item-unsc">
+                        <span class="label-unsc">AÑO DE FABRICACIÓN</span>
+                        <span class="value-unsc">@Model.Ano</span>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="data-item-fear">
-                        <span class="label-fear">TIEMPO DE JUEGO</span>
-                        <span class="value-fear">@Model.HorasDedicadas H.</span>
+                    <div class="data-item-unsc">
+                        <span class="label-unsc">HORAS EN SERVICIO</span>
+                        <span class="value-unsc">@Model.HorasDedicadas H.</span>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <div class="data-item-fear">
-                        <span class="label-fear">FECHA DE ADQUISICIION</span>
-                        <span class="value-fear">@Model.FechaAdquisicion.ToString("dd / MM / yyyy")</span>
+                    <div class="data-item-unsc">
+                        <span class="label-unsc">FECHA DE ASIGNACIÓN UNSC</span>
+                        <span class="value-unsc">@Model.FechaAdquisicion.ToString("dd / MM / yyyy")</span>
                     </div>
                 </div>
             </div>
 
-            <div class="toxin-report-box">
+            <div class="cortana-report-box">
                 <p class="report-text">
                     @Model.Descripcion
                 </p>
@@ -306,30 +288,31 @@
 
             @if (!string.IsNullOrEmpty(Model.VinculacionProyecto))
             {
-                <div class="data-item-fear mt-4" style="border-left-color: #ff0000;">
-                    <span class="label-fear"> VINCULACIÓN</span>
-                    <span class="value-fear" style="font-size: 1.1rem; color: #ff4500;">@Model.VinculacionProyecto</span>
+                <div class="data-item-unsc mt-4" style="border-left-color: #00f0ff;">
+                    <span class="label-unsc"> PROTOCOLO DE MISIÓN</span>
+                    <span class="value-unsc" style="font-size: 1.1rem; color: #00f0ff;">@Model.VinculacionProyecto</span>
                 </div>
             }
         </div>
     </div>
 
     <!-- BOTONES DE ACCIÓN -->
-    <div style="display: flex; justify-content: center; border-top: 2px solid #4a0000; margin-top: 40px; padding-top: 30px;">
-        <a asp-action="Index" class="btn-toxin-nav">
-            ABANDONAR EXPEDIENTE
+    <div style="display: flex; justify-content: center; border-top: 1px dashed rgba(0, 240, 255, 0.4); margin-top: 40px; padding-top: 30px;">
+        <a asp-action="Index" class="btn-unsc-nav">
+            REGRESAR AL MANDO TÁCTICO
         </a>
     </div>
 </div>
 
 <script>
-    // Script de alucinación visual (Flashes de inversión)
+    // Pulso telemétrico del visor MJOLNIR
     setInterval(() => {
-        if(Math.random() > 0.94) {
-            document.body.style.filter = "invert(1) contrast(5) hue-rotate(90deg)";
+        if (Math.random() > 0.92) {
+            const dossier = document.querySelector('.unsc-dossier');
+            dossier.style.boxShadow = "0 0 100px rgba(0, 240, 255, 0.6)";
             setTimeout(() => {
-                document.body.style.filter = "none";
-            }, 60);
+                dossier.style.boxShadow = "";
+            }, 100);
         }
-    }, 1200);
+    }, 1500);
 </script>

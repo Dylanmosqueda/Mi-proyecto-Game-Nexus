@@ -1,22 +1,23 @@
 ﻿@model List<Game_Nexus.Models.Item>
 
-<!-- Fuentes: Estilo industrial y desgastado -->
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<!-- Fuentes Tácticas UNSC -->
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-    /* --- ATMÓSFERA DE PESADILLA POTENCIADA --- */
+    /* --- ATMÓSFERA TÁCTICA UNSC --- */
     body {
-        background-color: #020200 !important;
-        color: #bc8f8f;
+        background-color: #070a0e !important;
+        color: #e2f1f8;
         font-family: 'Rajdhani', sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-        /* Fondo con rejilla de energía naranja muy tenue */
-        background-image: radial-gradient(circle at center, rgba(139, 0, 0, 0.2) 0%, #000 100%), linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px);
+        /* Rejilla de sensor HUD de energía cian */
+        background-image: radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, #05080c 100%), linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
         background-size: 100% 100%, 30px 30px, 30px 30px;
     }
 
+        /* Viñeta de Visor Spartan Mark V */
         body::after {
             content: "";
             position: fixed;
@@ -24,116 +25,114 @@
             left: 0;
             width: 100%;
             height: 100%;
-            box-shadow: inset 0 0 200px #000, inset 0 0 100px rgba(255, 69, 0, 0.2);
+            box-shadow: inset 0 0 180px #000, inset 0 0 90px rgba(0, 240, 255, 0.15);
             pointer-events: none;
             z-index: 9999;
         }
 
-    /* --- ANIMACIONES LLAMATIVAS --- */
-    @@keyframes chromaticAberration {
-        0% {
-            text-shadow: 2px 2px #ff4500, -2px -2px #ff0000;
-        }
-
-        50% {
-            text-shadow: -2px 2px #ffcc00, 2px -2px #ff4500;
-            transform: scale(1.01);
-        }
-
-        100% {
-            text-shadow: 2px 2px #ff4500, -2px -2px #ff0000;
-        }
-    }
-
-    @@keyframes cardGlow {
+    /* --- ANIMACIONES HUD SPARTAN --- */
+    @@keyframes cortanaFlicker {
         0%, 100% {
-            border-color: #300000;
-            box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+            text-shadow: 0 0 15px #00f0ff, 0 0 30px rgba(0, 240, 255, 0.6);
         }
 
         50% {
-            border-color: #ff4500;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.4);
+            text-shadow: 0 0 25px #00f0ff, 0 0 50px #00a8ff;
+            transform: scale(1.005);
         }
     }
 
-    /* --- CABECERA --- */
-    .scarecrow-header {
+    @@keyframes shieldPulse {
+        0%, 100% {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        50% {
+            border-color: #ffb400;
+            box-shadow: 0 0 30px rgba(255, 180, 0, 0.4);
+        }
+    }
+
+    /* --- CABECERA DE COMANDO UNSC --- */
+    .unsc-header {
         position: relative;
-        height: 380px;
-        background: #000;
+        height: 360px;
+        background: #0b0f17;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-bottom: 4px solid #ff4500;
-        box-shadow: 0 0 50px rgba(255, 69, 0, 0.5);
+        border-bottom: 4px solid #00f0ff;
+        box-shadow: 0 0 50px rgba(0, 240, 255, 0.3);
         overflow: hidden;
     }
 
-    .scarecrow-title {
+    .unsc-title {
         font-family: 'Orbitron', sans-serif;
-        color: #fff;
-        font-size: 5rem;
+        color: #ffffff;
+        font-size: 4.5rem;
         font-weight: 900;
-        letter-spacing: 15px;
+        letter-spacing: 12px;
         margin: 0;
-        animation: chromaticAberration 0.2s infinite; /* Glitch de color constante */
+        animation: cortanaFlicker 3s infinite;
         text-transform: uppercase;
     }
 
-    .fear-subtitle {
-        font-family: 'Special Elite', cursive;
-        color: #ffcc00;
-        letter-spacing: 8px;
-        font-size: 1.5rem;
+    .unsc-subtitle {
+        font-family: 'Share Tech Mono', monospace;
+        color: #ffb400;
+        letter-spacing: 6px;
+        font-size: 1.3rem;
         margin-top: 15px;
-        text-shadow: 0 0 10px #ffcc00;
+        text-shadow: 0 0 10px rgba(255, 180, 0, 0.6);
     }
 
-    /* --- TARJETAS EXPEDIENTES --- */
-    .fear-card {
-        background: rgba(10, 5, 0, 0.98);
-        border: 2px solid #300000;
+    /* --- TARJETAS TÁCTICAS SPARTAN --- */
+    .unsc-card {
+        background: rgba(13, 18, 25, 0.95);
+        border: 2px solid rgba(0, 240, 255, 0.4);
         margin-bottom: 50px;
         position: relative;
-        transition: 0.2s;
-        clip-path: polygon(0 5%, 100% 0, 95% 95%, 5% 100%);
-        animation: cardGlow 3s infinite;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        clip-path: polygon(0 4%, 4% 0, 96% 0, 100% 4%, 100% 96%, 96% 100%, 4% 100%, 0 96%);
+        animation: shieldPulse 5s infinite ease-in-out;
+        backdrop-filter: blur(5px);
     }
 
-        .fear-card:hover {
-            transform: scale(1.05) translateY(-10px);
-            border-color: #ffcc00;
-            box-shadow: 0 0 50px #ff4500;
+        .unsc-card:hover {
+            transform: scale(1.04) translateY(-8px);
+            border-color: #00f0ff;
+            box-shadow: 0 0 45px rgba(0, 240, 255, 0.5);
             z-index: 100;
-            filter: brightness(1.2);
         }
 
-    .card-header-fear {
-        background: #1a0000;
-        padding: 15px;
-        border-bottom: 2px solid #ff4500;
+    .card-header-unsc {
+        background: rgba(20, 30, 42, 0.9);
+        padding: 12px 18px;
+        border-bottom: 2px solid #00f0ff;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
-    .fear-tag {
-        font-family: 'Special Elite', cursive;
-        color: #ffcc00;
+    .unsc-tag {
+        font-family: 'Share Tech Mono', monospace;
+        color: #ffb400;
         font-weight: bold;
+        letter-spacing: 2px;
     }
 
     .game-image-container {
-        filter: sepia(100%) contrast(1.5) brightness(0.6);
-        border: 1px solid #4a0000;
+        border: 1px solid #00f0ff;
         margin: 15px;
         overflow: hidden;
         transition: 0.3s;
         position: relative;
+        background: #05080c;
     }
 
-        /* Línea de escaneo neón sobre la imagen */
+        /* Línea de escaneo telemétrico cian */
         .game-image-container::after {
             content: "";
             position: absolute;
@@ -141,9 +140,9 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: #ff4500;
-            box-shadow: 0 0 15px #ff4500;
-            animation: scanline 2s linear infinite;
+            background: #00f0ff;
+            box-shadow: 0 0 15px #00f0ff;
+            animation: scanline 2.5s linear infinite;
         }
 
     @@keyframes scanline {
@@ -156,148 +155,170 @@
         }
     }
 
-    .fear-card:hover .game-image-container {
-        filter: sepia(0%) contrast(1.1) brightness(1);
+    .unsc-card:hover .game-image-container {
+        filter: contrast(1.15) brightness(1.1);
+    }
+
+    .data-label {
+        font-family: 'Share Tech Mono', monospace;
+        color: #ffb400;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
     }
 
     .data-text {
-        color: #fff;
+        color: #ffffff;
         font-weight: 700;
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 1.1rem;
     }
 
-    /* BOTONES NEÓN */
-    .btn-toxin {
+    /* BOTONES MILITARES UNSC */
+    .btn-unsc-action {
         display: block;
-        background: #2a0000;
-        color: #ff4500;
-        border: 2px solid #ff4500;
-        padding: 15px;
+        background: #3e4d30; /* Verde MJOLNIR */
+        color: #00f0ff;
+        border: 2px solid #00f0ff;
+        padding: 12px;
         text-align: center;
         font-family: 'Orbitron', sans-serif;
         font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        box-shadow: 0 0 15px #4a0000;
-        transition: 0.3s;
-        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        letter-spacing: 2px;
+        text-decoration: none !important;
+        transition: all 0.25s ease;
+        clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
     }
 
-        .btn-toxin:hover {
-            background: #ff4500;
-            color: #000;
-            box-shadow: 0 0 40px #ff4500;
-            transform: skewX(-5deg);
+        .btn-unsc-action:hover {
+            background: #00f0ff;
+            color: #0b0e14;
+            box-shadow: 0 0 35px #00f0ff;
+            transform: scale(1.02);
         }
 
-    .btn-add-fear {
-        background: #ff4500;
-        color: #000;
-        padding: 25px 60px;
+    .btn-add-unsc {
+        background: #3e4d30;
+        color: #00f0ff;
+        border: 2px solid #00f0ff;
+        padding: 20px 50px;
         font-family: 'Orbitron', sans-serif;
         font-weight: 900;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         text-decoration: none !important;
-        box-shadow: 0 0 40px #ff4500;
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
         clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-        transition: 0.3s;
+        transition: all 0.3s ease;
+        display: inline-block;
     }
 
-        .btn-add-fear:hover {
-            background: #fff;
-            box-shadow: 0 0 80px #fff;
-            letter-spacing: 5px;
+        .btn-add-unsc:hover {
+            background: #00f0ff;
+            color: #0b0e14;
+            box-shadow: 0 0 60px #00f0ff;
+            letter-spacing: 3px;
         }
 
-    .fear-filter {
-        color: #ffcc00;
-        font-family: 'Special Elite', cursive;
-        margin: 0 15px;
-        font-size: 1.1rem;
-        text-shadow: 0 0 5px #ff4500;
+    .unsc-filter {
+        color: #00f0ff;
+        font-family: 'Share Tech Mono', monospace;
+        margin: 0 12px;
+        font-size: 1.05rem;
+        text-decoration: none !important;
         transition: 0.2s;
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid transparent;
     }
 
-        .fear-filter:hover {
-            color: #fff;
-            text-shadow: 0 0 20px #fff;
+        .unsc-filter:hover {
+            color: #ffffff;
+            border-color: #00f0ff;
+            background: rgba(0, 240, 255, 0.1);
+            text-shadow: 0 0 10px #00f0ff;
         }
 
-    .static-overlay {
+    .hud-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: url('https://media.giphy.com/media/oEI9uWUqnW3Fe/giphy.gif');
-        opacity: 0.05;
+        background: linear-gradient(rgba(0, 240, 255, 0.02) 50%, rgba(0, 0, 0, 0.25) 50%);
+        background-size: 100% 4px;
         pointer-events: none;
         z-index: 1000;
-        mix-blend-mode: overlay;
     }
 </style>
 
-<div class="static-overlay"></div>
+<div class="hud-overlay"></div>
 
-<div class="scarecrow-header">
-    <h1 class="scarecrow-title">GAME NEXUS HUB</h1>
-    <p class="fear-subtitle">Ríndete... el miedo es tu nueva realidad</p>
-    <div style="width: 100%; height: 4px; background: #ff4500; position: absolute; bottom: 0; box-shadow: 0 0 30px #ff4500;"></div>
+<!-- CABECERA PRINCIPAL -->
+<div class="unsc-header">
+    <h1 class="unsc-title">GAME NEXUS HUB</h1>
+    <p class="unsc-subtitle">UNSC DATABASE // CORTANA A.I. SYSTEM ONLINE</p>
+    <div style="width: 100%; height: 3px; background: #00f0ff; position: absolute; bottom: 0; box-shadow: 0 0 25px #00f0ff;"></div>
 </div>
 
 <div class="container mt-5">
+    <!-- FILTROS TÁCTICOS -->
     <div class="text-center mb-5">
-        <h3 style="font-family: 'Special Elite'; color: #ff4500; text-shadow: 0 0 10px #8b0000;">FILTRAR EXPEDIENTES:</h3>
+        <h3 style="font-family: 'Orbitron', sans-serif; color: #ffb400; letter-spacing: 2px; font-size: 1.3rem;">FILTRAR BASE DE DATOS TÁCTICA:</h3>
         <div class="mt-4">
-            <a asp-action="Index" class="fear-filter">[ TODOS_LOS_EXPEDIENTES ]</a>
-            @foreach (var gen in ViewBag.Generos as List<string>)
+            <a asp-action="Index" class="unsc-filter">[ TODOS_LOS_REGISTROS ]</a>
+            @if (ViewBag.Generos != null)
             {
-                <a asp-action="Index" asp-route-genero="@gen" class="fear-filter">@gen.ToUpper()</a>
+                foreach (var gen in ViewBag.Generos as List<string>)
+                {
+                    <a asp-action="Index" asp-route-genero="@gen" class="unsc-filter">@gen.ToUpper()</a>
+                }
             }
         </div>
     </div>
 
+    <!-- REJILLA DE ELEMENTOS/CATÁLOGO -->
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-4">
-                <div class="fear-card">
-                    <div class="card-header-fear">
-                        <span class="fear-tag">SUJETO_@item.Id</span>
-                        <div style="width: 12px; height: 12px; background: #ff0000; border-radius: 50%; box-shadow: 0 0 10px #ff0000; animation: scanline 0.5s infinite;"></div>
+                <div class="unsc-card">
+                    <div class="card-header-unsc">
+                        <span class="unsc-tag">REGISTRO_#@item.Id</span>
+                        <!-- Indicador LED de Estado Spartan -->
+                        <div style="width: 10px; height: 10px; background: #00f0ff; border-radius: 50%; box-shadow: 0 0 10px #00f0ff;"></div>
                     </div>
 
                     <div class="p-4">
-                        <h4 class="text-center" style="font-family: 'Orbitron'; color: #ffcc00; text-shadow: 0 0 10px rgba(255, 69, 0, 0.5);">@item.Titulo</h4>
+                        <h4 class="text-center" style="font-family: 'Orbitron', sans-serif; color: #ffffff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);">@item.Titulo</h4>
 
                         <div class="game-image-container">
-                            <img src="@item.ImagenUrl" style="width: 100%; height: 220px; object-fit: cover;" />
+                            <img src="@item.ImagenUrl" style="width: 100%; height: 210px; object-fit: cover;" alt="@item.Titulo" />
                         </div>
 
                         <div class="mt-4">
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <span class="data-label">ORIGEN:</span><br />
+                                    <span class="data-label">DESARROLLADOR:</span><br />
                                     <span class="data-text">@item.Desarrollador</span>
                                 </div>
                                 <div class="col-6 mb-3">
-                                    <span class="data-label">ESTADO:</span><br />
-                                    <span class="data-text" style="color: #ff4500;">@item.Estado</span>
+                                    <span class="data-label">ESTADO COMBATE:</span><br />
+                                    <span class="data-text" style="color: #00f0ff;">@item.Estado</span>
                                 </div>
                                 <div class="col-6">
-                                    <span class="data-label">TERMINAL:</span><br />
+                                    <span class="data-label">PLATAFORMA:</span><br />
                                     <span class="data-text">@item.Consola</span>
                                 </div>
                                 <div class="col-6">
-                                    <span class="data-label">PUNTUACION:</span><br />
-                                    <span class="data-text" style="color: #ffcc00;">@item.Calificacion / 10</span>
+                                    <span class="data-label">EVALUACIÓN:</span><br />
+                                    <span class="data-text" style="color: #ffb400;">@item.Calificacion / 10</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-4">
-                            <a asp-action="Detalle" asp-route-id="@item.Id" class="btn-toxin">
-                                ANALIZAR EXPEDIENTE
+                            <a asp-action="Detalle" asp-route-id="@item.Id" class="btn-unsc-action">
+                                ANALIZAR REGISTRO
                             </a>
                         </div>
                     </div>
@@ -306,21 +327,22 @@
         }
     </div>
 
+    <!-- BOTÓN REGISTRAR NUEVO ELEMENTO -->
     <div class="text-center mt-5 mb-5 pb-5">
-        <a asp-action="Agregar" class="btn-add-fear">
-            + NUEVO EXPEDIENTE
+        <a asp-action="Agregar" class="btn-add-unsc">
+            + REGISTRAR NUEVO ELEMENTO
         </a>
     </div>
 </div>
 
 <script>
-    // Pequeños flashes de inversión de color aleatorios (Llamativo y terrorífico)
+    // Parpadeo telemétrico del Visor MJOLNIR
     setInterval(() => {
-        if(Math.random() > 0.96) {
-            document.body.style.filter = "invert(1) contrast(5) hue-rotate(90deg)";
+        if (Math.random() > 0.95) {
+            document.body.style.filter = "brightness(1.2) contrast(1.1)";
             setTimeout(() => {
                 document.body.style.filter = "none";
-            }, 70);
+            }, 80);
         }
-    }, 1500);
+    }, 2000);
 </script>
