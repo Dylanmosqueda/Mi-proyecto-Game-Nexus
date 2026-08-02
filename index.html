@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameNexus - Halo Combat Evolved</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameNexus: Combat Evolved - UNSC Hub</title>
+    
+    <!-- Fuentes Tácticas UNSC -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
     <style>
+        /* --- ESTÉTICA MILITAR UNSC / VISOR SPARTAN --- */
         body {
-            background-color: #070a0e;
+            background-color: #070a0e !important;
             color: #e2f1f8;
             font-family: 'Rajdhani', sans-serif;
             margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow-x: hidden;
             background-image: radial-gradient(circle at center, rgba(0, 240, 255, 0.08) 0%, #05080c 100%), 
                               linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px), 
                               linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
             background-size: 100% 100%, 30px 30px, 30px 30px;
-            overflow: hidden;
         }
 
         body::after {
@@ -29,67 +29,315 @@
             top: 0; left: 0; width: 100%; height: 100%;
             box-shadow: inset 0 0 150px #000, inset 0 0 80px rgba(0, 240, 255, 0.15);
             pointer-events: none;
+            z-index: 9999;
+            animation: shieldPulse 5s infinite alternate;
         }
 
-        .unsc-container {
-            text-align: center;
+        /* NAVBAR COMANDO UNSC */
+        .navbar {
+            background: rgba(11, 15, 23, 0.95) !important;
+            border-bottom: 3px solid #00f0ff !important;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            padding: 15px 0;
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            color: #ffffff !important;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px #00f0ff;
+            cursor: pointer;
+        }
+
+        .nav-link {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffb400 !important;
+            text-transform: uppercase;
+            margin: 0 15px;
+            transition: all 0.2s ease;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px #00f0ff);
+        }
+
+        /* VISTAS SECCIONALES */
+        .view-section {
+            display: none;
             position: relative;
             z-index: 10;
         }
 
+        .view-section.active {
+            display: block;
+        }
+
+        /* INICIO WELCOME */
+        .unsc-welcome {
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .shield-emitter {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .unsc-emblem {
-            font-size: 7rem;
+            font-size: 8rem;
             color: #00f0ff;
-            text-shadow: 0 0 30px #00f0ff;
-            animation: pulse 3s infinite ease-in-out;
+            text-shadow: 0 0 30px #00f0ff, 0 0 60px rgba(0, 240, 255, 0.6);
+            animation: pulseEmblem 3s infinite ease-in-out;
         }
 
         .spartan-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-weight: 900;
+            font-size: 3.2rem;
             color: #ffffff;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px #00f0ff;
-            margin: 10px 0;
+            text-align: center;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px #00f0ff, 3px 3px 0 #3e4d30;
         }
 
         .cortana-subtitle {
             font-family: 'Share Tech Mono', monospace;
             color: #ffb400;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
+            font-size: 1.3rem;
+            text-align: center;
+            letter-spacing: 4px;
+            text-shadow: 0 0 12px rgba(255, 180, 0, 0.6);
+            font-weight: bold;
+            margin-top: 10px;
         }
 
-        .btn-spartan {
-            padding: 20px 50px;
+        .btn-spartan-glow {
+            padding: 22px 60px;
             background: #3e4d30;
             color: #00f0ff;
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 1.1rem;
-            text-decoration: none;
+            text-decoration: none !important;
+            font-size: 1.2rem;
             letter-spacing: 3px;
             border: 2px solid #00f0ff;
             clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
-            transition: all 0.3s;
+            transition: all 0.3s ease-in-out;
             display: inline-block;
+            cursor: pointer;
         }
 
-        .btn-spartan:hover {
+        .btn-spartan-glow:hover {
             background: #00f0ff;
             color: #0b0e14;
-            box-shadow: 0 0 50px #00f0ff;
+            box-shadow: 0 0 60px #00f0ff;
             transform: scale(1.08);
         }
 
-        @keyframes pulse {
+        /* CABECERA CATÁLOGO */
+        .unsc-header {
+            position: relative;
+            height: 280px;
+            background: #0b0f17;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 4px solid #00f0ff;
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .unsc-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            font-size: 3.8rem;
+            font-weight: 900;
+            letter-spacing: 10px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .unsc-subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffb400;
+            letter-spacing: 6px;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* TARJETAS DE CATÁLOGO */
+        .unsc-card {
+            background: rgba(13, 18, 25, 0.95);
+            border: 2px solid rgba(0, 240, 255, 0.4);
+            margin-bottom: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 4%, 4% 0, 96% 0, 100% 4%, 100% 96%, 96% 100%, 4% 100%, 0 96%);
+            backdrop-filter: blur(5px);
+        }
+
+        .unsc-card:hover {
+            transform: scale(1.04) translateY(-8px);
+            border-color: #00f0ff;
+            box-shadow: 0 0 45px rgba(0, 240, 255, 0.5);
+        }
+
+        .card-header-unsc {
+            background: rgba(20, 30, 42, 0.9);
+            padding: 12px 18px;
+            border-bottom: 2px solid #00f0ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .unsc-tag {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffb400;
+            font-weight: bold;
+        }
+
+        .game-image-container {
+            border: 1px solid #00f0ff;
+            margin: 15px;
+            overflow: hidden;
+            position: relative;
+            background: #05080c;
+        }
+
+        .data-label {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffb400;
+            font-size: 0.8rem;
+        }
+
+        .data-text {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn-unsc-action {
+            display: block;
+            background: #3e4d30;
+            color: #00f0ff;
+            border: 2px solid #00f0ff;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none !important;
+            transition: all 0.25s ease;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+            cursor: pointer;
+        }
+
+        .btn-unsc-action:hover {
+            background: #00f0ff;
+            color: #0b0e14;
+            box-shadow: 0 0 30px #00f0ff;
+        }
+
+        .unsc-filter {
+            color: #00f0ff;
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0 8px 10px 8px;
+            font-size: 1rem;
+            text-decoration: none !important;
+            padding: 5px 12px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: rgba(13, 18, 25, 0.8);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .unsc-filter:hover, .unsc-filter.active {
+            color: #ffffff;
+            border-color: #00f0ff;
+            background: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        /* DETALLE / DOSSIER */
+        .unsc-dossier {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(13, 18, 25, 0.95);
+            border: 2px solid #00f0ff;
+            border-top: 10px solid #ffb400;
+            clip-path: polygon(0 3%, 3% 0, 97% 0, 100% 3%, 100% 97%, 97% 100%, 3% 100%, 0 97%);
+            box-shadow: 0 0 80px rgba(0, 240, 255, 0.25);
+        }
+
+        .cortana-report-box {
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(5, 10, 16, 0.85);
+            border: 1px solid #00f0ff;
+            position: relative;
+        }
+
+        .cortana-report-box::before {
+            content: "ANÁLISIS_TÁCTICO_DE_CORTANA";
+            position: absolute;
+            top: -14px;
+            left: 20px;
+            background: #00f0ff;
+            color: #0b0e14;
+            padding: 2px 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+
+        /* PRIVACIDAD */
+        .privacy-manifesto {
+            max-width: 850px;
+            margin: 40px auto;
+        }
+
+        .node {
+            background: rgba(13, 18, 25, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-left: 8px solid #00f0ff;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .node:hover {
+            background: #3e4d30;
+            border-left-color: #ffb400;
+            transform: translateX(10px);
+        }
+
+        footer {
+            border-top: 1px dashed rgba(0, 240, 255, 0.4);
+            background: #05080c;
+            color: #a4c2d1;
+            font-family: 'Share Tech Mono', monospace;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        @@keyframes pulseEmblem {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px #00f0ff); }
             50% { transform: scale(1.05); filter: drop-shadow(0 0 40px #ffb400); }
         }
@@ -97,18 +345,239 @@
 </head>
 <body>
 
-    <div class="unsc-container">
-        <div class="shield-emitter">
-            <div class="unsc-emblem">🛡️</div>
-        </div>
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid px-5">
+                <a class="navbar-brand" onclick="showSection('inicio')">INICIO UNSC</a>
+                <div class="d-flex ms-auto">
+                    <span class="nav-link" onclick="showSection('catalogo')">[ MANDO_TÁCTICO ]</span>
+                    <span class="nav-link" onclick="showSection('privacidad')">[ PROTOCOLO_COLE ]</span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <h1 class="spartan-title">BIENVENIDO, SPARTAN DYLAN</h1>
-        <p class="cortana-subtitle">SISTEMA MJOLNIR MARK V ONLINE. CORTANA EN LÍNEA.</p>
+    <div class="container my-4">
 
-        <a href="https://github.com/Dylanmosqueda/Mi-proyecto-Game-Nexus" class="btn-spartan">
-            ACCEDER A LA BASE DE DATOS UNSC
-        </a>
+        <!-- 1. VISTA INICIO WELCOME -->
+        <section id="sec-inicio" class="view-section active">
+            <div class="unsc-welcome">
+                <div class="shield-emitter">
+                    <div class="unsc-emblem">🛡️</div>
+                </div>
+                <h1 class="spartan-title">BIENVENIDO, SPARTAN DYLAN</h1>
+                <p class="cortana-subtitle">SISTEMA MJOLNIR MARK V ONLINE. CORTANA EN LÍNEA.</p>
+                <div class="mt-4">
+                    <button class="btn-spartan-glow" onclick="showSection('catalogo')">
+                        ACCEDER A LA BASE DE DATOS UNSC
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. VISTA CATÁLOGO -->
+        <section id="sec-catalogo" class="view-section">
+            <div class="unsc-header">
+                <h1 class="unsc-title">GAME NEXUS HUB</h1>
+                <p class="unsc-subtitle">UNSC DATABASE // CORTANA A.I. SYSTEM ONLINE</p>
+            </div>
+
+            <div class="text-center mb-5">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: #ffb400; font-size: 1.2rem;">FILTRAR BASE DE DATOS TÁCTICA:</h3>
+                <div class="mt-3" id="filters-container">
+                    <!-- Los botones de filtro se generan dinámicamente con JS -->
+                </div>
+            </div>
+
+            <div class="row" id="games-grid">
+                <!-- Tarjetas de juegos insertadas con JS -->
+            </div>
+        </section>
+
+        <!-- 3. VISTA DETALLE DOSSIER -->
+        <section id="sec-detalle" class="view-section">
+            <div class="unsc-dossier" id="dossier-content">
+                <!-- Se llena dinámicamente al hacer clic en "ANALIZAR REGISTRO" -->
+            </div>
+        </section>
+
+        <!-- 4. VISTA PRIVACIDAD / PROTOCOLO COLE -->
+        <section id="sec-privacidad" class="view-section">
+            <div class="privacy-manifesto">
+                <h1 style="font-family: 'Orbitron'; color: #fff; text-align: center; text-shadow: 0 0 20px #00f0ff; margin-bottom: 40px;">PROTOCOLO_COLE_UNSC</h1>
+
+                <div class="node">
+                    <h2 style="font-family: 'Orbitron'; color: #00f0ff;">01. TELEMETRÍA Y MONITOREO SPARTAN</h2>
+                    <p style="font-family: 'Share Tech Mono';">Los sistemas del casco MJOLNIR Mark V registran exclusivamente la eficiencia operativa y constante del sujeto. Ninguna coordenada táctica o dato confidencial será expuesto al Covenant.</p>
+                </div>
+
+                <div class="node">
+                    <h2 style="font-family: 'Orbitron'; color: #00f0ff;">02. PROTOCOLO COLE (DIRECTIVA 092)</h2>
+                    <p style="font-family: 'Share Tech Mono';">En caso de amenaza de abordaje o brecha de seguridad en la terminal, la I.A. Cortana ejecutará la purga inmediata de mapas de navegación, coordenadas terrestres y matrices de memoria.</p>
+                </div>
+
+                <div class="node">
+                    <h2 style="font-family: 'Orbitron'; color: #00f0ff;">03. ENLACE NEURAL DE CORTANA</h2>
+                    <p style="font-family: 'Share Tech Mono';">Los datos locales y registros en caché se utilizan de manera exclusiva para mantener la calibración continua de los escudos de energía y sincronizar los sensores de movimiento del HUD.</p>
+                </div>
+            </div>
+        </section>
+
     </div>
 
+    <!-- FOOTER -->
+    <footer class="text-center">
+        <div class="container">
+            <span>© 2026 - UNSC PILLAR OF AUTUMN // SISTEMA MJOLNIR MARK V ONLINE</span>
+        </div>
+    </footer>
+
+    <!-- SCRIPT TÁCTICO INTERACTIVO -->
+    <script>
+        // BASE DE DATOS DE LOS 10 VIDEOJUEGOS (Del C# GameNexusController)
+        const gamesData = [
+            { id: 1, titulo: "Devil May Cry", genero: "Hack and Slash", ano: 2001, consola: "PlayStation 2", dev: "CapCom", estado: "Completado", fecha: "10/05/2021", horas: 45, score: 9, img: "https://images.hdqwalls.com/wallpapers/devil-may-cry-5-game-ld.jpg", desc: "Cazador de demonios. Dante enfrenta hordas infernales con su espada y pistolas." },
+            { id: 2, titulo: "Castlevania Symphony of the Night", genero: "Metroidvania", ano: 1997, consola: "PlayStation", dev: "Konami", estado: "Completado", fecha: "15/11/2020", horas: 60, score: 10, img: "https://th.bing.com/th/id/R.41321258bcc7fd4cb3572b727b198bc7?rik=bQPBmF4H1%2bR8VA&riu=http%3a%2f%2fwww.konami.com%2fgames%2fcastlevania%2fs%2fimg%2fsns_castlevania_us.jpg&ehk=z2jCWSz1QWLqNUNk6cvkAkgOFheD35uKOa3XDv4P4us%3d&risl=&pid=ImgRaw&r=0", desc: "Cazador de vampiros. Alucard explora el castillo invertido de Drácula." },
+            { id: 3, titulo: "Resident Evil 4", genero: "Survival Horror", ano: 2005, consola: "GameCube", dev: "CapCom", estado: "Completado", fecha: "20/03/2022", horas: 85, score: 10, img: "https://4kwallpapers.com/images/wallpapers/resident-evil-4-3440x1440-11094.jpg", desc: "Agente especial en España. Leon S. Kennedy en misión de rescate de la hija del presidente." },
+            { id: 4, titulo: "Halo: Combat Evolved", genero: "Ciencia ficcion", ano: 2001, consola: "Xbox", dev: "343 Industries", estado: "Completado", fecha: "05/01/2023", horas: 120, score: 9, img: "https://th.bing.com/th/id/R.16e1c5ae8c63b39f05f2411f10e09412?rik=Qaxz3pjdxRzghA&pid=ImgRaw&r=0", desc: "Espartano contra el Covenant. El Jefe Maestro y Cortana luchan en la Instalación 04." },
+            { id: 5, titulo: "God of War", genero: "Aventura", ano: 2005, consola: "PlayStation 2", dev: "SIE Santa Monica Studio", estado: "Completado", fecha: "12/08/2019", horas: 50, score: 9, img: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/02/god-of-war.jpg", desc: "Semidios contra dioses griegos. Kratos busca venganza contra Ares, el Dios de la Guerra." },
+            { id: 6, titulo: "Call of Duty", genero: "Shooter", ano: 2003, consola: "Xbox", dev: "Infinity Ward", estado: "Completado", fecha: "24/05/2025", horas: 50, score: 10, img: "https://staticg.sportskeeda.com/editor/2023/10/c3dec-16987519192024-1920.jpg", desc: "Batallas de guerra históricas en múltiples frentes del conflicto global." },
+            { id: 7, titulo: "The Legend of Zelda: Breath of the Wild", genero: "Aventura", ano: 2017, consola: "Nintendo Switch", dev: "Nintendo", estado: "Completado", fecha: "14/02/2020", horas: 150, score: 10, img: "https://th.bing.com/th/id/R.cba83cbe522f092fc0b57be7224dbe11?rik=32Pd%2bGVHcoz8LA&pid=ImgRaw&r=0", desc: "Exploración en mundo abierto. Link despierta tras 100 años para derrotar a Ganon." },
+            { id: 8, titulo: "Red Dead Redemption 2", genero: "Aventura", ano: 2018, consola: "PlayStation 4", dev: "Rockstar Games", estado: "Completado", fecha: "30/06/2021", horas: 200, score: 10, img: "https://th.bing.com/th/id/R.32faa1e71871f9d5905830ec57b75533?rik=cp%2bBLLPZdFsN3A&pid=ImgRaw&r=0", desc: "Vida de forajido en el viejo oeste. Arthur Morgan y la banda de Van der Linde luchan por sobrevivir." },
+            { id: 9, titulo: "The Witcher 3: Wild Hunt", genero: "RPG", ano: 2015, consola: "PlayStation 4", dev: "CD Projekt Red", estado: "Completado", fecha: "10/09/2020", horas: 120, score: 10, img: "https://gametimes.com.br/wp-content/uploads/2023/12/The-Witcher-3-requisitos.jpg", desc: "Cazador de monstruos en mundo abierto. Geralt de Rivia busca a Ciri en el Continente." },
+            { id: 10, titulo: "Dark Souls", genero: "RPG", ano: 2011, consola: "PlayStation 3", dev: "FromSoftware", estado: "Completado", fecha: "05/11/2019", horas: 80, score: 9, img: "https://gaming-cdn.com/images/products/18031/orig/dark-souls-3-remastered-pc-steam-cover.jpg?v=1753367298", desc: "Desafiante aventura en un mundo oscuro lleno de no-muertos y peligros." }
+        ];
+
+        // NAVEGACIÓN ENTRE SECCIONES
+        function showSection(sectionId) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById('sec-' + sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // RENDERIZAR FILTROS
+        function renderFilters() {
+            const container = document.getElementById('filters-container');
+            const generos = ["TODOS", ...new Set(gamesData.map(g => g.genero))];
+            
+            container.innerHTML = generos.map(gen => 
+                `<button class="unsc-filter ${gen === 'TODOS' ? 'active' : ''}" onclick="filterGames('${gen}', this)">
+                    [ ${gen.toUpperCase()} ]
+                </button>`
+            ).join('');
+        }
+
+        // FILTRAR JUEGOS
+        function filterGames(genero, btn) {
+            document.querySelectorAll('.unsc-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filtered = genero === 'TODOS' ? gamesData : gamesData.filter(g => g.genero === genero);
+            renderGamesGrid(filtered);
+        }
+
+        // RENDERIZAR TARJETAS EN EL CATÁLOGO
+        function renderGamesGrid(list) {
+            const grid = document.getElementById('games-grid');
+            grid.innerHTML = list.map(item => `
+                <div class="col-md-4">
+                    <div class="unsc-card">
+                        <div class="card-header-unsc">
+                            <span class="unsc-tag">REGISTRO_#${item.id}</span>
+                            <div style="width: 10px; height: 10px; background: #00f0ff; border-radius: 50%; box-shadow: 0 0 10px #00f0ff;"></div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="text-center" style="font-family: 'Orbitron'; color: #fff;">${item.titulo}</h4>
+                            <div class="game-image-container">
+                                <img src="${item.img}" style="width: 100%; height: 200px; object-fit: cover;" alt="${item.titulo}" />
+                            </div>
+                            <div class="mt-3">
+                                <div class="row">
+                                    <div class="col-6 mb-2"><span class="data-label">DESARROLLADOR:</span><br/><span class="data-text">${item.dev}</span></div>
+                                    <div class="col-6 mb-2"><span class="data-label">ESTADO:</span><br/><span class="data-text" style="color: #00f0ff;">${item.estado}</span></div>
+                                    <div class="col-6"><span class="data-label">PLATAFORMA:</span><br/><span class="data-text">${item.consola}</span></div>
+                                    <div class="col-6"><span class="data-label">EVALUACIÓN:</span><br/><span class="data-text" style="color: #ffb400;">${item.score} / 10</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <button class="btn-unsc-action w-100" onclick="showDetail(${item.id})">
+                                    ANALIZAR REGISTRO
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // MOSTRAR DETALLE / DOSSIER DE UN JUEGO
+        function showDetail(id) {
+            const item = gamesData.find(g => g.id === id);
+            if (!item) return;
+
+            const container = document.getElementById('dossier-content');
+            container.innerHTML = `
+                <div class="row">
+                    <div class="col-md-5 text-center mb-4">
+                        <div style="border: 2px solid #00f0ff; background: #05080c;">
+                            <img src="${item.img}" style="width: 100%; max-height: 350px; object-fit: cover;" alt="${item.titulo}" />
+                        </div>
+                        <div style="margin-top: 15px; font-family: 'Share Tech Mono'; color: #ffb400; font-size: 0.85rem;">
+                            REGISTRO TÁCTICO // INSTALACIÓN 04
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="d-flex justify-content-between align-items-end mb-4 border-bottom border-info pb-2">
+                            <h1 style="font-family: 'Orbitron'; color: #00f0ff; margin: 0; font-size: 2.2rem;">${item.titulo}</h1>
+                            <span style="font-family: 'Share Tech Mono'; color: #ffb400;">UNSC_ID:#${item.id}</span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-2">
+                                <div style="background: rgba(20, 30, 42, 0.7); padding: 12px; border-left: 4px solid #3e4d30;">
+                                    <span class="data-label">AÑO DE FABRICACIÓN</span><br/>
+                                    <strong style="font-family: 'Orbitron'; color: #fff;">${item.ano}</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <div style="background: rgba(20, 30, 42, 0.7); padding: 12px; border-left: 4px solid #3e4d30;">
+                                    <span class="data-label">HORAS EN SERVICIO</span><br/>
+                                    <strong style="font-family: 'Orbitron'; color: #fff;">${item.horas} H.</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div style="background: rgba(20, 30, 42, 0.7); padding: 12px; border-left: 4px solid #3e4d30;">
+                                    <span class="data-label">FECHA DE ASIGNACIÓN UNSC</span><br/>
+                                    <strong style="font-family: 'Orbitron'; color: #fff;">${item.fecha}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cortana-report-box">
+                            <p style="font-family: 'Share Tech Mono'; color: #e2f1f8; margin: 0; line-height: 1.8;">
+                                ${item.desc}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4 pt-3 border-top border-secondary">
+                    <button class="btn-spartan-glow" onclick="showSection('catalogo')">
+                        REGRESAR AL MANDO TÁCTICO
+                    </button>
+                </div>
+            `;
+
+            showSection('detalle');
+        }
+
+        // INICIALIZACIÓN
+        window.onload = () => {
+            renderFilters();
+            renderGamesGrid(gamesData);
+        };
+    </script>
 </body>
 </html>
